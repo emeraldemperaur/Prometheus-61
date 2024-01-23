@@ -1,0 +1,32 @@
+body{
+    background-color: #002C51;
+}
+
+.ostiary-logo{
+    font-size: 30px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    letter-spacing: 0.33em;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-top: 0px;
+}
+
+.ostiary-slogan{
+    font-family: 'Montserrat';
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 0.33em;
+    color: #ffffff;
+
+}
+
+
+.firm-logo {
+  
+    margin-left: 76%;
+    z-index: 3;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
