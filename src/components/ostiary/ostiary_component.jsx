@@ -1,24 +1,52 @@
+import { useContext, useRef, useState } from 'react';
 import '../ostiary/ostiary_styles.css'
+import 'react-toastify/dist/ReactToastify.css';
 import $ from 'jquery';
+import { P61Context } from '../../context';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Ostiary = () => {
+  const loginUserInput = useRef();
+  const loginKeyInput = useRef();
+  const context61 = useContext(P61Context);
+  const [error, setError] = useState([false,''])
+
 
   const onInputChangeHandler = (event) => {
     console.log('Input Detected: '+ event.target.value)
   }
 
   const onLoginClickHandler = () => {
-    console.log('Log In Clicked')
+    const validated = validateInput(loginUserInput.current.value)
+    console.log('Log In Clicked');
+    console.log(`UserID: ${loginUserInput.current.value}`);
+    console.log(`UserKey: ${loginKeyInput.current.value}`);
+    if(validated){
+      setError([false, ''])
+      context61.userLog(loginUserInput.current.value, loginKeyInput.current.value);
+
+    }
   }
 
   const onRequestClickHandler = () => {
     console.log('Request Clicked')
   }
 
+  const validateInput = (value) =>{
+    if(value === ''){
+      setError([true,'Input Required'])
+      toast.error('Login Credentials Required',{
+        position: "top-right"
+      })
+      return false;
+    }
+    return true;
+  }
+
     return(
         <div>
+          
              <div  className="container">
-              
               <div margin-top="133px" className="box"></div>
               <div className="container-forms ostiary-font">
                 <div className="container-info">
@@ -59,8 +87,8 @@ const Ostiary = () => {
                     <div className="table">
                       <div className="table-cell">
             
-                        <input className="ostiary-font" name="Username" placeholder="Username" type="text" maxLength="40" autoComplete="email"/>
-                        <input className="ostiary-font" name="Password" placeholder="Password" type="Password" maxLength="33" autoComplete="current-password"/>
+                        <input ref={loginUserInput} className="ostiary-font" name="Username" placeholder="Username" type="text" maxLength="40" autoComplete="email"/>
+                        <input ref={loginKeyInput} className="ostiary-font" name="Password" placeholder="Password" type="Password" maxLength="33" autoComplete="current-password"/>
                         <div className="btn ostiary-font" onClick={onLoginClickHandler}>
                           Log in
                         </div>

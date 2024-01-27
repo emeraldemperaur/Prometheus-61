@@ -1,15 +1,10 @@
+import { useState } from "react";
 import Ostiary from "../ostiary/ostiary_component";
 import '../ostiary/ostiary_style.css'
 
 
 const AuthOstiary = () => {
-
-    const getLocalTime = () => {
-        const newDate = new Date();
-        return newDate.getUTCDay().toString() + ' ' + newDate.getMonth().toString() + ' ' + newDate.getFullYear().toString()
-        
-    }
-
+    
     return(
         <div>
             <h2 className="ostiary-logo">Prometheus</h2>
@@ -24,3 +19,4 @@ const AuthOstiary = () => {
     )
 }
 export default AuthOstiary;
+

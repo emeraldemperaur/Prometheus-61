@@ -1,18 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useContext, useState } from 'react'
+import './components/navigator/subnavigator_styles.css'
+import './components/navigator/navigator_styles.css'
+import './components/ostiary/ostiary_style.css'
 import './App.css'
 import AuthOstiary from './components/ostiary/auth_ostiary_interface.jsx'
 import NavigatorMenu from './components/navigator/navigator_component.jsx'
+import DashboardInterface from './components/dashboard/dashboard_interface.jsx'
+import { P61Context } from './context/index.jsx'
+import { ToastContainer } from 'react-toastify'
+
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const context = useContext(P61Context);
+  console.log(context);
 
   return (
     <>
     <NavigatorMenu/>
     <AuthOstiary/>
+    <ToastContainer/>
     
     {/*
       <div>

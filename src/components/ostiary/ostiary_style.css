@@ -1,6 +1,11 @@
 body{
-    background-color: #002C51;
+    background-color: #002C51 !important;
 }
+
+* {
+    box-sizing: none;
+    }
+
 
 .ostiary-logo{
     font-size: 30px;
