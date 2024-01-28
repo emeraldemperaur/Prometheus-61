@@ -1,5 +1,6 @@
 import '../navigator/subnavigator_styles.css'
 import { subMenuItems } from '../../utils/nav_data';
+import { Link, NavLink } from 'react-router-dom';
 
 
 const SubNavigatorMenu = () => {
@@ -21,7 +22,7 @@ const SubNavigatorMenu = () => {
             </div>
             <div className="menu-toggle" onClick={() => {
                 console.log('Profile Menu Toggled')
-                let menuToggle = document.querySelector('.menu-toggle');
+                //let menuToggle = document.querySelector('.menu-toggle');
                 let navigation = document.querySelector('.navigation');
                 navigation.classList.toggle('active');
         
@@ -29,9 +30,9 @@ const SubNavigatorMenu = () => {
             </div>
             <ul className="menu">
                 { subMenuItems.map( subMenuItem => (
-                        <li key={subMenuItem.id}><a href={subMenuItem.link}>
+                        <li key={subMenuItem.id}><NavLink to={subMenuItem.link}>
                             <i style={{color: "#ffffff"}} className={subMenuItem.icon}></i>
-                            {subMenuItem.title}</a>
+                            {subMenuItem.title}</NavLink>
                             </li>
                        ))}
             </ul>

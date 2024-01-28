@@ -1,15 +1,16 @@
 import { useContext, useRef, useState } from 'react';
 import '../ostiary/ostiary_styles.css'
-import 'react-toastify/dist/ReactToastify.css';
 import $ from 'jquery';
 import { P61Context } from '../../context';
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Ostiary = () => {
   const loginUserInput = useRef();
   const loginKeyInput = useRef();
   const context61 = useContext(P61Context);
   const [error, setError] = useState([false,''])
+  let navigate = useNavigate();
 
 
   const onInputChangeHandler = (event) => {
@@ -24,6 +25,7 @@ const Ostiary = () => {
     if(validated){
       setError([false, ''])
       context61.userLog(loginUserInput.current.value, loginKeyInput.current.value);
+      navigate('/dashboard')
 
     }
   }
@@ -36,7 +38,8 @@ const Ostiary = () => {
     if(value === ''){
       setError([true,'Input Required'])
       toast.error('Login Credentials Required',{
-        position: "top-right"
+        position: "top-right",
+        closeOnClick: true
       })
       return false;
     }

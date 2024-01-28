@@ -4,7 +4,8 @@ import '../ostiary/ostiary_style.css'
 
 
 const AuthOstiary = () => {
-    
+    document.body.style.backgroundColor = "#002C51"
+
     return(
         <div>
             <h2 className="ostiary-logo">Prometheus</h2>

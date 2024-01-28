@@ -21,7 +21,6 @@ header{
     width:100%; 
     display:table; 
     background-color:#ffffff; 
-    margin-bottom:50px;
     position: fixed;
     left: 0px;
     right: 0px;
@@ -42,6 +41,7 @@ header{
 nav{
     width:auto; 
     float:right;
+    margin-top: 6px;
 }
 nav ul{
     display:table; 
