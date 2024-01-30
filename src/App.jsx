@@ -28,6 +28,7 @@ function App() {
 
   return (
     <>
+    <div className="App">
     <ToastContainer stacked/>
     <BrowserRouter>
     <Routes>
@@ -44,6 +45,7 @@ function App() {
 
     </Routes>
     </BrowserRouter>
+    </div>
     
     {/*
       <div>

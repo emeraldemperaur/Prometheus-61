@@ -2,9 +2,7 @@ body{
     background-color: #002C51;
 }
 
-* {
-    box-sizing: none;
-    }
+
 
 
 .ostiary-logo{
@@ -14,7 +12,7 @@ body{
     letter-spacing: 0.33em;
     text-transform: uppercase;
     color: #ffffff;
-    margin-top: 0px;
+    padding-top: 86px;
 }
 
 .ostiary-slogan{
@@ -24,6 +22,10 @@ body{
     letter-spacing: 0.33em;
     color: #ffffff;
 
+}
+
+.ost-highlight{
+    color: #ffffff;
 }
 
 

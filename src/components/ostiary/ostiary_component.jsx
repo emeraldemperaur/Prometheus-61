@@ -2,7 +2,7 @@ import { useContext, useRef, useState } from 'react';
 import '../ostiary/ostiary_styles.css'
 import $ from 'jquery';
 import { P61Context } from '../../context';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const Ostiary = () => {
@@ -49,18 +49,18 @@ const Ostiary = () => {
     return(
         <div>
           
-             <div  className="container">
+             <div  className="ost-container">
               <div margin-top="133px" className="box"></div>
-              <div className="container-forms ostiary-font">
-                <div className="container-info">
+              <div className="ost-container-forms ostiary-font">
+                <div className="ost-container-info">
                   <div className="info-item">
                     <div className="table">
                       <div className="table-cell">
-                        <p>
+                        <p className='ost-highlight'>
                           Have an account?
                         </p>
-                        <div className="btn" onClick={() => {
-                        $(".container").toggleClass("log-in"); 
+                        <div className="ost-btn" onClick={() => {
+                        $(".ost-container").toggleClass("log-in"); 
                     }}>
                           Log in
                         </div>
@@ -70,12 +70,12 @@ const Ostiary = () => {
                   <div className="info-item">
                     <div className="table">
                       <div className="table-cell">
-                        <p>
+                        <p className="ost-highlight">
                           Need an account? 
                         </p>
-                        <div className="btn" onClick={() => {
+                        <div className="ost-btn" onClick={() => {
                       
-                        $(".container").toggleClass("log-in");
+                        $(".ost-container").toggleClass("log-in");
                       
                     }}>
                           Request
@@ -84,7 +84,7 @@ const Ostiary = () => {
                     </div>
                   </div>
                 </div>
-                <div className="container-form">
+                <div className="ost-container-form">
             
                   <div className="form-item log-in">
                     <div className="table">
@@ -92,7 +92,7 @@ const Ostiary = () => {
             
                         <input ref={loginUserInput} className="ostiary-font" name="Username" placeholder="Username" type="text" maxLength="40" autoComplete="email"/>
                         <input ref={loginKeyInput} className="ostiary-font" name="Password" placeholder="Password" type="Password" maxLength="33" autoComplete="current-password"/>
-                        <div className="btn ostiary-font" onClick={onLoginClickHandler}>
+                        <div className="ost-btn ostiary-font" onClick={onLoginClickHandler}>
                           Log in
                         </div>
                       </div>
@@ -107,7 +107,7 @@ const Ostiary = () => {
                         className="ostiary-font" name="lastName" placeholder="Last Name" type="text" maxLength="33" autoComplete="family-name"/>
                         <input onChange={onInputChangeHandler}
                         className="ostiary-font" name="UUID" placeholder="MSID" type="text" maxLength="6" autoComplete="username"/>
-                        <div className="btn" onClick={onRequestClickHandler}>
+                        <div className="ost-btn" onClick={onRequestClickHandler}>
                           Request
                         </div>
                       </div>
