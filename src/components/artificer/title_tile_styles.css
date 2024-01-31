@@ -8,17 +8,16 @@
     text-transform: uppercase;
     margin-right: 33px;
     padding-top: 0px;
-    padding-bottom: 36px;
+    padding-bottom: 0px;
 
 }
 .title-box{
     padding-top: 196px;
     margin: 0px;
-    width: 100vw;
-    background-color: #216CA6;
+    width: 100%;
+    background-color: #002c51;
   }
 
   hr.solid {
-    border-top: 1px solid #bbb;
     box-shadow: rgb(0 0 0 / 50%) 0px -6px 6px -6px;
   }

@@ -7,7 +7,6 @@ const ProfilerInterface = () => {
     <>
     <NavigatorMenu/>
     <TitleTile title="Account Profile"/>
-    <h1>Profiler Interface</h1>
     </>
 
     )

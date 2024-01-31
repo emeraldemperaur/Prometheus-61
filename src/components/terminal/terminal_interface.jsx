@@ -7,7 +7,6 @@ const TerminalInterface = () => {
     <>
     <NavigatorMenu/>
     <TitleTile title="Terminal Console"/>
-    <h1>Terminal Interface</h1>
     </>
 
     )

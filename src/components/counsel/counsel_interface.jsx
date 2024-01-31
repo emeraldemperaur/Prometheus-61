@@ -7,7 +7,6 @@ const CounselInterface = () => {
     <>
     <NavigatorMenu/>
     <TitleTile title="Documentation"/>
-    <h1>Counsel Interface</h1>
     </>
 
     )

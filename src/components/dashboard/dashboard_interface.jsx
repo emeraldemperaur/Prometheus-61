@@ -2,6 +2,7 @@ import '../dashboard/dashboard_styles.css'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import NavigatorMenu from '../navigator/navigator_component';
+import TitleTile from '../artificer/title_tile_component';
 
 const DashboardInterface = () => {
 
@@ -9,7 +10,7 @@ const DashboardInterface = () => {
     return(
     <>
     <NavigatorMenu/>
-    <h1>Dashboard Interface</h1>
+    <TitleTile title="Dashboard"/>
     </>
 
     )
