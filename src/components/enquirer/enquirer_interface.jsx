@@ -4,10 +4,15 @@ import { MDBContainer, MDBRow, MDBCol, MDBInputGroup, MDBDropdown, MDBDropdownIt
 import { MDBCard, MDBCardHeader, MDBCardBody, MDBCardTitle, MDBCardText } from 'mdb-react-ui-kit';
 import RecordsCount from '../artificer/records_count_component';
 import { enquirerFilterItems } from '../../utils/options_data';
+import RecordsModal from '../artificer/records_modal_component';
+import { useState } from 'react';
 
 
 const EnquirerInterface = () => {
     document.body.style.backgroundColor = "#ffffff"
+    const [staticModal, setStaticModal] = useState(false);
+    const toggleOpen = () => setStaticModal(!staticModal);
+
     return(
     <>
     <NavigatorMenu/>
@@ -28,7 +33,7 @@ const EnquirerInterface = () => {
                             </MDBInputGroup>
                         </MDBCol>
                         <MDBCol size='4'>
-                            <MDBBtn style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 13, fontWeight: 600, letterSpacing: '0.21em' }} href=''>
+                            <MDBBtn onClick={toggleOpen} style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 13, fontWeight: 600, letterSpacing: '0.21em' }} href=''>
                                 <MDBIcon fab icon='plus circle' />  NEW QUERY MODEL
                             </MDBBtn>
                         </MDBCol>
@@ -50,7 +55,9 @@ const EnquirerInterface = () => {
                     </div>
                     </MDBRow>
     </MDBContainer>
-    <div className="fab-btn"> + </div>
+    <RecordsModal title="New Query Model" action="CREATE" size="fullscreen" 
+                toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal}/>
+    <div className="fab-btn" onClick={toggleOpen}> + </div>
     </>
 
     )

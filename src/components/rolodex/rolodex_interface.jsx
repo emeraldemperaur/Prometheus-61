@@ -5,10 +5,15 @@ import { MDBCard, MDBCardHeader, MDBCardBody, MDBCardTitle, MDBCardText } from '
 import '../rolodex/rolodex_styles.css'
 import RecordsCount from '../artificer/records_count_component';
 import { rolodexFilterItems } from '../../utils/options_data';
+import RecordsModal from '../artificer/records_modal_component';
+import { useState } from 'react';
 
 
 const RolodexInterface = () => {
     document.body.style.backgroundColor = "#ffffff"
+    const [staticModal, setStaticModal] = useState(false);
+    const toggleOpen = () => setStaticModal(!staticModal);
+
     return(
     <>
     <NavigatorMenu/>
@@ -29,8 +34,8 @@ const RolodexInterface = () => {
                             </MDBInputGroup>
                         </MDBCol>
                         <MDBCol size='4'>
-                            <MDBBtn style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 13, fontWeight: 600, letterSpacing: '0.21em' }} href=''>
-                                <MDBIcon fab icon='plus circle' />  NEW COMPANY PROFILE
+                            <MDBBtn onClick={toggleOpen} style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 13, fontWeight: 600, letterSpacing: '0.21em' }} href=''>
+                                <MDBIcon fab icon='plus circle'/>  NEW COMPANY PROFILE
                             </MDBBtn>
                         </MDBCol>
                     </MDBRow>
@@ -51,7 +56,9 @@ const RolodexInterface = () => {
                     </div>
                     </MDBRow>
                 </MDBContainer>
-                <div className="fab-btn"> + </div>
+                <RecordsModal title="New Company Profile" action="CREATE" size="lg" 
+                toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal}/>
+                <div className="fab-btn" onClick={toggleOpen}> + </div>
     
     </>
 
