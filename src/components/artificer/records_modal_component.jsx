@@ -1,7 +1,8 @@
 import '../artificer/records_modal_styles.css'
 import { MDBBtn, MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBModalBody, MDBModalFooter, MDBIcon } from 'mdb-react-ui-kit';
+import RolodexInputForm from '../rolodex/rolodex_input_component';
 
-const RecordsModal = ({title, action, size, toggleOpen, staticModal, setStaticModal}) => {
+const RecordsModal = ({title, action, size, toggleOpen, staticModal, setStaticModal, formComponent}) => {
     return(
     <>
     <MDBModal staticBackdrop tabIndex='-1' open={staticModal} setOpen={setStaticModal}>
@@ -11,8 +12,8 @@ const RecordsModal = ({title, action, size, toggleOpen, staticModal, setStaticMo
                     <MDBModalTitle className='records-modal-title'>{title}</MDBModalTitle>
                     <MDBBtn className='btn-close' onClick={toggleOpen}></MDBBtn>
                     </MDBModalHeader>
-                    <MDBModalBody>...
-                
+                    <MDBModalBody>
+                        {formComponent}
                     </MDBModalBody>
                     <MDBModalFooter>
                         <MDBBtn outline rounded onClick={toggleOpen}>Cancel</MDBBtn>

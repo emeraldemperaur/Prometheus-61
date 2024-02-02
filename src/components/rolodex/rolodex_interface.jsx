@@ -7,6 +7,7 @@ import RecordsCount from '../artificer/records_count_component';
 import { rolodexFilterItems } from '../../utils/options_data';
 import RecordsModal from '../artificer/records_modal_component';
 import { useState } from 'react';
+import RolodexInputForm from './rolodex_input_component';
 
 
 const RolodexInterface = () => {
@@ -22,7 +23,7 @@ const RolodexInterface = () => {
                     <MDBRow start>
                         <MDBCol size='4'>
                             <MDBInputGroup className='mb-3'>
-                                <input style={{ fontFamily: 'Montserrat'}} className='form-control' type='search' placeholder="Search..."/>
+                                <input style={{ fontFamily: 'Montserrat'}} id='rolodexSearch' className='form-control' type='search' placeholder="Search..."/>
                                 <MDBDropdown style={{ fontFamily: 'Montserrat'}}>
                                 <MDBDropdownToggle style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 15, fontWeight: 500 , letterSpacing: '0.21em'}}>Filter By</MDBDropdownToggle>
                                     <MDBDropdownMenu style={{ margin: 0 }}>
@@ -57,7 +58,7 @@ const RolodexInterface = () => {
                     </MDBRow>
                 </MDBContainer>
                 <RecordsModal title="New Company Profile" action="CREATE" size="lg" 
-                toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal}/>
+                toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal} formComponent={<RolodexInputForm/>}/>
                 <div className="fab-btn" onClick={toggleOpen}> + </div>
     
     </>
