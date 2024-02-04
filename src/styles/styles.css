@@ -92,3 +92,11 @@
   .slider.round:before {
     border-radius: 50%;
   }
+
+  .logo-avatar {
+    margin-bottom: 23px;
+    vertical-align: middle;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }

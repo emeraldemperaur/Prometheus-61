@@ -6,6 +6,7 @@ import RecordsCount from '../artificer/records_count_component';
 import { enquirerFilterItems } from '../../utils/options_data';
 import RecordsModal from '../artificer/records_modal_component';
 import { useState } from 'react';
+import EnquirerInputForm from './enquirer_input_component';
 
 
 const EnquirerInterface = () => {
@@ -56,7 +57,7 @@ const EnquirerInterface = () => {
                     </MDBRow>
     </MDBContainer>
     <RecordsModal title="New Query Model" action="CREATE" size="fullscreen" 
-                toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal}/>
+                toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal} formComponent={<EnquirerInputForm/>}/>
     <div className="fab-btn" onClick={toggleOpen}> + </div>
     </>
 

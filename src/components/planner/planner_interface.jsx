@@ -6,6 +6,7 @@ import RecordsCount from '../artificer/records_count_component';
 import { plannerFilterItems } from '../../utils/options_data';
 import RecordsModal from '../artificer/records_modal_component';
 import { useState } from 'react';
+import PlannerInputForm from './planner_input_component';
 
 const PlannerInterface = () => {
     document.body.style.backgroundColor = "#ffffff"
@@ -55,7 +56,7 @@ const PlannerInterface = () => {
                     </MDBRow>
     </MDBContainer>
     <RecordsModal title="New Plan Questionnaire" action="CREATE" size="xl" 
-                toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal}/>
+                toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal} formComponent={<PlannerInputForm/>}/>
     <div className="fab-btn" onClick={toggleOpen}> + </div>
     </>
 
