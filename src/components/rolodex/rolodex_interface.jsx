@@ -57,7 +57,7 @@ const RolodexInterface = () => {
                     </div>
                     </MDBRow>
                 </MDBContainer>
-                <RecordsModal title="New Company Profile" action="CREATE" size="lg" 
+                <RecordsModal title="New Company Profile" action="CREATE" size="xl" scrollable={true}
                 toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal} formComponent={<RolodexInputForm/>}/>
                 <div className="fab-btn" onClick={toggleOpen}> + </div>
     

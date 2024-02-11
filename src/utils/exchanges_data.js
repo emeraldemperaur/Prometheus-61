@@ -1,0 +1,42 @@
+export const exchangeMarketsItems = [
+    {id:"0", title:" ", label:"----"},
+    {id:"1", title:"New York Stock Exchange", label:"NYSE"},
+    {id:"2", title:"National Association of Securities Dealers Automated Quotations", label:"NASDAQ"},
+    {id:"3", title:"Toronto Stock Exchange", label:"TSX"},
+    {id:"4", title:"Shanghai Stock Exchange", label:"SSE"},
+    {id:"5", title:"European New Exchange Technology", label:"ENX"},
+    {id:"6", title:"Shenzhen Stock Exchange", label:"SZSE"},
+    {id:"7", title:"Tokyo Stock Exchange", label:"TSE"},
+    {id:"8", title:"Bombay Stock Exchange ", label:"BSE"},
+    {id:"9", title:"London Stock Exchange", label:"LSE"},
+    {id:"10", title:"National Stock Exchange of India", label:"NSE"},
+    {id:"11", title:"Hong Kong Stock Exchange", label:"SEHK"},
+    {id:"12", title:"Korea Exchange", label:"KRX"},
+    {id:"13", title:"Taiwan Stock Exchange", label:"TWSE"},
+    {id:"14", title:"Australian Securities Exchange", label:"ASX"},
+    {id:"15", title:"Sydney Stock Exchange", label:"SSX"},
+    {id:"16", title:"Johannesburg Stock Exchange", label:"JSE"},
+    {id:"17", title:"Nigerian Exchange Group", label:"NGX"}
+]
+
+export const queryExchangeMarketsItems = [
+    {id:"0", title:" ", label:"----"},
+    {id:"1", title:"Global - All Markets", label:"Global - All Markets"},
+    {id:"2", title:"New York Stock Exchange", label:"NYSE"},
+    {id:"3", title:"National Association of Securities Dealers Automated Quotations", label:"NASDAQ"},
+    {id:"4", title:"Toronto Stock Exchange", label:"TSX"},
+    {id:"5", title:"Shanghai Stock Exchange", label:"SSE"},
+    {id:"6", title:"European New Exchange Technology", label:"ENX"},
+    {id:"7", title:"Shenzhen Stock Exchange", label:"SZSE"},
+    {id:"8", title:"Tokyo Stock Exchange", label:"TSE"},
+    {id:"9", title:"Bombay Stock Exchange ", label:"BSE"},
+    {id:"10", title:"London Stock Exchange", label:"LSE"},
+    {id:"11", title:"National Stock Exchange of India", label:"NSE"},
+    {id:"12", title:"Hong Kong Stock Exchange", label:"SEHK"},
+    {id:"13", title:"Korea Exchange", label:"KRX"},
+    {id:"14", title:"Taiwan Stock Exchange", label:"TWSE"},
+    {id:"15", title:"Australian Securities Exchange", label:"ASX"},
+    {id:"16", title:"Sydney Stock Exchange", label:"SSX"},
+    {id:"17", title:"Johannesburg Stock Exchange", label:"JSE"},
+    {id:"18", title:"Nigerian Exchange Group", label:"NGX"}
+]

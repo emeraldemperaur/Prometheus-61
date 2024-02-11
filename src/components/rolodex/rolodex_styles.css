@@ -1,3 +1,7 @@
 .form-hint{
     text-align: left;
 }
+
+.stock-ticker{
+    text-transform: uppercase;
+}
