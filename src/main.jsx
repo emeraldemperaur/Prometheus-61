@@ -6,12 +6,16 @@ import App from './App.jsx'
 import './index.css'
 import './styles/styles.css'
 import { P61Provider } from './context/index.jsx'
+import { Provider } from 'react-redux';
+import { forgeStore } from './forge/index.js';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <P61Provider>
-    <App/>
-    </P61Provider>
+    <Provider store={forgeStore}>
+      <P61Provider>
+        <App/>
+      </P61Provider>
+    </Provider>
   </React.StrictMode>,
 )
