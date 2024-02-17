@@ -69,18 +69,18 @@ const RolodexInputForm = () => {
                 </div>
                 <div style={{paddingBottom:'3px'}}>
                 <MDBInput label='Authorized Name' type='text' id='formAuthName' aria-describedby='authName'/>
-                    <div id='authName' className='form-text form-hint'>Authorized Contact Name</div>
+                    <div id='authName' className='form-text form-hint'>Primary Contact Name</div>
                 </div>
                 <div style={{paddingBottom:'3px'}}>
                 <MDBInput label='Authorized Email' type='text' id='formAuthEmail' aria-describedby='authEmail'/>
-                    <div id='authEmail' className='form-text form-hint'>Authorized Contact Email</div>
+                    <div id='authEmail' className='form-text form-hint'>Primary Contact Email</div>
                 </div>
             </MDBCol>
         </MDBRow>
         <MDBRow style={{paddingTop: '23px'}}>
         <MDBCol size='4'>
         <div>
-            <Form.Select aria-describedby='corpCountry' aria-label="corpCountry">
+            <Form.Select id='formCorpCountry' aria-describedby='corpCountry' aria-label="corpCountry">
                     { countriesItems.map( countryItem => (
                                                 <option  key={countryItem.id} value={countryItem.alpha_3}>{countryItem.name}</option>
                                                 ) )}

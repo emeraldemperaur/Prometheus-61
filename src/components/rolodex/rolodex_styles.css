@@ -5,3 +5,148 @@
 .stock-ticker{
     text-transform: uppercase;
 }
+
+.rolodex-logo-avatar {
+    vertical-align: middle;
+    margin-top: 13px;
+    width: 136px;
+    height: 136px;
+    border-radius: 50%;
+  }
+
+  .rolodex-deck{
+    width: 500px;
+  }
+
+  .rolodex-company-name{
+    font-weight: 600;
+    font-size: 24px;
+    text-align: end;
+    color: #002c51;
+
+  }
+
+  .rolodex-country-title{
+    font-size: 13px;
+    text-transform: uppercase;
+    text-align: end;
+    color: #216ca5;
+    padding-top: 3px;
+
+  }
+
+  .rolodex-country-text{
+    font-size: 19px;
+    font-weight: 400;
+    letter-spacing: 0.09em;
+    text-align: end;
+    color: #002c51;
+
+  }
+
+  .rolodex-legend-text{
+  font-size: 16px;
+  font-weight: 300;
+  text-align: end;
+  padding-top: 13px;
+  text-transform: uppercase;
+  color: #002c51;
+
+  }
+
+.rolodex-exchange-text{
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+}
+
+.rolodex-symbol-text{
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.rolodex-incorporation-text{
+    font-size: 14px;
+    font-weight: 400;
+    padding-top: 13px;
+    text-align: left;
+    letter-spacing: 0.07em;
+}
+
+.rolodex-dual-listing-text{
+font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    text-align: left;
+}
+
+.rolodex-forms-title{
+  font-family: 'Montserrat';
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  color: #002c51;
+}
+
+.rolodex-form-header-title{
+  font-family: 'Montserrat';
+  letter-spacing: 0.11em;
+  font-size: 16px;
+  font-weight: 600;
+  color: #216CA6;
+  text-transform: capitalize;
+}
+
+.rolodex-form-region-text{
+  font-size: 15px;
+}
+
+.rolodex-form-market-text{
+    font-weight: 900;
+  
+}
+
+.rolodex-form-symbol-text{
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    color: black;
+    font-size: 15px;
+}
+
+.rolodex-form-build-text{
+  font-weight: 900;
+}
+
+.rolodex-form-button{
+  font-size: 14px;
+  color: #002c51;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 600;
+  background-color: #002c51;
+}
+
+
+.rolodex-title-box{
+  margin-top: 9px;
+}
+
+.rolodex-name-title{
+  font-family: 'Montserrat';
+  letter-spacing: 0.09em;
+  color: #216ca5;
+}
+
+.rolodex-badge{
+  font-size: 13px;
+  background-color: #216ca5 !important;
+}
+
+.rolodex-heading{
+  text-transform: uppercase;
+  font-weight: 700 !important;
+  color: #002C51 !important;
+}
+
+

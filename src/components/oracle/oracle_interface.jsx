@@ -45,7 +45,7 @@ const OracleInterface = () => {
                     </MDBRow>
                     <MDBRow>
                     <div>
-                    <MDBCard>
+                    <MDBCard className='list-bottom'>
                             <MDBCardBody>
 
 

@@ -6,12 +6,18 @@ import RecordsCount from '../artificer/records_count_component';
 import { plannerFilterItems } from '../../utils/options_data';
 import RecordsModal from '../artificer/records_modal_component';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import PlannerInputForm from './planner_input_component';
+import { addPlanQuestionnaire } from '../../forge/planner';
+import PlannerTable from './planner_table_component';
 
 const PlannerInterface = () => {
     document.body.style.backgroundColor = "#ffffff"
     const [staticModal, setStaticModal] = useState(false);
     const toggleOpen = () => setStaticModal(!staticModal);
+
+    const planner = useSelector((state)=> state.planner.list);
+    const plannerDispatch = useDispatch();
 
     return(
     <>
@@ -21,7 +27,7 @@ const PlannerInterface = () => {
                     <MDBRow start>
                         <MDBCol size='4'>
                             <MDBInputGroup className='mb-3'>
-                                <input style={{ fontFamily: 'Montserrat'}} className='form-control' type='search' placeholder="Search..."/>
+                                <input id='plannerSearch' style={{ fontFamily: 'Montserrat'}} className='form-control' type='search' placeholder="Search..."/>
                                 <MDBDropdown style={{ fontFamily: 'Montserrat'}}>
                                 <MDBDropdownToggle style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 15, fontWeight: 500 , letterSpacing: '0.21em'}}>Filter By</MDBDropdownToggle>
                                     <MDBDropdownMenu style={{ margin: 0 }}>
@@ -41,16 +47,23 @@ const PlannerInterface = () => {
 
                     <MDBRow>
                     <MDBCol size='4'>
-                        <RecordsCount recordtitle='Records Found' recordcount='0'/>
+                        <RecordsCount recordtitle='Records Found' recordcount={planner.length}/>
                     </MDBCol>
                     </MDBRow>
                     <MDBRow>
                     <div>
-                    <MDBCard>
-                            <MDBCardBody>
-
-
+                    <MDBCard className='list-bottom'>
+                        <PlannerTable plannerList={planner}/>
+                            {/* <MDBCardBody>
+                          } {
+                                    planner ?
+                                    planner.map(plan => (
+                                            <li key={plan.id}>{plan.companyName}<br/>{plan.productPlanName}</li>
+                                        ))
+                                        :null
+                                }
                             </MDBCardBody>
+                            */}
                     </MDBCard>
                     </div>
                     </MDBRow>

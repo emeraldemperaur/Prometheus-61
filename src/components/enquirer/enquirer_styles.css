@@ -2,3 +2,154 @@
     height: 340px;
     width: 100%;
 }
+
+.enquirer-company-name{
+    font-weight: 600;
+    font-size: 24px;
+    text-align: end;
+    color: #002c51;
+
+  }
+
+  .enquirer-country-title{
+    font-size: 13px;
+    text-transform: uppercase;
+    text-align: end;
+    color: #216ca5;
+    padding-top: 3px;
+
+  }
+
+  .enquirer-country-text{
+    font-size: 19px;
+    font-weight: 400;
+    letter-spacing: 0.09em;
+    text-align: end;
+    color: #002c51;
+
+  }
+
+  .enquirer-legend-text{
+  font-size: 16px;
+  font-weight: 300;
+  text-align: end;
+  padding-top: 13px;
+  text-transform: uppercase;
+  color: #002c51;
+
+  }
+
+.enquirer-exchange-text{
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+}
+
+.enquirer-symbol-text{
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.enquirer-incorporation-text{
+    font-size: 14px;
+    font-weight: 400;
+    padding-top: 13px;
+    text-align: left;
+    letter-spacing: 0.07em;
+}
+
+.enquirer-dual-listing-text{
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    text-align: left;
+}
+
+.enquirer-forms-title{
+  font-family: 'Montserrat';
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  color: #002c51;
+}
+
+.enquirer-form-header-title{
+  font-family: 'Montserrat';
+  letter-spacing: 0.11em;
+  font-size: 16px;
+  font-weight: 600;
+  color: #216CA6;
+  text-transform: capitalize;
+}
+
+.enquirer-form-region-text{
+  font-size: 15px;
+}
+
+.enquirer-form-market-text{
+    font-weight: 900;
+  
+}
+
+.enquirer-form-symbol-text{
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    color: black;
+    font-size: 15px;
+}
+
+.enquirer-form-build-text{
+  font-weight: 900;
+}
+
+.enquirer-form-button{
+  font-size: 14px;
+  color: #002c51;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 600;
+  background-color: #002c51;
+}
+
+
+.enquirer-title-box{
+  margin-top: 9px;
+}
+
+.enquirer-name-title{
+  font-family: 'Montserrat';
+  letter-spacing: 0.09em;
+  color: #216ca5;
+}
+
+.enquirer-badge{
+  font-size: 13px;
+}
+
+.enquirer-badge-sw{
+  font-size: 13px;
+  background-color: #00a1e2 !important;
+}
+
+.enquirer-badge-etrade{
+  font-size: 13px;
+  background-color: #5627d8 !important;
+}
+
+.enquirer-badge-ubs{
+  font-size: 13px;
+  background-color: #e60000 !important;
+}
+
+.enquirer-badge-sv{
+  font-size: 13px;
+  background-color: #00a1e2 !important;
+}
+
+.enquirer-heading{
+  text-transform: uppercase;
+  font-weight: 700 !important;
+  color: #002C51 !important;
+
+}

@@ -8,12 +8,17 @@ import { rolodexFilterItems } from '../../utils/options_data';
 import RecordsModal from '../artificer/records_modal_component';
 import { useState } from 'react';
 import RolodexInputForm from './rolodex_input_component';
-
+import { useSelector, useDispatch } from 'react-redux'
+import { addCompanyProfile } from '../../forge/rolodex';
+import RolodexTable from './rolodex_table_component';
 
 const RolodexInterface = () => {
     document.body.style.backgroundColor = "#ffffff"
     const [staticModal, setStaticModal] = useState(false);
     const toggleOpen = () => setStaticModal(!staticModal);
+
+    const rolodex = useSelector((state)=> state.rolodex.list);
+    const rolodexDispatch = useDispatch();
 
     return(
     <>
@@ -43,16 +48,15 @@ const RolodexInterface = () => {
 
                     <MDBRow>
                     <MDBCol size='4'>
-                        <RecordsCount recordtitle='Records Found' recordcount='0'/>
+                        <RecordsCount recordtitle='Records Found' recordcount={rolodex.length}/>
                     </MDBCol>
                     </MDBRow>
                     <MDBRow>
                     <div>
-                    <MDBCard>
-                            <MDBCardBody>
-
-
-                            </MDBCardBody>
+                    <MDBCard className='list-bottom'>
+                           <RolodexTable rolodexList={rolodex}/> 
+                           {console.log("Pre UI List: "+ rolodex.length)}    
+                               
                     </MDBCard>
                     </div>
                     </MDBRow>

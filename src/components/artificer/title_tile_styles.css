@@ -20,4 +20,5 @@
 
   hr.solid {
     box-shadow: rgb(0 0 0 / 50%) 0px -6px 6px -6px;
+    border-top: 0px solid;
   }

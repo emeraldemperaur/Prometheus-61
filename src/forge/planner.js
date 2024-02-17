@@ -1,0 +1,33 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+export const plannerSlice = createSlice({
+    name: 'planner',
+    initialState:{
+        list:[
+            {
+                id:1,
+                companyName: 'Empiaur Enterprises',
+                companyID: 1, 
+                companyRegion: 'North America',
+                companyStockExchange: 'TSX',
+                companyTickerSymbol: 'EMP',
+                productName: 'Share Purchase and Holdings',
+                productPlanName: 'Employee Share Purchase Plan',
+                enquiryName: 'Abode',
+                enquiryID: 1,
+                status: 1,
+                buildRank: 0
+            }
+        ]
+    },
+    reducers:{
+        addPlanQuestionnaire:(state, action)=>{
+            
+            state.list = [...state.list, action.payload]
+
+        }
+    }
+});
+
+export const {addPlanQuestionnaire} = plannerSlice.actions;
+export default plannerSlice.reducer;

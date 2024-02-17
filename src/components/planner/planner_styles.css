@@ -1,0 +1,86 @@
+.planner-forms-title{
+    font-family: 'Montserrat';
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    color: #002c51;
+  }
+  
+  .planner-form-header-title{
+    font-family: 'Montserrat';
+    letter-spacing: 0.11em;
+    font-size: 16px;
+    font-weight: 600;
+    color: #216CA6;
+    text-transform: capitalize;
+  }
+  
+  .planner-form-region-text{
+    font-size: 15px;
+  }
+  
+  .planner-form-market-text{
+      font-weight: 900;
+  }
+  
+  .planner-form-symbol-text{
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      color: black;
+      font-size: 15px;
+  }
+  
+  .planner-form-build-text{
+    font-weight: 900;
+  }
+  
+  .planner-form-button{
+    font-size: 14px;
+    color: #002c51;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 600;
+    background-color: #002c51;
+  }
+  
+  
+  .planner-title-box{
+    margin-top: 9px;
+  }
+  
+  .planner-name-title{
+    font-family: 'Montserrat';
+    letter-spacing: 0.09em;
+    color: #216ca5;
+  }
+  
+  .planner-badge{
+    font-size: 13px;
+  }
+  
+  .planner-heading{
+    text-transform: uppercase;
+    font-weight: 700 !important;
+    color: #002C51 !important;
+  }
+
+  .planner-build-rank-pending{
+    font-weight: 900;
+    color: #216ca5;
+  }
+
+  .planner-build-rank-lite{
+    font-weight: 900;
+    color: #00008b;
+  }
+
+  .planner-build-rank-medium{
+    font-weight: 900;
+    color: #b59410;
+  }
+
+  .planner-build-rank-large{
+    font-weight: 900;
+    color: #850101;
+  }
+  

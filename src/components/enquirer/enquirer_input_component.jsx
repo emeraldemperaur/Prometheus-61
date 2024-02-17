@@ -42,7 +42,7 @@ const EnquirerInputForm = () => {
             </MDBCol>
             <MDBCol size={4}>
                 <div>
-                <Form.Select aria-describedby='queryModelPlan' aria-label="queryModelPlan" defaultValue=" ">
+                <Form.Select id='formQueryModelPlan' aria-describedby='queryModelPlan' aria-label="queryModelPlan" defaultValue=" ">
                             { productPlanList.map( productPlanItem => (
                                                                 <option key={productPlanItem.id} value={productPlanItem.title}>{productPlanItem.title}</option>
                                                                 ))}
@@ -54,17 +54,17 @@ const EnquirerInputForm = () => {
         <MDBRow style={{paddingTop: '23px'}}>
             <MDBCol size={4}>
             <div>
-                <Form.Select aria-describedby='queryModelRegion' aria-label="queryModelRegion" defaultValue=" ">
+                <Form.Select id='formQueryModelRegion' aria-describedby='queryModelRegion' aria-label="queryModelRegion" defaultValue=" ">
                                 { countryRegionItems.map( countryRegion => (
                                         <option key={countryRegion.id}>{countryRegion.title}</option>
                                         ))}
                                 </Form.Select>
-                    <div id='queryModelPlan' className='form-text form-hint'>Region</div>
+                    <div id='queryModelRegion' className='form-text form-hint'>Region</div>
                 </div>
             </MDBCol>
             <MDBCol size={4}>
             <div>
-                <Form.Select aria-describedby='queryModelMarket' aria-label="queryModelMarket" defaultValue=" ">
+                <Form.Select id='formQueryModelMarket' aria-describedby='queryModelMarket' aria-label="queryModelMarket" defaultValue=" ">
                                 { queryExchangeMarketsItems.map( exchangeMarket => (
                                         <option key={exchangeMarket.id}>{exchangeMarket.title}</option>
                                         ))}
@@ -74,7 +74,7 @@ const EnquirerInputForm = () => {
             </MDBCol>
             <MDBCol size={4}>
             <div>
-                <Form.Select aria-describedby='queryModelPlatform' aria-label="queryModelPlatform" defaultValue=" ">
+                <Form.Select id='formQueryModelPlatform' aria-describedby='queryModelPlatform' aria-label="queryModelPlatform" defaultValue=" ">
                                 { equityPlatformItems.map( equityPlatform => (
                                         <option key={equityPlatform.id}>{equityPlatform.title}</option>
                                         ))}
