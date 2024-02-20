@@ -3,6 +3,12 @@
     width: 100%;
 }
 
+.enquirer-query-box-view{
+  height:150px;
+  width: 100%;
+}
+
+
 .enquirer-company-name{
     font-weight: 600;
     font-size: 24px;
@@ -127,6 +133,11 @@
   font-size: 13px;
 }
 
+.enquirer-view-badge{
+  float: left;
+  font-size: 21px;
+}
+
 .enquirer-badge-sw{
   font-size: 13px;
   background-color: #00a1e2 !important;
@@ -152,4 +163,60 @@
   font-weight: 700 !important;
   color: #002C51 !important;
 
+}
+
+.enquirer-viewer-title{
+  font-size: 24px;
+  font-weight: 900 !important;
+  font-family: 'Montserrat';
+  letter-spacing: 0.16em;
+  color: #002C51;
+  text-align: left;
+}
+
+.enquirer-viewer-subtitle{
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: -3px;
+  color: #216ca5;
+}
+
+.enquirer-viewer-heading{
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #216cb5;
+  font-family: 'Montserrat';
+  text-align: left;
+  padding-top: 3px;
+}
+
+.enquirer-viewer-region{
+  font-size: 24px;
+  text-align: left;
+  font-weight: 300;
+  color: black;
+}
+
+.enquirer-viewer-mkt{
+    text-align: left;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+}
+
+.enquirer-viewer-author{
+  font-size: 24px;
+  text-align: left;
+  font-weight: 300;
+  color: black;
+}
+
+.enquirer-viewer-author-time{
+    text-align: left;
+    letter-spacing: 0.13em;
+    font-size: 13px;
+    font-weight: 400;
 }

@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import PlannerInputForm from './planner_input_component';
 import { addPlanQuestionnaire } from '../../forge/planner';
 import PlannerTable from './planner_table_component';
+import { toast } from 'react-toastify';
+
 
 const PlannerInterface = () => {
     document.body.style.backgroundColor = "#ffffff"
@@ -18,6 +20,33 @@ const PlannerInterface = () => {
 
     const planner = useSelector((state)=> state.planner.list);
     const plannerDispatch = useDispatch();
+
+    const submitPQModel = () =>{
+        let plannerCorpNameInput = document.getElementById("formPlannerCorpName");
+        let plannerCorpNameLabel = document.getElementById("plannerCorpNameLabel");
+        let plannerProductNameInput = document.getElementById("formPlannerProductName");
+        let plannerProductNameLabel = document.getElementById("plannerProductNameLabel");
+        let plannerPlanNameInput = document.getElementById("formPlannerPlanName");
+        let plannerPlanNameLabel = document.getElementById("plannerPlanNameLabel");
+        let plannerEnquiryNameInput = document.getElementById("formPlannerEnquiryName");
+        let plannerEnquiryNameLabel = document.getElementById("plannerEnquiryNameLabel");
+        let plannerAutoShareInput = document.getElementById("formPlannerEnquiryShare");
+        if(inputTextValid(plannerCorpNameInput, plannerCorpNameLabel) && inputTextValid(plannerProductNameInput, plannerProductNameLabel) 
+        && inputTextValid(plannerPlanNameInput, plannerPlanNameLabel) && inputTextValid(plannerEnquiryNameInput, plannerEnquiryNameLabel)){
+            //setStaticModal(!staticModal);
+        }
+
+    }
+
+    const inputTextValid = (inputElement, inputLabel) =>{
+        let inputValid = false
+        if(inputElement.value.trim().length == 0){inputValid = false; inputLabel.style.color = "#880808"; inputLabel.style.fontWeight = 500; toast.warn('Missing required field!',{ position: "top-right", autoClose: 696, closeOnClick: true})
+            inputElement.focus();
+        }
+        if(inputElement.value.trim().length != 0){inputValid = true; inputLabel.style.color = "#757575"; inputLabel.style.fontWeight = 'normal'}
+        console.log("Input Valid: " + inputValid)
+        return inputValid
+    }
 
     return(
     <>
@@ -68,7 +97,7 @@ const PlannerInterface = () => {
                     </div>
                     </MDBRow>
     </MDBContainer>
-    <RecordsModal title="New Plan Questionnaire" action="CREATE" size="xl" 
+    <RecordsModal title="New Plan Questionnaire" action="CREATE" size="xl" onClickFunc={submitPQModel}
                 toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal} formComponent={<PlannerInputForm/>}/>
     <div className="fab-btn" onClick={toggleOpen}> + </div>
     </>

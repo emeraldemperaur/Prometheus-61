@@ -1,8 +1,20 @@
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBadge, MDBBtn, MDBIcon, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
-
+import { MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBModalBody } from 'mdb-react-ui-kit';
+import { useState } from 'react';
 import '../rolodex/rolodex_styles.css'
+import RolodexViewer from './rolodex_viewer';
 
 const RolodexTable = ({rolodexList}) => {
+
+    const [rolodexModal, setRolodexModal] = useState(false);
+    const [rolodexItem, setRolodexItem] = useState(null);
+    const toggleOpen = () => setRolodexModal(!rolodexModal);
+
+    const renderRolodexViewer = (rolodexItemObject) => {
+        setRolodexItem(rolodexItemObject)
+        setRolodexModal(!rolodexModal);
+        console.log(rolodexItem)
+    }
 
     return(
     <>
@@ -44,20 +56,20 @@ const RolodexTable = ({rolodexList}) => {
                                             </td>
                                             <td>
                                             {rolodexItem.dualListed ?
-                                            <><MDBBadge className='rolodex-badge' color='info' pill> Dual Listed</MDBBadge><br/></>
+                                            <><MDBBadge className='rolodex-badge' color='info' pill>Dual Listed</MDBBadge><br/></>
                                             :null}
                                             {rolodexItem.distributesDividends ?
-                                            <><MDBBadge className='rolodex-badge' color='info' pill> Dividends</MDBBadge><br/></>
+                                            <><MDBBadge className='rolodex-badge' color='info' pill>Dividends</MDBBadge><br/></>
                                             :null}
                                             {rolodexItem.legendConditions ?
-                                            <><MDBBadge className='rolodex-badge' color='info' pill> Legend Conditions</MDBBadge><br/></>
+                                            <><MDBBadge className='rolodex-badge' color='info' pill>Legend Conditions</MDBBadge><br/></>
                                             :null}   
                                             </td>
                                             <td>
                                                 
                                             </td>
                                             <td>
-                                                <MDBBtn className="rolodex-form-button" rounded size='sm'>
+                                                <MDBBtn onClick={() => renderRolodexViewer(rolodexItem)} className="rolodex-form-button" rounded size='sm'>
                                                 <i className="fa-regular fa-eye"></i> View</MDBBtn>&nbsp;
                                                 <MDBBtn className="rolodex-form-button" rounded size='sm'>
                                                 <i className="fa-regular fa-pen-to-square"></i> Edit</MDBBtn>&nbsp;
@@ -66,12 +78,39 @@ const RolodexTable = ({rolodexList}) => {
                                             </td>
                                             <td>
                                             
-                                            </td>
+                                            </td>        
+
                                             </tr>
                                             )):null
                                         }
             </MDBTableBody>
         </MDBTable>
+        <>
+        <MDBModal open={rolodexModal} tabIndex='-1' setOpen={setRolodexModal}>
+            <MDBModalDialog size='xl'>
+                <MDBModalContent>
+                    <MDBModalHeader>
+                        <MDBModalTitle className='rolodex-viewer-title'>{rolodexItem ?
+                        <>{rolodexItem.companyName}</>
+                            :null}
+                        </MDBModalTitle>
+                        <MDBBtn className='btn-close' color='none' onClick={toggleOpen}></MDBBtn>
+                    </MDBModalHeader>
+                    <MDBModalBody>{rolodexItem ?
+                        <>
+                        <RolodexViewer countryName={rolodexItem.incorporationCountry} region={rolodexItem.incorporationRegion}
+                         primeExchange={rolodexItem.primeStockExchange} primeSymbol={rolodexItem.primeTickerSymbol} legends={rolodexItem.legendConditions}
+                         dividends={rolodexItem.distributesDividends} dividendsMethod={rolodexItem.dividendsDistribution} dualListed={rolodexItem.dualListed}
+                         dualExchange={rolodexItem.dualStockExchange} dualSymbol={rolodexItem.dualTickerSymbol} contactName={rolodexItem.primaryContactName}
+                         contactEmail={rolodexItem.primaryContactEmail} corpType={rolodexItem.incorporationCategory}/>
+                        
+                        </>
+                            :null}
+                    </MDBModalBody>
+            </MDBModalContent>
+            </MDBModalDialog>
+        </MDBModal>
+        </>
     </div>
     </>
     )

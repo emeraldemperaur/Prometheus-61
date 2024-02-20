@@ -12,7 +12,12 @@ export const enquirerSlice = createSlice({
                 regionName: 'Global - All Regions',
                 exchangeMarket: 'Global - All Markets',
                 platformName: 'Global - All Platforms',
-                jsonQueryDefinition: ''
+                enquiryAuthor: 'Meka Egwim',
+                enquiryDate: 'February 22, 2024 - 03:19PM MDT',
+                enquiryModified: true,
+                enquiryEditor: 'Jane Smith',
+                enquiryEditDate: 'February 23, 2024 - 06:39PM MDT',
+                jsonQueryDefinition: 'Abode JSON Testing Text'
             }
         ]
     },

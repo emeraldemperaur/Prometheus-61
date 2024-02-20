@@ -1,9 +1,20 @@
-import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBadge, MDBBtn, MDBIcon, MDBTable, MDBTableHead, MDBTableBody, MDBCheckbox } from 'mdb-react-ui-kit';
+import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody, MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBModalBody } from 'mdb-react-ui-kit';
+import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-
 import '../planner/planner_styles.css'
+import EnquirerViewer from './enquirer_viewer';
 
 const EnquirerTable = ({enquirerList}) => {
+
+    const [enquirerModal, setEnquirerModal] = useState(false);
+    const [enquirerItem, setEnquirerItem] = useState(null);
+    const toggleOpen = () => setEnquirerModal(!enquirerModal);
+
+    const renderEnquirerViewer = (enquirerItemObject) => {
+        setEnquirerItem(enquirerItemObject)
+        setEnquirerModal(!enquirerModal);
+        console.log(enquirerItem)
+    }
 
     return(
     <>
@@ -57,7 +68,7 @@ const EnquirerTable = ({enquirerList}) => {
                                         
                                     </td>
                                     <td>
-                                        <MDBBtn className="enquirer-form-button" rounded size='sm'>
+                                        <MDBBtn onClick={() => renderEnquirerViewer(enquirerItem)} className="enquirer-form-button" rounded size='sm'>
                                         <i className="fa-regular fa-eye"></i> View</MDBBtn>&nbsp;
                                         <MDBBtn className="enquirer-form-button" rounded size='sm'>
                                         <i className="fa-regular fa-pen-to-square"></i> Edit</MDBBtn>&nbsp;
@@ -73,6 +84,31 @@ const EnquirerTable = ({enquirerList}) => {
      
             </MDBTableBody>
         </MDBTable>
+        <>
+        <MDBModal open={enquirerModal} tabIndex='-1' setOpen={setEnquirerModal}>
+            <MDBModalDialog scrollable size='xl'>
+                <MDBModalContent>
+                    <MDBModalHeader>
+                        <MDBModalTitle className='enquirer-viewer-title'>{enquirerItem ?
+                        <>{enquirerItem.modelName}<br/>
+                        <p className='enquirer-viewer-subtitle'>{enquirerItem.productPlanName}</p></>
+                            :null}
+                        </MDBModalTitle>
+                        <MDBBtn className='btn-close' color='none' onClick={toggleOpen}></MDBBtn>
+                    </MDBModalHeader>
+                    <MDBModalBody>{enquirerItem ?
+                        <>
+                        <EnquirerViewer modelName={enquirerItem.modelName} regionName={enquirerItem.regionName} exchangeMarket={enquirerItem.exchangeMarket} 
+                        platformName={enquirerItem.platformName} enquiryAuthor={enquirerItem.enquiryAuthor} enquiryDate={enquirerItem.enquiryDate}
+                        jsonQueryDefinition={enquirerItem.jsonQueryDefinition}
+                        enquiryModified={enquirerItem.enquiryModified} enquiryEditor={enquirerItem.enquiryEditor} enquiryEditDate={enquirerItem.enquiryEditDate}/>
+                        </>
+                            :null}
+                    </MDBModalBody>
+            </MDBModalContent>
+            </MDBModalDialog>
+        </MDBModal>
+        </>
     </div>
     </>
     )

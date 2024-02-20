@@ -7,7 +7,7 @@ export const rolodexSlice = createSlice({
             {
                 id:1,
                 companyName: 'Empiaur Enterprises', 
-                primaryContactName: 'Anonymous',
+                primaryContactName: 'James Bond',
                 primaryContactEmail: 'anonymous@empiaur.ca',
                 companyLogo: '',
                 incorporationCountry: 'Canada',
@@ -17,9 +17,9 @@ export const rolodexSlice = createSlice({
                 dualListed: true,
                 dualStockExchange: 'NYSE',
                 dualTickerSymbol: 'EMPE',
-                legendConditions: true,
-                distributesDividends: false,
-                dividendsDistribution: '',
+                legendConditions: false,
+                distributesDividends: true,
+                dividendsDistribution: 'Stock Reinvestment',
                 incorporationCategory: 'C-Corp'
             }
         ]

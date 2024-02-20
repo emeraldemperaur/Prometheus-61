@@ -1,8 +1,19 @@
-import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBadge, MDBBtn, MDBIcon, MDBTable, MDBTableHead, MDBTableBody, MDBCheckbox } from 'mdb-react-ui-kit';
-
+import { MDBBadge, MDBBtn, MDBIcon, MDBTable, MDBTableHead, MDBTableBody, MDBCheckbox, MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBModalBody, MDBTooltip } from 'mdb-react-ui-kit';
+import { useState } from 'react';
 import '../planner/planner_styles.css'
+import PlannerViewer from './planner_viewer';
 
 const PlannerTable = ({plannerList}) => {
+
+    const [plannerModal, setPlannerModal] = useState(false);
+    const [plannerItem, setPlannerItem] = useState(null);
+    const toggleOpen = () => setPlannerModal(!plannerModal);
+
+    const renderPlannerViewer = (plannerItemObject) => {
+        setPlannerItem(plannerItemObject)
+        setPlannerModal(!plannerModal);
+        console.log(plannerItem)
+    }
 
     return(
     <>
@@ -69,7 +80,7 @@ const PlannerTable = ({plannerList}) => {
                                                 :null}  
                                     </td>
                                     <td>
-                                        <MDBBtn className="planner-form-button" rounded size='sm'>
+                                        <MDBBtn onClick={() => renderPlannerViewer(plannerItem)} className="planner-form-button" rounded size='sm'>
                                         <i className="fa-regular fa-eye"></i> View</MDBBtn>&nbsp;
                                         <MDBBtn className="planner-form-button" rounded size='sm'>
                                         <i className="fa-regular fa-pen-to-square"></i> Edit</MDBBtn>&nbsp;
@@ -84,6 +95,34 @@ const PlannerTable = ({plannerList}) => {
                     }
             </MDBTableBody>
         </MDBTable>
+        <>
+        <MDBModal open={plannerModal} tabIndex='-1' setOpen={setPlannerModal}>
+            <MDBModalDialog scrollable size='fullscreen'>
+                <MDBModalContent>
+                    <MDBModalHeader>
+                        <MDBModalTitle className='planner-viewer-title'>{plannerItem ?
+                        <>
+                        <MDBTooltip tag='a' title={plannerItem.enquiryName}>
+                        {plannerItem.productPlanName}<br/></MDBTooltip>
+                        <p className='planner-viewer-subtitle'>{plannerItem.companyName}</p>
+                        
+                        </>
+                            :null}
+                        </MDBModalTitle>
+                        <MDBBtn className='btn-close' color='none' onClick={toggleOpen}></MDBBtn>
+                    </MDBModalHeader>
+                    <MDBModalBody>{plannerItem ?
+                        <>
+                        <PlannerViewer status={plannerItem.status} buildRank={plannerItem.buildRank} companyRegion={plannerItem.companyRegion} companyStockExchange={plannerItem.companyStockExchange}
+                        companyTickerSymbol={plannerItem.companyTickerSymbol} isCorpDualListed={plannerItem.isCorpDualListed} companyDualStockExchange={plannerItem.companyDualStockExchange}
+                        companyDualTickerSymbol={plannerItem.companyDualTickerSymbol} correspondenceName={plannerItem.correspondenceName} correspondenceTime={plannerItem.correspondenceTime}/>
+                        </>
+                            :null}
+                    </MDBModalBody>
+            </MDBModalContent>
+            </MDBModalDialog>
+        </MDBModal>
+        </>
     </div>
     </>
     )

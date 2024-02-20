@@ -44,6 +44,8 @@
     font-size: 1.2rem;
     white-space: nowrap;
     color: #ffffff;
+    letter-spacing: 0.09em;
+    padding-top: 13px;
   }
   
   .navigation .user-box .image-box {

@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import EnquirerInputForm from './enquirer_input_component';
 import { addQueryModel } from '../../forge/enquirer';
 import EnquirerTable from './enquirer_table_component';
+import { toast } from 'react-toastify';
 
 
 const EnquirerInterface = () => {
@@ -19,6 +20,47 @@ const EnquirerInterface = () => {
 
     const enquirer = useSelector((state)=> state.enquirer.list);
     const enquirerDispatch = useDispatch();
+
+    const submitQMModel = () =>{
+        let queryModelInput = document.getElementById("formQueryModelName");
+        let queryModelLabel = document.getElementById("queryModelNameLabel");
+        let queryModelProductInput = document.getElementById("formQueryModelProduct");
+        let queryModelProductLabel = document.getElementById("queryModelProductLabel");
+        let queryModelPlanInput = document.getElementById("formQueryModelPlan");
+        let queryModelPlanLabel = document.getElementById("queryModelPlanLabel");
+        let queryModelRegionInput = document.getElementById("formQueryModelRegion");
+        let queryModelRegionLabel = document.getElementById("queryModelRegionLabel");
+        let queryModelMarketInput = document.getElementById("formQueryModelMarketEx");
+        let queryModelMarketLabel = document.getElementById("queryModelMarketExLabel");
+        let queryModelPlatformInput = document.getElementById("formQueryModelPlatform");
+        let queryModelPlatformLabel = document.getElementById("queryModelPlatformLabel");
+        let queryModelJSONInput = document.getElementById("formQueryModelJSON");
+        let queryModelJSONLabel = document.getElementById("queryModelJSONLabel");
+        if(inputTextValid(queryModelInput, queryModelLabel) && inputTextValid(queryModelInput, queryModelLabel) 
+        && inputTextValid(queryModelProductInput, queryModelProductLabel) && inputTextValid(queryModelPlanInput, queryModelPlanLabel) 
+        && inputTextValid(queryModelRegionInput, queryModelRegionLabel) && inputMktValid(queryModelMarketInput, queryModelMarketLabel)
+        && inputTextValid(queryModelPlatformInput, queryModelPlatformLabel) && inputTextValid(queryModelJSONInput, queryModelJSONLabel)){
+                        //setStaticModal(!staticModal);
+        }
+    }
+
+    const inputTextValid = (inputElement, inputLabel) =>{
+        let inputValid = false
+        if(inputElement.value.trim().length == 0){inputValid = false; inputLabel.style.color = "#880808"; inputLabel.style.fontWeight = 500; toast.warn('Missing required field!',{ position: "top-right", autoClose: 696, closeOnClick: true})
+            inputElement.focus();
+        }
+        if(inputElement.value.trim().length != 0){inputValid = true; inputLabel.style.color = "#757575"; inputLabel.style.fontWeight = 'normal'}
+        console.log("Input Valid: " + inputValid)
+        return inputValid
+    }
+
+    const inputMktValid = (inputElement, inputMktLabel) =>{
+        let inputMktValid = false
+        if(inputElement.value.trim() == "----"){inputMktValid = false; inputMktLabel.style.color = "#880808"; inputMktLabel.style.fontWeight = 500; toast.warn('Missing required field!',{ position: "top-right", autoClose: 696, closeOnClick: true}); inputElement.focus();}
+        if(inputElement.value.trim() != 0 && inputElement.value.trim() != "----"){inputMktValid = true; inputMktLabel.style.color = "#757575"; inputMktLabel.style.fontWeight = 'normal'}
+        console.log("Input Mkt Valid: " + inputMktValid)
+        return inputMktValid
+    }
 
     return(
     <>
@@ -70,7 +112,7 @@ const EnquirerInterface = () => {
                     </div>
                     </MDBRow>
     </MDBContainer>
-    <RecordsModal title="New Query Model" action="CREATE" size="fullscreen" 
+    <RecordsModal title="New Query Model" action="CREATE" size="fullscreen" onClickFunc={submitQMModel}
                 toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal} formComponent={<EnquirerInputForm/>}/>
     <div className="fab-btn" onClick={toggleOpen}> + </div>
     </>

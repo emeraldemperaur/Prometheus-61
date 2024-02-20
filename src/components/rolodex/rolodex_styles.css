@@ -143,10 +143,97 @@ font-size: 14px;
   background-color: #216ca5 !important;
 }
 
+.rolodex-view-badge{
+  font-size: 21px;
+  float: left;
+}
+
 .rolodex-heading{
   text-transform: uppercase;
   font-weight: 700 !important;
   color: #002C51 !important;
+}
+
+.rolodex-viewer-title{
+    font-size: 24px;
+    font-weight: 900 !important;
+    font-family: 'Montserrat';
+    letter-spacing: 0.16em;
+    color: #002C51;
+}
+
+.rolodex-viewer-heading{
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: #216cb5;
+    font-family: 'Montserrat';
+    text-align: left;
+    padding-top: 3px;
+}
+
+.rolodex-viewer-country{
+    font-size: 24px;
+    text-align: left;
+    font-weight: 400;
+    color: black;
+}
+
+.rolodex-viewer-region{
+    font-size: 18px;
+    letter-spacing: 0.09em;
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+.rolodex-viewer-exchange{
+    text-align: left;
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+}
+
+.rolodex-viewer-ticker{
+    font-size: 23px;
+    letter-spacing: 0.21em;
+    text-align: left;
+    font-weight: 300;
+}
+
+.rolodex-viewer-legends{
+    font-size: 21px;
+    text-align: left;
+    letter-spacing: 0.13em;
+    font-weight: 300;
+}
+
+.rolodex-viewer-prime-contact{
+    font-size: 21px;
+    text-align: left;
+    letter-spacing: 0.13em;
+    font-weight: 300;
+}
+
+.rolodex-viewer-prime-contact-info{
+  font-size: 16px;
+  text-align: left;
+  letter-spacing: 0.19em;
+  font-weight: 400;
+  float: left;
+  text-decoration: none !important;
+  color: #216ca5 !important;
+  padding-bottom: 13px;
+}
+
+.rolodex-viewer-corp-type{
+    position: absolute;
+    bottom: 23px;
+    right: 169px;
+    font-size: 44px;
+    letter-spacing: 0.13em;
+    font-weight: 400;
 }
 
 
