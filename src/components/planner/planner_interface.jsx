@@ -33,7 +33,29 @@ const PlannerInterface = () => {
         let plannerAutoShareInput = document.getElementById("formPlannerEnquiryShare");
         if(inputTextValid(plannerCorpNameInput, plannerCorpNameLabel) && inputTextValid(plannerProductNameInput, plannerProductNameLabel) 
         && inputTextValid(plannerPlanNameInput, plannerPlanNameLabel) && inputTextValid(plannerEnquiryNameInput, plannerEnquiryNameLabel)){
-            //setStaticModal(!staticModal);
+            plannerDispatch(addPlanQuestionnaire({
+                id:getNextId(planner),
+                companyName: plannerCorpNameInput.value,
+                companyID: 1, 
+                companyRegion: 'North America',
+                companyStockExchange: 'TSX',
+                companyTickerSymbol: 'EMP',
+                isCorpDualListed: false,
+                companyDualStockExchange: 'NYSE',
+                companyDualTickerSymbol: 'EMPE',
+                productName: plannerProductNameInput.value,
+                productPlanName: plannerPlanNameInput.value,
+                enquiryName: plannerEnquiryNameInput.value,
+                enquiryID: 1,
+                autoShare: plannerAutoShareInput.checked,
+                status: 1,
+                buildRank: 0,
+                correspondenceName:'Prometheus Admin',
+                correspondenceTime:'February 23, 2024 - 06:39PM MDT'
+            }))
+            clearInputs([plannerCorpNameInput, plannerProductNameInput, plannerPlanNameInput, plannerEnquiryNameInput])
+            clearToggles([plannerAutoShareInput])
+            setStaticModal(!staticModal);
         }
 
     }
@@ -47,6 +69,10 @@ const PlannerInterface = () => {
         console.log("Input Valid: " + inputValid)
         return inputValid
     }
+
+    const getNextId = (plannerStore) => { let plannerLength = plannerStore.length; return ++plannerLength}
+    const clearInputs = (inputList) =>{for(const inputElement of inputList){inputElement.value = " ";}}
+    const clearToggles = (toggleList) => { for(const toggle of toggleList){ toggle.checked = false;}}
 
     return(
     <>

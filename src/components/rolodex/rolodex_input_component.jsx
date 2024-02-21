@@ -7,9 +7,8 @@ import { exchangeMarketsItems } from '../../utils/exchanges_data';
 import { countriesItems } from '../../utils/country_data';
 
 
-const RolodexInputForm = () => {
-    const [marketPrefix, setMarketPrefix] = useState("----");
-    const [dualMarketPrefix, setDualMarketPrefix] = useState("----");
+const RolodexInputForm = ({marketPrefix, dualMarketPrefix, setMarketPrefix, setDualMarketPrefix}) => {
+    
   
     const toggleDualListingMask = () => {
         if(document.getElementById("formCorpDualMarketInput").style.visibility == "hidden"){document.getElementById("formCorpDualMarketInput").style.visibility = "visible"; document.getElementById("formDualStockTickerInput").style.visibility = "visible";
@@ -86,7 +85,7 @@ const RolodexInputForm = () => {
             </div>
         </MDBCol>
         <MDBCol size='4'>
-            <MDBInputGroup className='mb-3' textBefore={marketPrefix}>
+            <MDBInputGroup id='formStockTickerInput' className='mb-3' textBefore={marketPrefix}>
                 <input className='form-control' id='formStockTicker' placeholder='Ticker Symbol' type='text' defaultValue=""/>
             </MDBInputGroup>
         </MDBCol> 

@@ -135,7 +135,7 @@
 
 .enquirer-view-badge{
   float: left;
-  font-size: 21px;
+  font-size: 21px !important;
 }
 
 .enquirer-badge-sw{
@@ -219,4 +219,8 @@
     letter-spacing: 0.13em;
     font-size: 13px;
     font-weight: 400;
+}
+
+.enquirer-table-txt{
+  text-align: left;
 }

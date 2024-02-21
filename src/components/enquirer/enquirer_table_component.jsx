@@ -38,8 +38,8 @@ const EnquirerTable = ({enquirerList}) => {
             
                                         <div className='d-flex align-items-center'>
                                         <div className='ms-3'>
-                                            <p className='fw-bold mb-1 enquirer-name-title'>{enquirerItem.modelName}</p>
-                                            <p className='text-muted mb-0'>{enquirerItem.productPlanName}</p>
+                                            <p className='fw-bold mb-1 enquirer-name-title enquirer-table-txt'>{enquirerItem.modelName}</p>
+                                            <p className='text-muted mb-0 enquirer-table-txt'>{enquirerItem.productPlanName}</p>
                                         </div>
                                         </div>
                                     </td>

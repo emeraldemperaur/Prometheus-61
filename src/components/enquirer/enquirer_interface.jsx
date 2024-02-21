@@ -40,7 +40,24 @@ const EnquirerInterface = () => {
         && inputTextValid(queryModelProductInput, queryModelProductLabel) && inputTextValid(queryModelPlanInput, queryModelPlanLabel) 
         && inputTextValid(queryModelRegionInput, queryModelRegionLabel) && inputMktValid(queryModelMarketInput, queryModelMarketLabel)
         && inputTextValid(queryModelPlatformInput, queryModelPlatformLabel) && inputTextValid(queryModelJSONInput, queryModelJSONLabel)){
-                        //setStaticModal(!staticModal);
+            enquirerDispatch(addQueryModel({
+                id:getNextId(enquirer),
+                modelName: queryModelInput.value, 
+                productName: queryModelProductInput.value,
+                productPlanName: queryModelPlanInput.value,
+                regionName: queryModelRegionInput.value,
+                exchangeMarket: queryModelMarketInput.value,
+                platformName: queryModelPlatformInput.value,
+                enquiryAuthor: 'Prometheus Admin',
+                enquiryDate: 'February 22, 2024 - 03:19PM MDT',
+                enquiryModified: false,
+                enquiryEditor: ' ',
+                enquiryEditDate: ' ',
+                jsonQueryDefinition: queryModelJSONInput.value
+            }))
+            clearInputs([queryModelInput, queryModelProductInput, queryModelPlanInput, queryModelRegionInput, queryModelMarketInput, 
+                queryModelPlatformInput, queryModelJSONInput])
+            setStaticModal(!staticModal);
         }
     }
 
@@ -61,6 +78,11 @@ const EnquirerInterface = () => {
         console.log("Input Mkt Valid: " + inputMktValid)
         return inputMktValid
     }
+
+    const getNextId = (enquirerStore) => { let enquirerLength = enquirerStore.length; return ++enquirerLength}
+    const clearInputs = (inputList) =>{for(const inputElement of inputList){inputElement.value = " ";}}
+
+
 
     return(
     <>

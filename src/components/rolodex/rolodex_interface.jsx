@@ -11,11 +11,15 @@ import RolodexInputForm from './rolodex_input_component';
 import { useSelector, useDispatch } from 'react-redux'
 import { addCompanyProfile } from '../../forge/rolodex';
 import RolodexTable from './rolodex_table_component';
+import { countriesItems } from '../../utils/country_data';
 import { toast } from 'react-toastify';
 
 const RolodexInterface = () => {
     document.body.style.backgroundColor = "#ffffff"
     const [staticModal, setStaticModal] = useState(false);
+    const [marketPrefix, setMarketPrefix] = useState("----");
+    const [dualMarketPrefix, setDualMarketPrefix] = useState("----");
+
     const toggleOpen = () => setStaticModal(!staticModal);
     const rolodex = useSelector((state)=> state.rolodex.list);
     const rolodexDispatch = useDispatch();
@@ -35,14 +39,17 @@ const RolodexInterface = () => {
         let corpSymbolInput = document.getElementById("formStockTicker");
         let corpSymbolLabel = document.getElementById("corpMarketExLabel");
         let corpDualListedInput = document.getElementById("formCorpDualListedToggle");
+        let corpDualExchangeOption = document.getElementById("formCorpDualMarketInput");
         let corpDualExchangeInput = document.getElementById("formCorpDualMarketEx");
         let corpDualExchangeLabel = document.getElementById("corpDualMarketExLabel");
         let corpDualSymbolInput = document.getElementById("formDualStockTicker");
         let corpDualSymbolLabel = document.getElementById("corpDualMarketExLabel");
+        let corpDualSymbolOption = document.getElementById("formDualStockTickerInput");
         let corpLegendInput = document.getElementById("formCorpLegendConditions");
         let corpDividendsInput = document.getElementById("formCorpDividendsToggle");
         let corpDividendDistroInput = document.getElementById("formCorpDividendsDistroMethod");
         let corpDividendDistroLabel = document.getElementById("corpDividendsMethodLabel");
+        let corpDividendDistroOption = document.getElementById("formCorpDividendsMethodInput");
         let corpCategoryInput = document.getElementById("formCorpCategoryType");
         let corpCategoryLabel = document.getElementById("formCorpCategoryTypeLabel");
         if(inputTextValid(corpNameInput, corpNameLabel) && inputTextValid(corpContactNameInput, corpContactNameLabel) 
@@ -51,12 +58,35 @@ const RolodexInterface = () => {
         && duoListedValid(corpDualListedInput, corpDualExchangeInput, corpDualExchangeLabel, corpDualSymbolInput, corpDualSymbolLabel) 
         && dividendsValid(corpDividendsInput, corpDividendDistroInput, corpDividendDistroLabel) 
         && inputTextValid(corpCategoryInput, corpCategoryLabel)){
-            //setStaticModal(!staticModal);
+            rolodexDispatch(addCompanyProfile({
+                id:getNextId(rolodex),
+                companyName: corpNameInput.value, 
+                primaryContactName: corpContactNameInput.value,
+                primaryContactEmail: corpContactEmailInput.value,
+                companyLogo: '',
+                incorporationCountry: corpCountryInput.value,
+                incorporationRegion: fetchRegion(corpCountryInput.value),
+                primeStockExchange: corpExchangeInput.value,
+                primeTickerSymbol: corpSymbolInput.value,
+                dualListed: corpDualListedInput.checked,
+                dualStockExchange: toggledInputValue(corpDualListedInput, corpDualExchangeInput),
+                dualTickerSymbol: toggledInputValue(corpDualListedInput, corpDualSymbolInput),
+                legendConditions: corpLegendInput.checked,
+                distributesDividends: corpDividendsInput.checked,
+                dividendsDistribution: toggledInputValue(corpDividendsInput, corpDividendDistroInput),
+                incorporationCategory: corpCategoryInput.value
+            }))
+            setStaticModal(!staticModal);
+            clearInputs([corpNameInput, corpContactNameInput, corpContactEmailInput, corpCountryInput, corpExchangeInput, corpSymbolInput, 
+                corpDualExchangeInput, corpDualSymbolInput, corpDividendDistroInput, corpCategoryInput])
+            clearToggles([corpDualListedInput, corpLegendInput, corpDividendsInput])
+            setMarketPrefix("----");setDualMarketPrefix("----");
+            hideToggledInput([corpDualExchangeOption, corpDualSymbolOption, corpDividendDistroOption])
         }
     }
 
     const inputTextValid = (inputElement, inputLabel) =>{
-        let inputValid = false
+        let inputValid = false;
         if(inputElement.value.trim().length == 0){inputValid = false; inputLabel.style.color = "#880808"; inputLabel.style.fontWeight = 500; toast.warn('Missing required field!',{ position: "top-right", autoClose: 696, closeOnClick: true})
             inputElement.focus();
         }
@@ -66,7 +96,7 @@ const RolodexInterface = () => {
     }
 
     const inputMktValid = (inputElement, inputLabel) =>{
-        let inputMktValid = false
+        let inputMktValid = false;
         if(inputElement.value.trim() == "----"){inputMktValid = false; inputLabel.style.color = "#880808"; inputLabel.style.fontWeight = 500; toast.warn('Missing required field!',{ position: "top-right", autoClose: 696, closeOnClick: true})
             inputElement.focus();
         }
@@ -77,27 +107,39 @@ const RolodexInterface = () => {
 
     const duoListedValid = (toggleElement, inputElement, inputLabel, symbolElement, symbolLabel) => {
         let duoListed = false;
-        console.log("Duo Toggle Position: " + toggleElement.checked)
-        if(toggleElement && toggleElement.checked){
-            duoListed = inputMktValid(inputElement, inputLabel);
-            if(duoListed){
-                duoListed = inputTextValid(symbolElement, symbolLabel)
-            }
-        }
-        if(!toggleElement.checked){
-            duoListed = true;
-        }
-        return duoListed
-    }
+        console.log("Duo Toggle Position: " + toggleElement.checked);
+        if(toggleElement && toggleElement.checked){ duoListed = inputMktValid(inputElement, inputLabel);if(duoListed){duoListed = inputTextValid(symbolElement, symbolLabel);}}
+        if(!toggleElement.checked){duoListed = true;}return duoListed}
 
     const dividendsValid = (toggleElement, inputElement, inputLabel) =>{
         let dividendsValid = false;
-        console.log("Dividends Toggle Position: " + toggleElement.checked)
+        console.log("Dividends Toggle Position: " + toggleElement.checked);
         if(toggleElement && toggleElement.checked){dividendsValid = inputTextValid(inputElement, inputLabel);}
-        if(!toggleElement.checked){dividendsValid = true;}
-        return dividendsValid
+        if(!toggleElement.checked){dividendsValid = true;} return dividendsValid
     }
 
+    const toggledInputValue = (toggleInput, inputElement) =>{ let inputValue = " "; if(toggleInput.value){inputValue = inputElement.value} return inputValue}
+
+    const fetchRegion = (countryName) => {
+        let regionName = " "; let countryObject = null;
+        for(const country of countriesItems){if(country.name == countryName)countryObject = country}
+        if(countryObject.continent == "North America"){regionName = "North America";}; if(countryObject.continent == "Asia" || "Oceania"){regionName = "Asia-Pacific";}
+        if(countryObject.continent == "Europe" || "Middle East" || "Africa"){regionName = "EMEA";}; if(countryObject.continent == "South America" || "Caribbean"){regionName = "Latin America";}
+        return regionName;
+    }
+
+    const clearInputs = (inputList) =>{for(const inputElement of inputList){inputElement.value = " ";}}
+
+    const clearToggles = (toggleList) => { for(const toggle of toggleList){ toggle.checked = false;}}
+
+    const hideToggledInput = (inputList) => {
+        for(const visibleInput of inputList){
+            visibleInput.style.visibility = "hidden"
+            console.log("Hide Toggled Input check: " + visibleInput)
+        }
+    }
+
+    const getNextId = (rolodexStore) => { let rolodexLength = rolodexStore.length; return ++rolodexLength}
 
     return(
     <>
@@ -141,7 +183,9 @@ const RolodexInterface = () => {
                     </MDBRow>
                 </MDBContainer>
                 <RecordsModal title="New Company Profile" action="CREATE" size="xl" scrollable={true} onClickFunc={submitCPModel}
-                toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal} formComponent={<RolodexInputForm/>}/>
+                toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal} 
+                formComponent={<RolodexInputForm marketPrefix={marketPrefix} dualMarketPrefix={dualMarketPrefix}
+                 setMarketPrefix={setMarketPrefix} setDualMarketPrefix={setDualMarketPrefix}/>}/>
                 <div className="fab-btn" onClick={toggleOpen}> + </div>
     
     </>

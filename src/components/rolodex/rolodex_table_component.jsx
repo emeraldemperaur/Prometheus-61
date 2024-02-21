@@ -43,9 +43,9 @@ const RolodexTable = ({rolodexList}) => {
                                                     className='rounded-circle'
                                                 />
                                                 <div className='ms-3'>
-                                                    <p className='fw-bold mb-1 rolodex-name-title'>{rolodexItem.companyName}</p>
-                                                    <p className='text-muted mb-0'>{rolodexItem.incorporationCountry}</p>
-                                                    <p className='text-muted mb-0'>{rolodexItem.incorporationCategory}</p>
+                                                    <p style={{textAlign:'left'}} className='fw-bold mb-1 rolodex-name-title rolodex-table-txt'>{rolodexItem.companyName}</p>
+                                                    <p style={{textAlign:'left'}} className='text-muted mb-0 rolodex-table-txt'>{rolodexItem.incorporationCountry}</p>
+                                                    <p style={{textAlign:'left'}} className='text-muted mb-0 rolodex-table-txt'>{rolodexItem.incorporationCategory}</p>
                                                 </div>
                                                 </div>
                                             </td>

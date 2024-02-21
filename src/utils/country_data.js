@@ -2,7 +2,7 @@
 // length 252
 export const countriesItems = [
     {id: 0,name: " ",alpha_3: " ",code: " ",currency: " ",symbol: " ",continent: " ",phone: 0,continent_code: " ",capital: " "},
-    {id: 1,name: "Afghanistan",alpha_3: "AFG",code: "AF",currency: "AFN",symbol: "؋",continent: "Asia",phone: 93,continent_code: "AS",capital: "Kabul"},
+    {id: 1,name: "Afghanistan",alpha_3: "AFG",code: "AF",currency: "AFN",symbol: "؋",continent: "Middle East",phone: 93,continent_code: "AS",capital: "Kabul"},
     {id: 2,name: "Aland Islands",alpha_3: "ALA",code: "AX",currency: "EUR",symbol: "€",continent: "Europe",phone: 358,continent_code: "EU",capital: "Mariehamn"},
     {id: 3,name: "Albania",alpha_3: "ALB",code: "AL",currency: "ALL",symbol: "Lek",continent: "Europe",phone: 355,continent_code: "EU",capital: "Tirana"},
     {id: 4,name: "Algeria",alpha_3: "DZA",code: "DZ",currency: "DZD",symbol: "دج",continent: "Africa",phone: 213,continent_code: "AF",capital: "Algiers"},
@@ -171,9 +171,9 @@ export const countriesItems = [
     {id: 167,name: "Northern Mariana Islands",alpha_3: "MNP",code: "MP",currency: "USD",symbol: "$",continent: "Oceania",phone: 1670,continent_code: "OC",capital: "Saipan"},
     {id: 168,name: "Norway",alpha_3: "NOR",code: "NO",currency: "NOK",symbol: "kr",continent: "Europe",phone: 47,continent_code: "EU",capital: "Oslo"},
     {id: 169,name: "Oman",alpha_3: "OMN",code: "OM",currency: "OMR",symbol: ".ع.ر",continent: "Asia",phone: 968,continent_code: "AS",capital: "Muscat"},
-    {id: 170,name: "Pakistan",alpha_3: "PAK",code: "PK",currency: "PKR",symbol: "₨",continent: "Asia",phone: 92,continent_code: "AS",capital: "Islamabad"},
+    {id: 170,name: "Pakistan",alpha_3: "PAK",code: "PK",currency: "PKR",symbol: "₨",continent: "Middle East",phone: 92,continent_code: "AS",capital: "Islamabad"},
     {id: 171,name: "Palau",alpha_3: "PLW",code: "PW",currency: "USD",symbol: "$",continent: "Oceania",phone: 680,continent_code: "OC",capital: "Melekeok"},
-    {id: 172,name: "Palestinian Territory, Occupied",alpha_3: "PSE",code: "PS",currency: "ILS",symbol: "₪",continent: "Asia",phone: 970,continent_code: "AS",capital: "East Jerusalem"},
+    {id: 172,name: "Palestinian Territory, Occupied",alpha_3: "PSE",code: "PS",currency: "ILS",symbol: "₪",continent: "Middle East",phone: 970,continent_code: "AS",capital: "East Jerusalem"},
     {id: 173,name: "Panama",alpha_3: "PAN",code: "PA",currency: "PAB",symbol: "B/.",continent: "North America",phone: 507,continent_code: "NA",capital: "Panama City"},
     {id: 174,name: "Papua New Guinea",alpha_3: "PNG",code: "PG",currency: "PGK",symbol: "K",continent: "Oceania",phone: 675,continent_code: "OC",capital: "Port Moresby"},
     {id: 175,name: "Paraguay",alpha_3: "PRY",code: "PY",currency: "PYG",symbol: "₲",continent: "South America",phone: 595,continent_code: "SA",capital: "Asuncion"},
