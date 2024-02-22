@@ -11,6 +11,7 @@ import EnquirerInputForm from './enquirer_input_component';
 import { addQueryModel } from '../../forge/enquirer';
 import EnquirerTable from './enquirer_table_component';
 import { toast } from 'react-toastify';
+import { currentTime } from '../../utils/chronos';
 
 
 const EnquirerInterface = () => {
@@ -49,7 +50,7 @@ const EnquirerInterface = () => {
                 exchangeMarket: queryModelMarketInput.value,
                 platformName: queryModelPlatformInput.value,
                 enquiryAuthor: 'Prometheus Admin',
-                enquiryDate: 'February 22, 2024 - 03:19PM MDT',
+                enquiryDate: currentTime(),
                 enquiryModified: false,
                 enquiryEditor: ' ',
                 enquiryEditDate: ' ',

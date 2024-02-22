@@ -42,7 +42,7 @@ const PlannerInputForm = () => {
                 <Form.Select id='formPlannerCorpName' aria-describedby='plannerCorpName' aria-label="plannerCorpName" defaultValue=" ">
                                 <option>&nbsp;</option>
                                 { rolodexList.map( rolodexItem => (
-                                                            <option key={rolodexItem.id} value={rolodexItem.companyName}>{rolodexItem.companyName}</option>
+                                                            <option key={rolodexItem.id} value={rolodexItem.id}>{rolodexItem.companyName}</option>
                                                             ))}
                                 </Form.Select>
                     <div id='plannerCorpNameLabel' className='form-text form-hint'>Company Name</div>
@@ -75,7 +75,7 @@ const PlannerInputForm = () => {
                     <Form.Select id='formPlannerEnquiryName' aria-describedby='plannerEnquiryName' aria-label="plannerEnquiryName" defaultValue=" ">
                                     <option>&nbsp;</option>
                                     { filteredEnquirer.map( enquirerItem => (
-                                                            <option key={enquirerItem.id} value={enquirerItem.modelName}>{enquirerItem.modelName}</option>
+                                                            <option key={enquirerItem.id} value={enquirerItem.id}>{enquirerItem.modelName}</option>
                                                             ))}
                                     </Form.Select>
                         <div id='plannerEnquiryNameLabel' className='form-text form-hint'>Enquiry</div>

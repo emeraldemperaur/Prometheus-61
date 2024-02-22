@@ -11,13 +11,16 @@ import PlannerInputForm from './planner_input_component';
 import { addPlanQuestionnaire } from '../../forge/planner';
 import PlannerTable from './planner_table_component';
 import { toast } from 'react-toastify';
+import rolodex from '../../forge/rolodex';
+import { currentTime } from '../../utils/chronos';
 
 
 const PlannerInterface = () => {
     document.body.style.backgroundColor = "#ffffff"
     const [staticModal, setStaticModal] = useState(false);
     const toggleOpen = () => setStaticModal(!staticModal);
-
+    const rolodexList = useSelector((state)=> state.rolodex.list);
+    const enquirerList = useSelector((state)=> state.enquirer.list);
     const planner = useSelector((state)=> state.planner.list);
     const plannerDispatch = useDispatch();
 
@@ -33,25 +36,28 @@ const PlannerInterface = () => {
         let plannerAutoShareInput = document.getElementById("formPlannerEnquiryShare");
         if(inputTextValid(plannerCorpNameInput, plannerCorpNameLabel) && inputTextValid(plannerProductNameInput, plannerProductNameLabel) 
         && inputTextValid(plannerPlanNameInput, plannerPlanNameLabel) && inputTextValid(plannerEnquiryNameInput, plannerEnquiryNameLabel)){
+            let selectedCorp = fetchCompany(rolodexList, plannerCorpNameInput.value)
+            let selectedQuery = fetchQuery(enquirerList, plannerEnquiryNameInput.value)
             plannerDispatch(addPlanQuestionnaire({
                 id:getNextId(planner),
-                companyName: plannerCorpNameInput.value,
-                companyID: 1, 
-                companyRegion: 'North America',
-                companyStockExchange: 'TSX',
-                companyTickerSymbol: 'EMP',
-                isCorpDualListed: false,
-                companyDualStockExchange: 'NYSE',
-                companyDualTickerSymbol: 'EMPE',
+                companyName: selectedCorp.companyName,
+                companyID: selectedCorp.id, 
+                companyRegion: selectedCorp.incorporationRegion,
+                companyStockExchange: selectedCorp.primeStockExchange,
+                companyTickerSymbol: selectedCorp.primeTickerSymbol,
+                isCorpDualListed: selectedCorp.dualListed,
+                companyDualStockExchange: selectedCorp.dualStockExchange,
+                companyDualTickerSymbol: selectedCorp.dualTickerSymbol,
                 productName: plannerProductNameInput.value,
                 productPlanName: plannerPlanNameInput.value,
-                enquiryName: plannerEnquiryNameInput.value,
-                enquiryID: 1,
+                enquiryName: selectedQuery.modelName,
+                enquiryID: selectedQuery.id,
                 autoShare: plannerAutoShareInput.checked,
                 status: 1,
                 buildRank: 0,
-                correspondenceName:'Prometheus Admin',
-                correspondenceTime:'February 23, 2024 - 06:39PM MDT'
+                correspondenceName: selectedCorp.primaryContactName,
+                correspondenceEmail:selectedCorp.correspondenceEmail,
+                correspondenceTime: currentTime()
             }))
             clearInputs([plannerCorpNameInput, plannerProductNameInput, plannerPlanNameInput, plannerEnquiryNameInput])
             clearToggles([plannerAutoShareInput])
@@ -68,6 +74,26 @@ const PlannerInterface = () => {
         if(inputElement.value.trim().length != 0){inputValid = true; inputLabel.style.color = "#757575"; inputLabel.style.fontWeight = 'normal'}
         console.log("Input Valid: " + inputValid)
         return inputValid
+    }
+
+    const fetchCompany = (rolodexList, selectedId) =>{
+        let corpObject = null
+        for(const corp of rolodexList){
+            if(corp.id == selectedId){
+                corpObject = corp
+            }
+        }
+        return corpObject;
+    }
+
+    const fetchQuery = (enquirerList, selectedId) =>{
+        let queryObject = null
+        for(const enquiry of enquirerList){
+            if(enquiry.id == selectedId){
+                queryObject = enquiry
+            }
+        }
+        return queryObject;
     }
 
     const getNextId = (plannerStore) => { let plannerLength = plannerStore.length; return ++plannerLength}

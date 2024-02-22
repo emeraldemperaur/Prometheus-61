@@ -13,10 +13,10 @@ export const enquirerSlice = createSlice({
                 exchangeMarket: 'Global - All Markets',
                 platformName: 'Global - All Platforms',
                 enquiryAuthor: 'Meka Egwim',
-                enquiryDate: 'February 22, 2024 - 03:19PM MDT',
+                enquiryDate: 'February 22, 2024 at 03:19PM MST',
                 enquiryModified: true,
                 enquiryEditor: 'Jane Smith',
-                enquiryEditDate: 'February 23, 2024 - 06:39PM MDT',
+                enquiryEditDate: 'February 23, 2024 at 06:39PM MST',
                 jsonQueryDefinition: 'Abode JSON Testing Text'
             }
         ]

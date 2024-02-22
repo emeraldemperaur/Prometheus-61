@@ -1,5 +1,6 @@
 import { MDBBadge, MDBBtn, MDBIcon, MDBTable, MDBTableHead, MDBTableBody, MDBCheckbox, MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBModalBody, MDBTooltip } from 'mdb-react-ui-kit';
 import { useState } from 'react';
+import { CSSTransition, TransitionGroup} from 'react-transition-group';
 import '../planner/planner_styles.css'
 import PlannerViewer from './planner_viewer';
 
@@ -31,6 +32,7 @@ const PlannerTable = ({plannerList}) => {
             </tr>
             </MDBTableHead>
             <MDBTableBody style={{ fontFamily:'Montserrat' }}>
+                <>
                     { plannerList ?
                                 plannerList.map( plannerItem => (
                                 <tr key={plannerItem.id}>
@@ -93,6 +95,7 @@ const PlannerTable = ({plannerList}) => {
                                 </tr>
                                 )):null
                     }
+                    </>
             </MDBTableBody>
         </MDBTable>
         <>
@@ -104,7 +107,7 @@ const PlannerTable = ({plannerList}) => {
                         <>
                         <MDBTooltip tag='a' title={plannerItem.enquiryName}>
                         {plannerItem.productPlanName}<br/></MDBTooltip>
-                        <p className='planner-viewer-subtitle'>{plannerItem.companyName}</p>
+                        <p className='planner-viewer-subtitle planner-table-txt'>{plannerItem.companyName}</p>
                         
                         </>
                             :null}

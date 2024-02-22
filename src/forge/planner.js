@@ -21,7 +21,8 @@ export const plannerSlice = createSlice({
                 status: 1,
                 buildRank: 0,
                 correspondenceName:'James Bond',
-                correspondenceTime:'February 23, 2024 - 06:39PM MDT'
+                correspondenceEmail:'james.bond@empiaurenterprises.ca',
+                correspondenceTime:'February 23, 2024 at 06:39 PM MST'
             }
         ]
     },
