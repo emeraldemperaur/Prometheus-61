@@ -123,8 +123,14 @@ const RolodexInterface = () => {
     const fetchRegion = (countryName) => {
         let regionName = " "; let countryObject = null;
         for(const country of countriesItems){if(country.name == countryName)countryObject = country}
-        if(countryObject.continent == "North America"){regionName = "North America";}; if(countryObject.continent == "Asia" || "Oceania"){regionName = "Asia-Pacific";}
-        if(countryObject.continent == "Europe" || "Middle East" || "Africa"){regionName = "EMEA";}; if(countryObject.continent == "South America" || "Caribbean"){regionName = "Latin America";}
+        if(countryObject.continent == "North America"){regionName = "North America"}
+        if(countryObject.continent == "Asia"){regionName = "Asia-Pacific"}
+        if(countryObject.continent == "South America"){regionName = "Latin America"}
+        if(countryObject.continent == "Caribbean"){regionName = "Latin America"}
+        if(countryObject.continent == "Oceania"){regionName = "Asia-Pacific"}
+        if(countryObject.continent == "Europe"){regionName = "EMEA"}
+        if(countryObject.continent == "Africa"){regionName = "EMEA"}
+       
         return regionName;
     }
 

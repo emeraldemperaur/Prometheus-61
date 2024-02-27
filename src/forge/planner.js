@@ -6,22 +6,22 @@ export const plannerSlice = createSlice({
         list:[
             {
                 id:1,
-                companyName: 'Empiaur Enterprises',
+                companyName: 'Wayne Enterprises',
                 companyID: 1, 
                 companyRegion: 'North America',
                 companyStockExchange: 'TSX',
-                companyTickerSymbol: 'EMP',
+                companyTickerSymbol: 'WYN',
                 isCorpDualListed: true,
                 companyDualStockExchange: 'NYSE',
-                companyDualTickerSymbol: 'EMPE',
+                companyDualTickerSymbol: 'WYNE',
                 productName: 'Share Purchase and Holdings',
                 productPlanName: 'Employee Share Purchase Plan',
                 enquiryName: 'Abode',
                 enquiryID: 1,
                 status: 1,
                 buildRank: 0,
-                correspondenceName:'James Bond',
-                correspondenceEmail:'james.bond@empiaurenterprises.ca',
+                correspondenceName:'Bruce Wayne',
+                correspondenceEmail:'bruce.wayne@wayneenterprises.ca',
                 correspondenceTime:'February 23, 2024 at 06:39 PM MST'
             }
         ]

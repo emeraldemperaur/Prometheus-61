@@ -28,14 +28,15 @@ const RolodexViewer = (props) => {
       <MDBCol size={4}>
         <>
         <p className='rolodex-viewer-heading'>Legend Conditions</p>
-        {props.legends ? <><p className='rolodex-viewer-legends'>Yes</p></> : <p className='rolodex-viewer-legends'>Not Applicable</p>}
+        {props.legends ? <><MDBBadge className='rolodex-badge rolodex-view-badge' color='dark' pill>Yes</MDBBadge></>
+         : <MDBBadge className='rolodex-badge rolodex-view-badge' color='dark' pill>Not Applicable</MDBBadge>}
         </>
       </MDBCol>
       <MDBCol size={4}>
         <>
         <p className='rolodex-viewer-heading'>Distributes Dividends</p>
         {props.dividends ? <><MDBBadge className='rolodex-badge rolodex-view-badge' color='dark' pill>{props.dividendsMethod}</MDBBadge>
-        </> : <p className='rolodex-viewer-legends'>Not Applicable</p>}
+        </> : <><MDBBadge className='rolodex-badge rolodex-view-badge' color='dark' pill>Not Applicable</MDBBadge></>}
         </>
       </MDBCol>
       <MDBCol size={4}>
@@ -45,13 +46,13 @@ const RolodexViewer = (props) => {
         <p className='rolodex-viewer-exchange'>{props.dualExchange}</p>
         <p style={{marginTop: '-23px'}} className='rolodex-viewer-ticker'>{props.dualSymbol}</p>
         </>
-        : <><p className='rolodex-viewer-legends'>No</p></>}
+        : <><MDBBadge className='rolodex-badge rolodex-view-badge' color='dark' pill>No</MDBBadge></>}
       </MDBCol>
     </MDBRow>
     <MDBRow>
       <MDBCol size={5}>
         <>
-        <p className='rolodex-viewer-heading'>Primary Contact</p>
+        <p style={{marginTop: '23px'}} className='rolodex-viewer-heading'>Primary Contact</p>
         <p className='rolodex-viewer-prime-contact'>{props.contactName}</p>
         <a href={'mailto:' + props.contactEmail} className='rolodex-viewer-prime-contact-info'>{props.contactEmail}</a>
         </>
