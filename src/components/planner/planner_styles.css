@@ -201,4 +201,44 @@
   text-align: left;
 }
 
+.planner-synopsis-tabs{
+    font-size: 16px;
+    font-family: 'Montserrat';
+    letter-spacing: 0.21em;
+    font-weight: 400;
+    text-decoration: none !important;
+}
+
+.planner-platform-img{
+  width: 350px;
+  height: 150px;
+  float: right;
+  margin-right: 23px;
+  justify-content: center;
+}
+
+.planner-platform-img-sw{
+  width: 300px;
+  height: 100px;
+  float: right;
+  margin-right: 23px;
+  justify-content: center;
+}
+
+.planner-platform-img-ubs{
+  width: 300px;
+  height: 100px;
+  float: right;
+  margin-right: 23px;
+  justify-content: center;
+}
+
+.planner-platform-img-etrade{
+  width: 350px;
+  height: 100px;
+  float: right;
+  margin-right: 23px;
+  justify-content: center;
+}
+
   

@@ -116,9 +116,11 @@ const PlannerTable = ({plannerList}) => {
                     </MDBModalHeader>
                     <MDBModalBody>{plannerItem ?
                         <>
-                        <PlannerViewer status={plannerItem.status} buildRank={plannerItem.buildRank} companyRegion={plannerItem.companyRegion} companyStockExchange={plannerItem.companyStockExchange}
+                        <PlannerViewer companyName={plannerItem.companyName} productPlanName={plannerItem.productPlanName} status={plannerItem.status} buildRank={plannerItem.buildRank} 
+                        companyRegion={plannerItem.companyRegion} companyStockExchange={plannerItem.companyStockExchange}
                         companyTickerSymbol={plannerItem.companyTickerSymbol} isCorpDualListed={plannerItem.isCorpDualListed} companyDualStockExchange={plannerItem.companyDualStockExchange}
-                        companyDualTickerSymbol={plannerItem.companyDualTickerSymbol} correspondenceName={plannerItem.correspondenceName} correspondenceTime={plannerItem.correspondenceTime}/>
+                        companyDualTickerSymbol={plannerItem.companyDualTickerSymbol} correspondenceName={plannerItem.correspondenceName} correspondenceTime={plannerItem.correspondenceTime} 
+                        platformName={plannerItem.enquiryPlatformName}/>
                         </>
                             :null}
                     </MDBModalBody>

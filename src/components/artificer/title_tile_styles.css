@@ -22,3 +22,21 @@
     box-shadow: rgb(0 0 0 / 50%) 0px -6px 6px -6px;
     border-top: 0px solid;
   }
+
+  .typed-out{
+    overflow: hidden;
+    border-right: .15em solid #ffffff;
+    white-space: nowrap;
+    animation: 
+      typing 4444ms forwards;
+    font-size: 1.6rem;
+    font-family: 'Montserrat';
+    letter-spacing: 0.13em;
+    font-weight: 400;
+    color: #ffffff;
+    width: 0;
+  }
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }

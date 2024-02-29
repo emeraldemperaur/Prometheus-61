@@ -1,10 +1,32 @@
-import { MDBBadge, MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem, MDBRow, MDBCol } from 'mdb-react-ui-kit';
+import { MDBBadge, MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem, MDBRow, MDBCol, MDBBtnGroup, MDBBtn, MDBTabs, MDBTabsItem, MDBTabsLink, MDBTabsContent, MDBTabsPane } from 'mdb-react-ui-kit';
 import { useState, useEffect } from 'react';
 import '../planner/planner_styles.css'
 import { toast } from 'react-toastify';
+import PlannerViewerOverview from './planner_viewer_overview';
+import PlannerViewerInput from './planner_viewer_input';
 
 
 const PlannerViewer = (props) => {
+
+    const [inputViewActive, setInputViewActive] = useState('OVERVIEW');
+    const handleInputViewClick = (value) => { if (value === inputViewActive) {return;} setInputViewActive(value); };
+    const copyLink = () => {
+        toast.info(`Questionnaire link copied to clipboard!`,{
+        position: "top-right",
+        autoClose: 1000,
+        closeOnClick: true
+      })
+      console.log(`Questionnaire link copied to clipboard!`);   
+    }
+    const shareEnquiry = (queryCorrespondence) => {
+        toast.success(`Questionnaire notification sent to ${queryCorrespondence}!`,{
+        position: "top-right",
+        autoClose: 1000,
+        closeOnClick: true
+    })
+    console.log(`Questionnaire notification sent to ${queryCorrespondence}`);   
+    }
+
 
     return(
         <>
@@ -61,6 +83,17 @@ const PlannerViewer = (props) => {
         </MDBRow>
         <MDBRow>
             <MDBCol size={12}>
+            <>
+            <MDBBtnGroup style={{position: 'fixed', right: '360px', fontFamily: 'Montserrat', 
+            fontWeight: 800, fontSize:'14px', letterSpacing: '0.21em'}} shadow='0' aria-label='share plan synopsis'>
+                    <MDBBtn onClick={() => copyLink()} 
+                    style={{fontFamily: 'Montserrat', fontWeight: 800, fontSize:'0.875rem', letterSpacing: '0.21em', paddingTop: '0.75rem', paddingBottom: '0.6875rem', lineHeight: 1.6}} color='secondary' outline>
+                    <i className="fa-regular fa-copy"></i></MDBBtn>
+                    <MDBBtn onClick={() => shareEnquiry(props.correspondenceName)} 
+                    style={{fontFamily: 'Montserrat', fontWeight: 800, fontSize:'0.875rem', letterSpacing: '0.21em', paddingTop: '0.75rem', paddingBottom: '0.6875rem', lineHeight: 1.6}} color='secondary'>
+                    <i className="fa-regular fa-share-from-square"></i> SHARE ENQUIRY</MDBBtn>
+            </MDBBtnGroup>
+            </>
             <MDBDropdown style={{position: 'fixed', right: '33px', backgroundColor: '#002c51', fontFamily: 'Montserrat', 
             fontWeight: 700, letterSpacing: '0.13em'}} group>
                 <MDBDropdownToggle style={{backgroundColor: '#002c51', letterSpacing: '0.21em'}} className='planner-viewer-export-btn' size='lg'>
@@ -81,6 +114,32 @@ const PlannerViewer = (props) => {
             <MDBCol>
                 <h2 className='planner-viewer-synopsis'>Implementation Synopsis</h2>
             </MDBCol>
+        </MDBRow>
+        <MDBRow>
+            <>
+            <MDBTabs justify className='mb-3'>
+                <MDBTabsItem>
+                <MDBTabsLink  onClick={() => handleInputViewClick('OVERVIEW')} active={inputViewActive === 'OVERVIEW'}>
+                <i className="fa-solid fa-tachograph-digital"></i><div className='planner-synopsis-tabs'>Overview</div>
+                </MDBTabsLink>
+                </MDBTabsItem>
+                <MDBTabsItem>
+                <MDBTabsLink className='planner-synopsis-tabs' onClick={() => handleInputViewClick('INPUT')} active={inputViewActive === 'INPUT'}>
+                <i className="fa-solid fa-keyboard"></i><div className='planner-synopsis-tabs'>Input</div>
+                </MDBTabsLink>
+                </MDBTabsItem>
+            </MDBTabs>
+
+            <MDBTabsContent>
+                <MDBTabsPane open={inputViewActive === 'OVERVIEW'}>
+                    <PlannerViewerOverview platformName={props.platformName}/>
+                    OVERVIEW content
+                </MDBTabsPane>
+                <MDBTabsPane open={inputViewActive === 'INPUT'}>
+                    <PlannerViewerInput platformName={props.platformName}/>
+                    INPUT content</MDBTabsPane>
+            </MDBTabsContent>
+            </>
         </MDBRow>
         </>
         )

@@ -52,6 +52,7 @@ const PlannerInterface = () => {
                 productPlanName: plannerPlanNameInput.value,
                 enquiryName: selectedQuery.modelName,
                 enquiryID: selectedQuery.id,
+                enquiryPlatformName: selectedQuery.platformName,
                 autoShare: plannerAutoShareInput.checked,
                 status: 1,
                 buildRank: 0,

@@ -9,7 +9,7 @@ import RecordsModal from '../artificer/records_modal_component';
 import { useEffect, useState } from 'react';
 import RolodexInputForm from './rolodex_input_component';
 import { useSelector, useDispatch } from 'react-redux'
-import { addCompanyProfile } from '../../forge/rolodex';
+import { addCompanyProfile, fetchRolodex } from '../../forge/rolodex';
 import RolodexTable from './rolodex_table_component';
 import { countriesItems } from '../../utils/country_data';
 import { toast } from 'react-toastify';
@@ -160,7 +160,7 @@ const RolodexInterface = () => {
                                 <MDBDropdownToggle style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 15, fontWeight: 500 , letterSpacing: '0.21em'}}>Filter By</MDBDropdownToggle>
                                     <MDBDropdownMenu style={{ margin: 0 }}>
                                     { rolodexFilterItems.map( filterItem => (
-                                        <MDBDropdownItem key={filterItem.id} link>{filterItem.title}</MDBDropdownItem>
+                                        <MDBDropdownItem onClick={()=> rolodexDispatch(fetchRolodex())} key={filterItem.id} link>{filterItem.title}</MDBDropdownItem>
                                         ))}
                                         </MDBDropdownMenu>
                                 </MDBDropdown>

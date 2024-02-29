@@ -18,6 +18,8 @@ export const plannerSlice = createSlice({
                 productPlanName: 'Employee Share Purchase Plan',
                 enquiryName: 'Abode',
                 enquiryID: 1,
+                enquiryPlatformName: 'UBS Group',
+                autoShare:false,
                 status: 1,
                 buildRank: 0,
                 correspondenceName:'Bruce Wayne',

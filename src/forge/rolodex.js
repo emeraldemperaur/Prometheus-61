@@ -1,5 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import { error } from "jquery";
 
+export const fetchRolodex = createAsyncThunk(
+    'rolodex/fetchRolodex',
+    async(thunkAPI)=>{
+        try{
+            const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+            return response.data;
+        }catch(error){
+            return error;
+        }      
+    }
+    )
 export const rolodexSlice = createSlice({
     name: 'rolodex',
     initialState:{
@@ -30,6 +43,18 @@ export const rolodexSlice = createSlice({
             state.list = [...state.list, action.payload]
 
         }
+    },
+    extraReducers:(builder)=>{
+        builder.addCase(fetchRolodex.pending, (state)=>{
+            console.log('pending request');
+        })
+        .addCase(fetchRolodex.fulfilled, (state, action)=>{
+            console.log('fulfilled request');
+            console.log(action.payload);
+        })
+        .addCase(fetchRolodex.rejected, (state)=>{
+            console.log('rejected');
+        })
     }
 });
 

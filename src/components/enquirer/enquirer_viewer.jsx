@@ -5,22 +5,18 @@ import { toast } from 'react-toastify';
 
 
 const EnquirerViewer = (props) => {
-    const [enquirerJSON, setEnquirerJSON] = useState(" ");
-
-    useEffect(() => {
-        let textBox = document.getElementById('formQueryModelJSONView');
-        setEnquirerJSON(textBox.value)    
-      }, [])
-
-        
-    const copyContent = (queryTitle) => {
-                navigator.clipboard.writeText(enquirerJSON);
-                toast.info(queryTitle + ' copied to clipboard!',{
-                position: "top-right",
-                autoClose: 1000,
-                closeOnClick: true
-              })
-              console.log(queryTitle + ' copied to clipboard');   
+    const copyContent = async (queryTitle) => {
+                try {
+                  navigator.clipboard.writeText(props.jsonQueryDefinition);
+                  toast.info(queryTitle + ' copied to clipboard!',{
+                  position: "top-right",
+                  autoClose: 1000,
+                  closeOnClick: true
+               })
+              console.log(queryTitle + ' copied to clipboard');
+                }catch (err) {
+                      console.error('Failed to copy to clipboard!', err);
+                }  
           }
     
 
@@ -78,7 +74,7 @@ const EnquirerViewer = (props) => {
                         <i className="fa-solid fa-copy prefix"></i>
                         </span>
                     </div>
-                    <textarea disabled className="enquirer-query-box-view" id="formQueryModelJSONView" defaultValue={props.jsonQueryDefinition}>
+                    <textarea disabled className="enquirer-query-box-view" id="formQueryModelJSONView" value={props.jsonQueryDefinition}>
                     </textarea>
                 </div>
             </>

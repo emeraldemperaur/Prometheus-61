@@ -1,5 +1,5 @@
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody, MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBModalBody } from 'mdb-react-ui-kit';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import '../planner/planner_styles.css'
 import EnquirerViewer from './enquirer_viewer';
@@ -8,13 +8,14 @@ const EnquirerTable = ({enquirerList}) => {
 
     const [enquirerModal, setEnquirerModal] = useState(false);
     const [enquirerItem, setEnquirerItem] = useState(null);
-    const toggleOpen = () => setEnquirerModal(!enquirerModal);
-
-    const renderEnquirerViewer = (enquirerItemObject) => {
-        setEnquirerItem(enquirerItemObject)
-        setEnquirerModal(!enquirerModal);
+    const toggleOpen = () => setEnquirerModal(!enquirerModal); 
+    const renderEnquirerViewer = (enquirerItemObject) => { 
+        setEnquirerItem(enquirerItemObject); 
+        setEnquirerModal(!enquirerModal); 
         console.log(enquirerItem)
     }
+   
+
 
     return(
     <>

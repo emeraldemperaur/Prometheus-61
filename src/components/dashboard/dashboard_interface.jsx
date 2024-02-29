@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import NavigatorMenu from '../navigator/navigator_component';
 import TitleTile from '../artificer/title_tile_component';
+import HubTile from '../artificer/hub_title_component';
 
 const DashboardInterface = () => {
 
@@ -10,7 +11,7 @@ const DashboardInterface = () => {
     return(
     <>
     <NavigatorMenu/>
-    <TitleTile title="Dashboard"/>
+    <HubTile userName="Meka" title="Dashboard"/>
     </>
 
     )

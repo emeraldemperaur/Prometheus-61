@@ -130,3 +130,8 @@
 .list-bottom{
   margin-bottom: 13px;
 }
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  color: #2196F3 !important;
+  border-color: #2196F3 !important;
+}
