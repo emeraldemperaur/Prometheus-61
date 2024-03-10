@@ -16,6 +16,8 @@ export const plannerSlice = createSlice({
                 companyDualTickerSymbol: 'WYNE',
                 productName: 'Share Purchase and Holdings',
                 productPlanName: 'Employee Share Purchase Plan',
+                isPortmanteau: false,
+                portmanteauLabel: ' ',
                 enquiryName: 'Abode',
                 enquiryID: 1,
                 enquiryPlatformName: 'UBS Group',

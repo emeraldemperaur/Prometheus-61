@@ -19,12 +19,12 @@ const PlannerViewer = (props) => {
       console.log(`Questionnaire link copied to clipboard!`);   
     }
     const shareEnquiry = (queryCorrespondence) => {
-        toast.success(`Questionnaire notification sent to ${queryCorrespondence}!`,{
+        toast.success(`Questionnaire notification sent to ${queryCorrespondence}.`,{
         position: "top-right",
         autoClose: 1000,
         closeOnClick: true
     })
-    console.log(`Questionnaire notification sent to ${queryCorrespondence}`);   
+     console.log(`Questionnaire notification sent to ${queryCorrespondence}`);   
     }
 
 
@@ -137,7 +137,8 @@ const PlannerViewer = (props) => {
                 </MDBTabsPane>
                 <MDBTabsPane open={inputViewActive === 'INPUT'}>
                     <PlannerViewerInput platformName={props.platformName}/>
-                    INPUT content</MDBTabsPane>
+                    INPUT content
+                </MDBTabsPane>
             </MDBTabsContent>
             </>
         </MDBRow>

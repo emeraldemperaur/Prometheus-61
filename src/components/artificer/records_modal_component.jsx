@@ -22,11 +22,8 @@ const RecordsModal = ({title, action, size, toggleOpen, staticModal, setStaticMo
             </MDBModalContent>
         </MDBModalDialog>
     </MDBModal>
-    
     </>
 
     )
-
-
 }
 export default RecordsModal;

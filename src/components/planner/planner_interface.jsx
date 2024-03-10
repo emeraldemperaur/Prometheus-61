@@ -11,13 +11,17 @@ import PlannerInputForm from './planner_input_component';
 import { addPlanQuestionnaire } from '../../forge/planner';
 import PlannerTable from './planner_table_component';
 import { toast } from 'react-toastify';
-import rolodex from '../../forge/rolodex';
 import { currentTime } from '../../utils/chronos';
+import PromptModal from '../artificer/prompt_modal_component';
 
 
 const PlannerInterface = () => {
     document.body.style.backgroundColor = "#ffffff"
     const [staticModal, setStaticModal] = useState(false);
+    const [togglePromptModal, setTogglePromptModal] = useState(false);
+    const [portmanteauCorp, setPortmanteauCorp] = useState(" ");
+    const [portmanteauProduct, setPortmanteauProduct] = useState(" ");
+    const [portmanteauQuery, setPortmanteauQuery] = useState(" ");
     const toggleOpen = () => setStaticModal(!staticModal);
     const rolodexList = useSelector((state)=> state.rolodex.list);
     const enquirerList = useSelector((state)=> state.enquirer.list);
@@ -25,44 +29,55 @@ const PlannerInterface = () => {
     const plannerDispatch = useDispatch();
 
     const submitPQModel = () =>{
-        let plannerCorpNameInput = document.getElementById("formPlannerCorpName");
-        let plannerCorpNameLabel = document.getElementById("plannerCorpNameLabel");
-        let plannerProductNameInput = document.getElementById("formPlannerProductName");
-        let plannerProductNameLabel = document.getElementById("plannerProductNameLabel");
-        let plannerPlanNameInput = document.getElementById("formPlannerPlanName");
-        let plannerPlanNameLabel = document.getElementById("plannerPlanNameLabel");
-        let plannerEnquiryNameInput = document.getElementById("formPlannerEnquiryName");
-        let plannerEnquiryNameLabel = document.getElementById("plannerEnquiryNameLabel");
-        let plannerAutoShareInput = document.getElementById("formPlannerEnquiryShare");
+        var plannerCorpNameInput = document.getElementById("formPlannerCorpName");
+        var plannerCorpNameLabel = document.getElementById("plannerCorpNameLabel");
+        var plannerProductNameInput = document.getElementById("formPlannerProductName");
+        var plannerProductNameLabel = document.getElementById("plannerProductNameLabel");
+        var plannerPlanNameInput = document.getElementById("formPlannerPlanName");
+        var plannerPlanNameLabel = document.getElementById("plannerPlanNameLabel");
+        var plannerEnquiryNameInput = document.getElementById("formPlannerEnquiryName");
+        var plannerEnquiryNameLabel = document.getElementById("plannerEnquiryNameLabel");
+        var plannerAutoShareInput = document.getElementById("formPlannerEnquiryShare");
         if(inputTextValid(plannerCorpNameInput, plannerCorpNameLabel) && inputTextValid(plannerProductNameInput, plannerProductNameLabel) 
         && inputTextValid(plannerPlanNameInput, plannerPlanNameLabel) && inputTextValid(plannerEnquiryNameInput, plannerEnquiryNameLabel)){
             let selectedCorp = fetchCompany(rolodexList, plannerCorpNameInput.value)
             let selectedQuery = fetchQuery(enquirerList, plannerEnquiryNameInput.value)
-            plannerDispatch(addPlanQuestionnaire({
-                id:getNextId(planner),
-                companyName: selectedCorp.companyName,
-                companyID: selectedCorp.id, 
-                companyRegion: selectedCorp.incorporationRegion,
-                companyStockExchange: selectedCorp.primeStockExchange,
-                companyTickerSymbol: selectedCorp.primeTickerSymbol,
-                isCorpDualListed: selectedCorp.dualListed,
-                companyDualStockExchange: selectedCorp.dualStockExchange,
-                companyDualTickerSymbol: selectedCorp.dualTickerSymbol,
-                productName: plannerProductNameInput.value,
-                productPlanName: plannerPlanNameInput.value,
-                enquiryName: selectedQuery.modelName,
-                enquiryID: selectedQuery.id,
-                enquiryPlatformName: selectedQuery.platformName,
-                autoShare: plannerAutoShareInput.checked,
-                status: 1,
-                buildRank: 0,
-                correspondenceName: selectedCorp.primaryContactName,
-                correspondenceEmail:selectedCorp.correspondenceEmail,
-                correspondenceTime: currentTime()
-            }))
-            clearInputs([plannerCorpNameInput, plannerProductNameInput, plannerPlanNameInput, plannerEnquiryNameInput])
-            clearToggles([plannerAutoShareInput])
-            setStaticModal(!staticModal);
+            if(productExists(selectedCorp.companyName, plannerPlanNameInput.value, planner)){
+                    setPortmanteauCorp(selectedCorp)
+                    setPortmanteauQuery(selectedQuery)
+                    setPortmanteauProduct(plannerPlanNameInput.value)
+                    setStaticModal(!staticModal);
+                    setTogglePromptModal(!togglePromptModal);
+                    
+        
+            }
+            if(!productExists(selectedCorp.companyName, plannerPlanNameInput.value, planner)){
+                plannerDispatch(addPlanQuestionnaire({
+                    id:getNextId(planner),
+                    companyName: selectedCorp.companyName,
+                    companyID: selectedCorp.id, 
+                    companyRegion: selectedCorp.incorporationRegion,
+                    companyStockExchange: selectedCorp.primeStockExchange,
+                    companyTickerSymbol: selectedCorp.primeTickerSymbol,
+                    isCorpDualListed: selectedCorp.dualListed,
+                    companyDualStockExchange: selectedCorp.dualStockExchange,
+                    companyDualTickerSymbol: selectedCorp.dualTickerSymbol,
+                    productName: plannerProductNameInput.value,
+                    productPlanName: plannerPlanNameInput.value,
+                    enquiryName: selectedQuery.modelName,
+                    enquiryID: selectedQuery.id,
+                    enquiryPlatformName: selectedQuery.platformName,
+                    autoShare: plannerAutoShareInput.checked,
+                    status: 1,
+                    buildRank: 0,
+                    correspondenceName: selectedCorp.primaryContactName,
+                    correspondenceEmail:selectedCorp.correspondenceEmail,
+                    correspondenceTime: currentTime()
+                }))
+                clearInputs([plannerCorpNameInput, plannerProductNameInput, plannerPlanNameInput, plannerEnquiryNameInput])
+                clearToggles([plannerAutoShareInput])
+                setStaticModal(!staticModal);
+            }
         }
 
     }
@@ -95,6 +110,17 @@ const PlannerInterface = () => {
             }
         }
         return queryObject;
+    }
+
+    const productExists = (companyName, productPlanName, plannerList) =>{
+        let extantProduct = false;
+        for(const plan of plannerList){
+            if(plan.companyName == companyName && plan.productPlanName == productPlanName){
+                extantProduct = true;
+                console.log(`An extant ${productPlanName} already exists for ${companyName}`)
+            }
+        }
+        return extantProduct;
     }
 
     const getNextId = (plannerStore) => { let plannerLength = plannerStore.length; return ++plannerLength}
@@ -136,22 +162,48 @@ const PlannerInterface = () => {
                     <div>
                     <MDBCard className='list-bottom'>
                         <PlannerTable plannerList={planner}/>
-                            {/* <MDBCardBody>
-                          } {
-                                    planner ?
-                                    planner.map(plan => (
-                                            <li key={plan.id}>{plan.companyName}<br/>{plan.productPlanName}</li>
-                                        ))
-                                        :null
-                                }
-                            </MDBCardBody>
-                            */}
                     </MDBCard>
                     </div>
                     </MDBRow>
     </MDBContainer>
     <RecordsModal title="New Plan Questionnaire" action="CREATE" size="xl" onClickFunc={submitPQModel}
                 toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal} formComponent={<PlannerInputForm/>}/>
+
+<PromptModal title="Extant Product Plan" action="CREATE" size="lg" staticModal={staticModal} setStaticModal={setStaticModal}
+                    togglePromptModal={togglePromptModal} setTogglePromptModal={setTogglePromptModal} scrollable={false} 
+                    productPlan={portmanteauProduct} corpName={portmanteauCorp.companyName}
+                    onClickFunc={() =>{
+                        if(inputTextValid(document.getElementById("formPortmanteauLabel"), document.getElementById("promptPortmanteauLabel"))){
+                            let plannerPortmanteauInput = document.getElementById("formPortmanteauLabel");
+                            plannerDispatch(addPlanQuestionnaire({
+                                id:getNextId(planner),
+                                companyName: portmanteauCorp.companyName,
+                                companyID: portmanteauCorp.id, 
+                                companyRegion: portmanteauCorp.incorporationRegion,
+                                companyStockExchange: portmanteauCorp.primeStockExchange,
+                                companyTickerSymbol: portmanteauCorp.primeTickerSymbol,
+                                isCorpDualListed: portmanteauCorp.dualListed,
+                                companyDualStockExchange: portmanteauCorp.dualStockExchange,
+                                companyDualTickerSymbol: portmanteauCorp.dualTickerSymbol,
+                                productName: document.getElementById("formPlannerProductName").value,
+                                productPlanName: document.getElementById("formPlannerPlanName").value,
+                                isPortmanteau: true,
+                                portmanteauLabel: plannerPortmanteauInput.value,
+                                enquiryName: portmanteauQuery.modelName,
+                                enquiryID: portmanteauQuery.id,
+                                enquiryPlatformName: portmanteauQuery.platformName,
+                                autoShare: document.getElementById("formPlannerEnquiryShare").checked,
+                                status: 1,
+                                buildRank: 0,
+                                correspondenceName: portmanteauCorp.primaryContactName,
+                                correspondenceEmail:portmanteauCorp.correspondenceEmail,
+                                correspondenceTime: currentTime()
+                            }))
+                            clearInputs([document.getElementById("formPlannerCorpName"), document.getElementById("formPlannerProductName"), document.getElementById("formPlannerPlanName"), document.getElementById("formPlannerEnquiryName"), plannerPortmanteauInput])
+                            clearToggles([document.getElementById("formPlannerEnquiryShare")])
+                            setTogglePromptModal(!togglePromptModal);
+                        }
+                    }}/>
     <div className="fab-btn" onClick={toggleOpen}> + </div>
     </>
 

@@ -47,6 +47,9 @@ const PlannerTable = ({plannerList}) => {
                                         />
                                         <div className='ms-3'>
                                             <p className='fw-bold mb-1 planner-name-title planner-table-txt'>{plannerItem.productPlanName}</p>
+                                            {plannerItem.isPortmanteau ?
+                                            <><p className='text-muted mb-0 planner-table-txt'>{plannerItem.portmanteauLabel}</p></>
+                                            :null}
                                             <p className='text-muted mb-0 planner-table-txt'>{plannerItem.companyName}</p>
                                         </div>
                                         </div>
@@ -105,8 +108,12 @@ const PlannerTable = ({plannerList}) => {
                     <MDBModalHeader>
                         <MDBModalTitle className='planner-viewer-title'>{plannerItem ?
                         <>
-                        <MDBTooltip tag='a' title={plannerItem.enquiryName}>
-                        {plannerItem.productPlanName}<br/></MDBTooltip>
+                         {plannerItem.isPortmanteau ?
+                                            <><MDBTooltip tag='a' title={plannerItem.enquiryName} >
+                                            {`${plannerItem.productPlanName} - ${plannerItem.portmanteauLabel}`}<br/></MDBTooltip></>
+                                            :<MDBTooltip tag='a' title={plannerItem.enquiryName}>
+                                            {plannerItem.productPlanName}<br/></MDBTooltip>}
+                        
                         <p className='planner-viewer-subtitle planner-table-txt'>{plannerItem.companyName}</p>
                         
                         </>
