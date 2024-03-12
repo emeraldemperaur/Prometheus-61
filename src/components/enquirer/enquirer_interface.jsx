@@ -12,13 +12,15 @@ import { addQueryModel } from '../../forge/enquirer';
 import EnquirerTable from './enquirer_table_component';
 import { toast } from 'react-toastify';
 import { currentTime } from '../../utils/chronos';
+import ExtantModal from '../artificer/extant_modal_component';
 
 
 const EnquirerInterface = () => {
     document.body.style.backgroundColor = "#ffffff"
     const [staticModal, setStaticModal] = useState(false);
+    const [toggleExtantModal, setToggleExtantModal] = useState(false);
+    const [extantQuery, setExtantQuery] = useState(" ");
     const toggleOpen = () => setStaticModal(!staticModal);
-
     const enquirer = useSelector((state)=> state.enquirer.list);
     const enquirerDispatch = useDispatch();
 
@@ -41,24 +43,36 @@ const EnquirerInterface = () => {
         && inputTextValid(queryModelProductInput, queryModelProductLabel) && inputTextValid(queryModelPlanInput, queryModelPlanLabel) 
         && inputTextValid(queryModelRegionInput, queryModelRegionLabel) && inputMktValid(queryModelMarketInput, queryModelMarketLabel)
         && inputTextValid(queryModelPlatformInput, queryModelPlatformLabel) && inputTextValid(queryModelJSONInput, queryModelJSONLabel)){
-            enquirerDispatch(addQueryModel({
-                id:getNextId(enquirer),
-                modelName: queryModelInput.value, 
-                productName: queryModelProductInput.value,
-                productPlanName: queryModelPlanInput.value,
-                regionName: queryModelRegionInput.value,
-                exchangeMarket: queryModelMarketInput.value,
-                platformName: queryModelPlatformInput.value,
-                enquiryAuthor: 'Prometheus Admin',
-                enquiryDate: currentTime(),
-                enquiryModified: false,
-                enquiryEditor: ' ',
-                enquiryEditDate: ' ',
-                jsonQueryDefinition: queryModelJSONInput.value
-            }))
-            clearInputs([queryModelInput, queryModelProductInput, queryModelPlanInput, queryModelRegionInput, queryModelMarketInput, 
-                queryModelPlatformInput, queryModelJSONInput])
-            setStaticModal(!staticModal);
+            if(queryModelExists(queryModelInput.value, enquirer)){
+                setExtantQuery(queryModelInput.value)
+                setStaticModal(!staticModal);
+                setTimeout(() => {
+                        setToggleExtantModal(!toggleExtantModal);
+                    }, 333);
+            }
+            if(!queryModelExists(queryModelInput.value, enquirer)){
+                enquirerDispatch(addQueryModel({
+                    id:getNextId(enquirer),
+                    modelName: queryModelInput.value, 
+                    productName: queryModelProductInput.value,
+                    productPlanName: queryModelPlanInput.value,
+                    regionName: queryModelRegionInput.value,
+                    exchangeMarket: queryModelMarketInput.value,
+                    platformName: queryModelPlatformInput.value,
+                    enquiryAuthor: 'Prometheus Admin',
+                    enquiryDate: currentTime(),
+                    enquiryModified: false,
+                    enquiryEditor: ' ',
+                    enquiryEditDate: ' ',
+                    jsonQueryDefinition: queryModelJSONInput.value
+                }))
+                clearInputs([queryModelInput, queryModelProductInput, queryModelPlanInput, queryModelRegionInput, queryModelMarketInput, 
+                    queryModelPlatformInput, queryModelJSONInput])
+                setStaticModal(!staticModal);
+            }
+            
+            
+        
         }
     }
 
@@ -78,6 +92,17 @@ const EnquirerInterface = () => {
         if(inputElement.value.trim() != 0 && inputElement.value.trim() != "----"){inputMktValid = true; inputMktLabel.style.color = "#757575"; inputMktLabel.style.fontWeight = 'normal'}
         console.log("Input Mkt Valid: " + inputMktValid)
         return inputMktValid
+    }
+
+    const queryModelExists = (modelName, enquirerList) =>{
+        let extantQuery = false;
+        for(const enquiry of enquirerList){
+            if(enquiry.modelName == modelName){
+                extantQuery = true;
+                console.log(`A ${modelName} query model already exists. Please provide a unique model name.`)
+            }
+        }
+        return extantQuery;
     }
 
     const getNextId = (enquirerStore) => { let enquirerLength = enquirerStore.length; return ++enquirerLength}
@@ -137,6 +162,11 @@ const EnquirerInterface = () => {
     </MDBContainer>
     <RecordsModal title="New Query Model" action="CREATE" size="fullscreen" onClickFunc={submitQMModel}
                 toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal} formComponent={<EnquirerInputForm/>}/>
+    
+    <ExtantModal title="Extant Query Model" size="lg" staticModal={staticModal} setStaticModal={setStaticModal}
+                                    togglePromptModal={toggleExtantModal} setTogglePromptModal={setToggleExtantModal} scrollable={false} 
+                                    recordType="query model" recordName={extantQuery} entity="model name" recordIcon="fa-regular fa-circle-question"
+                                    context="in the records database"/>
     <div className="fab-btn" onClick={toggleOpen}> + </div>
     </>
 

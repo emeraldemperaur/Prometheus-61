@@ -13,10 +13,13 @@ import { addCompanyProfile, fetchRolodex } from '../../forge/rolodex';
 import RolodexTable from './rolodex_table_component';
 import { countriesItems } from '../../utils/country_data';
 import { toast } from 'react-toastify';
+import ExtantModal from '../artificer/extant_modal_component';
 
 const RolodexInterface = () => {
     document.body.style.backgroundColor = "#ffffff"
     const [staticModal, setStaticModal] = useState(false);
+    const [toggleExtantModal, setToggleExtantModal] = useState(false);
+    const [extantCorp, setExtantCorp] = useState(" ");
     const [marketPrefix, setMarketPrefix] = useState("----");
     const [dualMarketPrefix, setDualMarketPrefix] = useState("----");
 
@@ -58,30 +61,40 @@ const RolodexInterface = () => {
         && duoListedValid(corpDualListedInput, corpDualExchangeInput, corpDualExchangeLabel, corpDualSymbolInput, corpDualSymbolLabel) 
         && dividendsValid(corpDividendsInput, corpDividendDistroInput, corpDividendDistroLabel) 
         && inputTextValid(corpCategoryInput, corpCategoryLabel)){
-            rolodexDispatch(addCompanyProfile({
-                id:getNextId(rolodex),
-                companyName: corpNameInput.value, 
-                primaryContactName: corpContactNameInput.value,
-                primaryContactEmail: corpContactEmailInput.value,
-                companyLogo: '',
-                incorporationCountry: corpCountryInput.value,
-                incorporationRegion: fetchRegion(corpCountryInput.value),
-                primeStockExchange: corpExchangeInput.value,
-                primeTickerSymbol: corpSymbolInput.value,
-                dualListed: corpDualListedInput.checked,
-                dualStockExchange: toggledInputValue(corpDualListedInput, corpDualExchangeInput),
-                dualTickerSymbol: toggledInputValue(corpDualListedInput, corpDualSymbolInput),
-                legendConditions: corpLegendInput.checked,
-                distributesDividends: corpDividendsInput.checked,
-                dividendsDistribution: toggledInputValue(corpDividendsInput, corpDividendDistroInput),
-                incorporationCategory: corpCategoryInput.value
-            }))
-            setStaticModal(!staticModal);
-            clearInputs([corpNameInput, corpContactNameInput, corpContactEmailInput, corpCountryInput, corpExchangeInput, corpSymbolInput, 
-                corpDualExchangeInput, corpDualSymbolInput, corpDividendDistroInput, corpCategoryInput])
-            clearToggles([corpDualListedInput, corpLegendInput, corpDividendsInput])
-            setMarketPrefix("----");setDualMarketPrefix("----");
-            hideToggledInput([corpDualExchangeOption, corpDualSymbolOption, corpDividendDistroOption])
+            if(rolodexExists(corpNameInput.value, corpCountryInput.value, rolodex)){
+                setExtantCorp(corpNameInput.value)
+                setStaticModal(!staticModal);
+                setTimeout(() => {
+                        setToggleExtantModal(!toggleExtantModal);
+                    }, 333);
+            } 
+            if(!rolodexExists(corpNameInput.value, corpCountryInput.value, rolodex)){
+                rolodexDispatch(addCompanyProfile({
+                    id:getNextId(rolodex),
+                    companyName: corpNameInput.value, 
+                    primaryContactName: corpContactNameInput.value,
+                    primaryContactEmail: corpContactEmailInput.value,
+                    companyLogo: '',
+                    incorporationCountry: corpCountryInput.value,
+                    incorporationRegion: fetchRegion(corpCountryInput.value),
+                    primeStockExchange: corpExchangeInput.value,
+                    primeTickerSymbol: corpSymbolInput.value,
+                    dualListed: corpDualListedInput.checked,
+                    dualStockExchange: toggledInputValue(corpDualListedInput, corpDualExchangeInput),
+                    dualTickerSymbol: toggledInputValue(corpDualListedInput, corpDualSymbolInput),
+                    legendConditions: corpLegendInput.checked,
+                    distributesDividends: corpDividendsInput.checked,
+                    dividendsDistribution: toggledInputValue(corpDividendsInput, corpDividendDistroInput),
+                    incorporationCategory: corpCategoryInput.value
+                }))
+                setStaticModal(!staticModal);
+                clearInputs([corpNameInput, corpContactNameInput, corpContactEmailInput, corpCountryInput, corpExchangeInput, corpSymbolInput, 
+                    corpDualExchangeInput, corpDualSymbolInput, corpDividendDistroInput, corpCategoryInput])
+                clearToggles([corpDualListedInput, corpLegendInput, corpDividendsInput])
+                setMarketPrefix("----");setDualMarketPrefix("----");
+                hideToggledInput([corpDualExchangeOption, corpDualSymbolOption, corpDividendDistroOption])
+            } 
+            
         }
     }
 
@@ -129,6 +142,7 @@ const RolodexInterface = () => {
         if(countryObject.continent == "Caribbean"){regionName = "Latin America"}
         if(countryObject.continent == "Oceania"){regionName = "Asia-Pacific"}
         if(countryObject.continent == "Europe"){regionName = "EMEA"}
+        if(countryObject.continent == "Middle East"){regionName = "EMEA"}
         if(countryObject.continent == "Africa"){regionName = "EMEA"}
        
         return regionName;
@@ -137,6 +151,17 @@ const RolodexInterface = () => {
     const clearInputs = (inputList) =>{for(const inputElement of inputList){inputElement.value = " ";}}
 
     const clearToggles = (toggleList) => { for(const toggle of toggleList){ toggle.checked = false;}}
+
+    const rolodexExists = (companyName, countryName, rolodexList) =>{
+        let extantRolodex = false;
+        for(const rolodex of rolodexList){
+            if(rolodex.companyName == companyName && rolodex.incorporationCountry == countryName){
+                extantRolodex = true;
+                console.log(`An extant company profile already exists for ${companyName} in that region. Please provide a unique company name.`)
+            }
+        }
+        return extantRolodex;
+    }
 
     const hideToggledInput = (inputList) => {
         for(const visibleInput of inputList){
@@ -192,6 +217,11 @@ const RolodexInterface = () => {
                 toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal} 
                 formComponent={<RolodexInputForm marketPrefix={marketPrefix} dualMarketPrefix={dualMarketPrefix}
                  setMarketPrefix={setMarketPrefix} setDualMarketPrefix={setDualMarketPrefix}/>}/>
+
+                <ExtantModal title="Extant Company Profile" size="lg" staticModal={staticModal} setStaticModal={setStaticModal}
+                                    togglePromptModal={toggleExtantModal} setTogglePromptModal={setToggleExtantModal} scrollable={false} 
+                                    recordType="company profile" recordName={extantCorp} entity="company name" recordIcon="fa-regular fa-registered"
+                                    context="in that market region"/>
                 <div className="fab-btn" onClick={toggleOpen}> + </div>
     
     </>

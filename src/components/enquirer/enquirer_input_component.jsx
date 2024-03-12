@@ -28,7 +28,7 @@ const EnquirerInputForm = () => {
         <MDBRow style={{paddingTop:'23px'}}>
             <MDBCol size={4}>
                 <div>
-                <MDBInput label='Model Name' type='text' id='formQueryModelName' aria-describedby='queryModelName' defaultValue=" "/>
+                <MDBInput label='Model Name' type='text' id='formQueryModelName' aria-describedby='queryModelName' defaultValue=""/>
                     <div id='queryModelNameLabel' className='form-text form-hint'>Model Name</div>
                 </div>
             </MDBCol>

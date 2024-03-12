@@ -1,0 +1,28 @@
+.extant-modal-title{
+    font-family: 'Montserrat';
+    letter-spacing: 0.12em;
+    color: #ffffff;
+    font-weight: 400;
+}
+
+.extant-modal-header{
+    background-color: #216CA6;
+}
+
+.form-hint{
+    text-align: left;
+}
+
+.extant-modal-text{
+    text-align: justify;
+    float: left;
+    font-size: 17px;
+    letter-spacing: 0.13em;
+    font-family: 'Montserrat';
+    font-weight: 400;
+}
+
+.extant-modal-icon{
+    font-size: 69px;
+    margin-top: 13px;
+}

@@ -47,7 +47,9 @@ const PlannerInterface = () => {
                     setPortmanteauQuery(selectedQuery)
                     setPortmanteauProduct(plannerPlanNameInput.value)
                     setStaticModal(!staticModal);
-                    setTogglePromptModal(!togglePromptModal);
+                    setTimeout(() => {
+                        setTogglePromptModal(!togglePromptModal);
+                    }, 333);
                     
         
             }

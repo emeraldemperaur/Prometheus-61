@@ -20,7 +20,7 @@ const PromptModal = ({title, action, size, toggleOpen, setStaticModal, staticMod
                         <MDBRow>
                             <MDBCol size={9}>
                             <div style={{paddingBottom:'3px'}}>
-                                <MDBInput label='Portmanteau Label' type='text' id='formPortmanteauLabel' aria-describedby='promptPortmanteauLabel' defaultValue=" "/>
+                                <MDBInput label='Portmanteau Label' type='text' id='formPortmanteauLabel' aria-describedby='promptPortmanteauLabel' defaultValue=""/>
                                     <div id='promptPortmanteauLabel' className='form-text form-hint'>Portmanteau Identifier</div>
                             </div>
                             </MDBCol>
@@ -31,7 +31,7 @@ const PromptModal = ({title, action, size, toggleOpen, setStaticModal, staticMod
                             setTogglePromptModal(!togglePromptModal);
                             setTimeout(() => {
                                 setStaticModal(!staticModal);
-                            }, 400);
+                            }, 333);
                             }}><i className="fa-regular fa-hand-point-left"></i> Go Back
                         </MDBBtn>
                         <MDBBtn onClick={onClickFunc} outline rounded><MDBIcon fab icon='plus circle' /> {action}</MDBBtn>
