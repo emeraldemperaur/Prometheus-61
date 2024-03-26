@@ -1,4 +1,4 @@
-import { MDBRow, MDBCol, MDBInput, MDBInputGroup, MDBFile } from 'mdb-react-ui-kit';
+import { MDBRow, MDBCol, MDBInput, MDBInputGroup, MDBFile, MDBTextArea } from 'mdb-react-ui-kit';
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import '../enquirer/enquirer_styles.css'
@@ -96,7 +96,7 @@ const EnquirerInputForm = () => {
                         <i className="fa-solid fa-code prefix"></i>
                         </span>
                     </div>
-                    <textarea className="enquirer-query-box" id="formQueryModelJSON"></textarea>
+                    <MDBTextArea className="enquirer-query-box" id="formQueryModelJSON"></MDBTextArea>
                 </div>
                 </div>
             </MDBCol>

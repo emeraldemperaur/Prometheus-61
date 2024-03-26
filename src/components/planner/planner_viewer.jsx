@@ -4,6 +4,7 @@ import '../planner/planner_styles.css'
 import { toast } from 'react-toastify';
 import PlannerViewerOverview from './planner_viewer_overview';
 import PlannerViewerInput from './planner_viewer_input';
+import { Link } from 'react-router-dom';
 
 
 const PlannerViewer = (props) => {
@@ -84,7 +85,7 @@ const PlannerViewer = (props) => {
         <MDBRow>
             <MDBCol size={12}>
             <>
-            <MDBBtnGroup style={{position: 'fixed', right: '360px', fontFamily: 'Montserrat', 
+            <MDBBtnGroup style={{position: 'absolute', right: '360px', fontFamily: 'Montserrat', 
             fontWeight: 800, fontSize:'14px', letterSpacing: '0.21em'}} shadow='0' aria-label='share plan synopsis'>
                     <MDBBtn onClick={() => copyLink()} 
                     style={{fontFamily: 'Montserrat', fontWeight: 800, fontSize:'0.875rem', letterSpacing: '0.21em', paddingTop: '0.75rem', paddingBottom: '0.6875rem', lineHeight: 1.6}} color='secondary' outline>
@@ -94,17 +95,17 @@ const PlannerViewer = (props) => {
                     <i className="fa-regular fa-share-from-square"></i> SHARE ENQUIRY</MDBBtn>
             </MDBBtnGroup>
             </>
-            <MDBDropdown style={{position: 'fixed', right: '33px', backgroundColor: '#002c51', fontFamily: 'Montserrat', 
-            fontWeight: 700, letterSpacing: '0.13em'}} group>
+            <MDBDropdown style={{position: 'absolute', right: '33px', backgroundColor: '#002c51', fontFamily: 'Montserrat', 
+            fontWeight: 700, letterSpacing: '0.13em'}} animation group>
                 <MDBDropdownToggle style={{backgroundColor: '#002c51', letterSpacing: '0.21em'}} className='planner-viewer-export-btn' size='lg'>
                 <i className="fa-solid fa-file-export"></i> EXPORT SYNOPSIS</MDBDropdownToggle>
                 <MDBDropdownMenu>
-                <MDBDropdownItem link>.CSV Data</MDBDropdownItem>
-                <MDBDropdownItem link>.XLSX Data</MDBDropdownItem>
-                <MDBDropdownItem link>PDF Outline</MDBDropdownItem>
-                <MDBDropdownItem link>Manual Guide</MDBDropdownItem>
+                <MDBDropdownItem link onClick={() => console.log(".CSV Data Export")}><i className="fa-solid fa-file-csv"></i> .CSV Data</MDBDropdownItem>
+                <MDBDropdownItem link onClick={() => console.log(".XLSX Data Export")}><i className="fa-regular fa-file-excel"></i> .XLSX Data</MDBDropdownItem>
+                <MDBDropdownItem link onClick={() => console.log("PDF Outline Export")}><i className="fa-regular fa-file-pdf"></i> PDF Outline</MDBDropdownItem>
+                <MDBDropdownItem link onClick={() => console.log("Manual Guide Export")}><i className="fa-brands fa-mandalorian"></i> Manual Guide</MDBDropdownItem>
                 <MDBDropdownItem divider />
-                <MDBDropdownItem link>Auto Deploy</MDBDropdownItem>
+                <MDBDropdownItem link onClick={() => console.log("Auto Deploy Export")}><i className="fa-solid fa-robot"></i> Auto Deploy</MDBDropdownItem>
                 </MDBDropdownMenu>
             </MDBDropdown>
             </MDBCol>
@@ -133,11 +134,9 @@ const PlannerViewer = (props) => {
             <MDBTabsContent>
                 <MDBTabsPane open={inputViewActive === 'OVERVIEW'}>
                     <PlannerViewerOverview platformName={props.platformName}/>
-                    OVERVIEW content
                 </MDBTabsPane>
                 <MDBTabsPane open={inputViewActive === 'INPUT'}>
                     <PlannerViewerInput platformName={props.platformName}/>
-                    INPUT content
                 </MDBTabsPane>
             </MDBTabsContent>
             </>

@@ -9,7 +9,7 @@ const HubTile = (props) => {
      <div className="title-box container-fluid">
         <div className="row align-items-start">
             <div style={{display:'inline-block'}} className="col align-self-start">
-                <div class="typed-out">{hubGreeting(props.userName)}</div>
+                <div className="typed-out">{hubGreeting(props.userName)}</div>
             </div>           
             <div className="col align-self-end">
                 <p className="page-title">{props.title}</p>

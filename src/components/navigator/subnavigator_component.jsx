@@ -16,7 +16,7 @@ const SubNavigatorMenu = () => {
          <div className="navigation">
             <div className="user-box">
                 <div className="image-box">
-                    <img src="https://media.licdn.com/dms/image/D5603AQEl5KtuOMO8Kw/profile-displayphoto-shrink_800_800/0/1669664147445?e=1710979200&v=beta&t=5eT37IEmWMoGFbmC-UDdXluP_i-xsw4xpFkGloDfuXw" alt="avatar"/>
+                    <img src="https://mekaegwim.ca/wp-content/uploads/2024/03/20221225_125955-scaled.jpg" alt="avatar"/>
                 </div>&nbsp;
                 <p className="username">Meka</p>
             </div>

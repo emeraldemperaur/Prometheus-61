@@ -1,5 +1,8 @@
-import { MDBCol, MDBRow } from "mdb-react-ui-kit";
+import { MDBCard, MDBCol, MDBRow } from "mdb-react-ui-kit";
 import '../planner/planner_styles.css'
+import TextInput from "../architect/text_input_component";
+import PlannerViewerFooter from "../artificer/planner_viewer_footer";
+import SectionTitle from "../architect/section_title_component";
 
 const PlannerViewerOverview = (props) => {
     return(
@@ -22,6 +25,16 @@ const PlannerViewerOverview = (props) => {
             <><img className="planner-platform-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Morgan_Stanley_Logo_1.svg/576px-Morgan_Stanley_Logo_1.svg.png" alt="Stockvantage"/></>
             :null}
         </MDBCol>
+    </MDBRow>
+    <MDBRow className="planner-viewer-formbox">
+        <MDBCol size={12}>
+            <MDBCard>
+            <MDBRow>
+                <SectionTitle/>
+            </MDBRow>
+            </MDBCard>
+        </MDBCol>
+        <PlannerViewerFooter platformName={props.platformName}/>
     </MDBRow>
     </>
 

@@ -1,0 +1,35 @@
+.core-input-label{
+    text-align: start;
+    
+}
+
+.core-input-icon{
+    color: black;
+}
+
+.core-input-label-text{
+    color: black;
+    font-family: 'Montserrat' !important;
+    font-weight: 300 !important;
+    font-size: 1.0rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+}
+
+.core-input-section-ribbon{
+    background-color: #216cb5;
+    border-radius: 0px;
+    margin-top: 33px;
+    margin-bottom: 33px;
+}
+
+.core-input-section-text{
+    color: #ffffff;
+    font-family: 'Montserrat' !important;
+    font-weight: 400;
+    letter-spacing: 0.33em;
+    margin-left: 13px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: left;
+}

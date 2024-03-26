@@ -29,15 +29,15 @@ const PlannerInterface = () => {
     const plannerDispatch = useDispatch();
 
     const submitPQModel = () =>{
-        var plannerCorpNameInput = document.getElementById("formPlannerCorpName");
-        var plannerCorpNameLabel = document.getElementById("plannerCorpNameLabel");
-        var plannerProductNameInput = document.getElementById("formPlannerProductName");
-        var plannerProductNameLabel = document.getElementById("plannerProductNameLabel");
-        var plannerPlanNameInput = document.getElementById("formPlannerPlanName");
-        var plannerPlanNameLabel = document.getElementById("plannerPlanNameLabel");
-        var plannerEnquiryNameInput = document.getElementById("formPlannerEnquiryName");
-        var plannerEnquiryNameLabel = document.getElementById("plannerEnquiryNameLabel");
-        var plannerAutoShareInput = document.getElementById("formPlannerEnquiryShare");
+        let plannerCorpNameInput = document.getElementById("formPlannerCorpName");
+        let plannerCorpNameLabel = document.getElementById("plannerCorpNameLabel");
+        let plannerProductNameInput = document.getElementById("formPlannerProductName");
+        let plannerProductNameLabel = document.getElementById("plannerProductNameLabel");
+        let plannerPlanNameInput = document.getElementById("formPlannerPlanName");
+        let plannerPlanNameLabel = document.getElementById("plannerPlanNameLabel");
+        let plannerEnquiryNameInput = document.getElementById("formPlannerEnquiryName");
+        let plannerEnquiryNameLabel = document.getElementById("plannerEnquiryNameLabel");
+        let plannerAutoShareInput = document.getElementById("formPlannerEnquiryShare");
         if(inputTextValid(plannerCorpNameInput, plannerCorpNameLabel) && inputTextValid(plannerProductNameInput, plannerProductNameLabel) 
         && inputTextValid(plannerPlanNameInput, plannerPlanNameLabel) && inputTextValid(plannerEnquiryNameInput, plannerEnquiryNameLabel)){
             let selectedCorp = fetchCompany(rolodexList, plannerCorpNameInput.value)

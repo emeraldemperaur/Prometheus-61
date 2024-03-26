@@ -241,4 +241,21 @@
   justify-content: center;
 }
 
+.planner-viewer-formbox{
+  margin-top: 23px;
+
+}
+
+.input-stack-box{
+  margin-top: 33px;
+}
+
+.input-stack-title{
+  font-family: 'Montserrat';
+  font-weight: 400;
+  letter-spacing: 0.13em;
+  color: #216cb5;
+  margin-bottom: 0px;
+}
+
   

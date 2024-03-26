@@ -1,0 +1,11 @@
+.planner-footer-img{
+    width: 155px;
+    height: 50px;
+    justify-self: center;
+    margin-top: 23px;
+    margin-bottom: 0px;
+  }
+
+  .planner-footer-box{
+    display: grid;
+  }
