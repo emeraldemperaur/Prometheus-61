@@ -33,3 +33,20 @@
     padding-bottom: 3px;
     text-align: left;
 }
+
+.checkbox-input-border{
+    margin-top: 6px;
+}
+
+.form-check-input{
+    display: inline !important;
+}
+
+.form-check-label{
+    display: inline !important;
+}
+
+.switch-input-label{
+    justify-content: start;
+    display: grid !important;
+}

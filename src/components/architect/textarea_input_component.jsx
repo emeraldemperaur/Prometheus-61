@@ -7,13 +7,23 @@ const TextAreaInput = (props) => {
 
     return(
     <>
-    <MDBCol size={4}>
-    <MDBTextArea label='Example label' id='formTextExample1' aria-describedby='textExample1'  placeholder="0-100" defaultValue='' rows={3} readonly={true}/>
-                <div id='textExample1' className='form-text core-input-label'>
-                    <p className='core-input-label-text'>TextArea Input Element  
-                    <MDBTooltip tag='a' wrapperProps={{ href: 'https://mekaegwim.ca/MekaEgwim%20--%20Resume.pdf', target:'_blank' }} title="Hi! I'm a tooltip test for long form rendering prospects on the prometheus test inputs!" placement='bottom'>
+    {props.newRow ?
+            <><div className='w-100'></div></>
+            :null}
+    <MDBCol size={props.width}>
+    <MDBTextArea label={props.inputLabel} id={`${props.alias}FormInput`} aria-describedby={`${props.alias}InputLabel`}  
+    placeholder={props.placeholder} defaultValue={props.defaultValue} rows={props.rows} readonly={props.readOnly}/>
+                <div id={`${props.alias}InputLabel`} className='form-text core-input-label'>
+                    <p className='core-input-label-text'>{props.inputLabel}  
+                    {props.isHinted ?
+                    <>
+                    <MDBTooltip tag='a' wrapperProps={{ href: props.hintLink, target:'_blank' }} 
+                    title={props.hintText} placement='bottom'>
                     &nbsp;<i className="fa-regular fa-circle-question core-input-icon"></i>
-                    </MDBTooltip></p>    
+                    </MDBTooltip>
+                    </>
+                    :null}
+                    </p>    
                 </div>
     </MDBCol> 
     </>

@@ -30,7 +30,7 @@ const PlannerViewerOverview = (props) => {
         <MDBCol size={12}>
             <MDBCard>
             <MDBRow>
-                <SectionTitle/>
+                <SectionTitle sectionIcon={'fa-solid fa-dumpster-fire'} sectionTitle={'Alpha Section'}/>
             </MDBRow>
             </MDBCard>
         </MDBCol>

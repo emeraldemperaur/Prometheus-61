@@ -1,24 +1,20 @@
 import '../architect/architect_core_styles.css'
-import { MDBRadio, MDBCol, MDBTooltip } from 'mdb-react-ui-kit';
+import {MDBCol, MDBFile, MDBTooltip } from 'mdb-react-ui-kit';
 
 
 
-const RadioInput = (props) => {
+const FileInput = (props) => {
 
     return(
         <>
         {props.newRow ?
                 <><div className='w-100'></div></>
                 :null}
-         <MDBCol className='checkbox-input-border' size={props.width}>
-         {props.optionsList ?
-                <>
-                { props.optionsList.map( optionItem => (
-                                            <MDBRadio name={props.alias} key={optionItem.id} id={`${props.alias}${optionItem.id}FormInput`} value={optionItem.text} label={optionItem.text} 
-                                            aria-describedby={`${props.alias}InputLabel`} readOnly={props.readOnly} disabled={props.disabled} inline />
-                                            ))}
-                </>
-                :null}
+         <MDBCol size={props.width}>
+         <>
+                    <MDBFile id={`${props.alias}FormInput`} multiple={props.multipleFiles} accept={props.fileTypes}
+                    readOnly={props.readOnly} disabled={props.disabled} label={props.inputLabel} aria-describedby={`${props.alias}InputLabel`}/>
+         </>
                     <div id={`${props.alias}InputLabel`} className='form-text core-input-label'>
                         <p className='core-input-label-text'>{props.inputLabel}  
                         {props.isHinted ?
@@ -34,7 +30,5 @@ const RadioInput = (props) => {
         </MDBCol>
         </>
     )
-
-
 }
-export default RadioInput;
+export default FileInput;
