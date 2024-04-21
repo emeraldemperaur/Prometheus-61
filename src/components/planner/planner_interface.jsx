@@ -11,12 +11,13 @@ import PlannerInputForm from './planner_input_component';
 import { addPlanQuestionnaire } from '../../forge/planner';
 import PlannerTable from './planner_table_component';
 import { toast } from 'react-toastify';
-import { currentTime } from '../../utils/chronos';
+import { currentTime, fetchPIN } from '../../utils/chronos';
 import PromptModal from '../artificer/prompt_modal_component';
 
 
 const PlannerInterface = () => {
     document.body.style.backgroundColor = "#ffffff"
+    document.body.style.fontFamily = "Montserrat"
     const [staticModal, setStaticModal] = useState(false);
     const [togglePromptModal, setTogglePromptModal] = useState(false);
     const [portmanteauCorp, setPortmanteauCorp] = useState(" ");
@@ -70,6 +71,7 @@ const PlannerInterface = () => {
                     enquiryID: selectedQuery.id,
                     enquiryPlatformName: selectedQuery.platformName,
                     autoShare: plannerAutoShareInput.checked,
+                    accessPIN: fetchPIN(),
                     status: 1,
                     buildRank: 0,
                     correspondenceName: selectedCorp.primaryContactName,
@@ -195,6 +197,7 @@ const PlannerInterface = () => {
                                 enquiryID: portmanteauQuery.id,
                                 enquiryPlatformName: portmanteauQuery.platformName,
                                 autoShare: document.getElementById("formPlannerEnquiryShare").checked,
+                                accessPIN: fetchPIN(),
                                 status: 1,
                                 buildRank: 0,
                                 correspondenceName: portmanteauCorp.primaryContactName,

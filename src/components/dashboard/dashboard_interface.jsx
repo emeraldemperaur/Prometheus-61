@@ -8,6 +8,7 @@ import HubTile from '../artificer/hub_title_component';
 const DashboardInterface = () => {
 
     document.body.style.backgroundColor = "#ffffff"
+    document.body.style.fontFamily = "Montserrat"
     return(
     <>
     <NavigatorMenu/>

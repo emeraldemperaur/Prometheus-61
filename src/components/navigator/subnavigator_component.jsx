@@ -3,7 +3,7 @@ import { subMenuItems } from '../../utils/nav_data';
 import { Link, NavLink } from 'react-router-dom';
 
 
-const SubNavigatorMenu = () => {
+const SubNavigatorMenu = (props) => {
     
     
     const onMenuToggleHandler = () => {
@@ -13,7 +13,7 @@ const SubNavigatorMenu = () => {
 
     return(
         <div>
-         <div className="navigation">
+         <div style={{position: `${props.absolute}`}} className="navigation">
             <div className="user-box">
                 <div className="image-box">
                     <img src="https://mekaegwim.ca/wp-content/uploads/2024/03/20221225_125955-scaled.jpg" alt="avatar"/>

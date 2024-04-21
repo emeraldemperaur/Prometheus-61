@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-const NavigatorMenu = () => {
+const NavigatorMenu = (props) => {
     let [index, setIndex] = useState(0);
     
     useEffect(()=>{
@@ -18,7 +18,7 @@ const NavigatorMenu = () => {
 
     return(
         <>
-        <header>
+        <header style={{position: `${props.absolute}`}}>
             <section>
                 <div><><Link to="/" id="logo">PROMETHEUS</Link></></div>
                 
@@ -29,7 +29,7 @@ const NavigatorMenu = () => {
                         <li key={menuItem.id}><NavLink to={menuItem.link}><i className={menuItem.icon}></i>{menuItem.title}</NavLink></li>
                        ))}
                     </ul>
-                    <SubNavigatorMenu/>
+                    <SubNavigatorMenu absolute={props.absolute} />
                 </nav>
                 
                 </div>

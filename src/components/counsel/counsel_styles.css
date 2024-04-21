@@ -1,0 +1,109 @@
+.counsel-logo{
+  width: 250px;
+  height: 250px;
+  float: right;
+}
+
+.counsel-logo2{
+  width: 250px;
+  height: 250px;
+  float: left;
+}
+
+.counsel-box{
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.version-text{
+  font-size: 33px;
+  font-weight: 100;
+  margin-top: 96px;
+  text-align: left;
+  letter-spacing: 0.13em;
+}
+
+.logo-box{
+  justify-content: right;
+}
+
+.section-title{
+  text-align: left;
+  font-family: 'Montserrat';
+  letter-spacing: 0.13em;
+  font-weight: 400;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+/* 2. Make nav sticky */
+main > nav {
+	position: sticky;
+	top: 2rem;
+	align-self: start;
+}
+
+/* 3. ScrollSpy active styles (see JS tab for activation) */
+.section-nav li.active > a {
+	color: #333;
+	font-weight: 500;
+}
+
+/* Sidebar Navigation */
+.section-nav {
+	padding-left: 0;
+	border-left: 1px solid #efefef;
+}
+
+.section-nav a {
+	text-decoration: none;
+	display: block;
+	padding: 0.125rem 0;
+	color: #ccc;
+	transition: all 50ms ease-in-out; /* 💡 This small transition makes setting of the active state smooth */
+}
+
+.section-nav a:hover,
+.section-nav a:focus {
+	color: #666;
+}
+
+/** Poor man's reset **/
+* {
+	box-sizing: border-box;
+}
+
+
+
+ul,
+ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.side-list {
+	margin-left: 1rem;
+  text-align: start;
+}
+
+.side-section{
+  padding-bottom: 20rem;
+}
+
+h1 {
+	font-weight: 300;
+}
+
+/** page layout **/
+main {
+	display: grid;
+	grid-template-columns: 1fr 15em;
+	max-width: 100em;
+	width: 90%;
+	margin: 0 auto;
+}
+
+/** enlarge the sections for this demo, so that we have a long scrollable page **/
+

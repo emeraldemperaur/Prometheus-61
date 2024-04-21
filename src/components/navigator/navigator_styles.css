@@ -17,6 +17,18 @@ section{
     display:table; 
     position:relative;
 }
+.-absolute{
+    width:100%; 
+    display:table; 
+    background-color:#ffffff; 
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    z-index: 3;
+}
+
 header{
     width:100%; 
     display:table; 
@@ -67,6 +79,18 @@ nav ul li a:hover{
     color:#ffffff; 
     transition: all 0.5s ease 0s;
 }
+
+nav ul li a.active{
+    background-color:#002C51; 
+    color:#ffffff; 
+    transition: all 0.5s ease 0s;
+}
+
+nav ul li a.active i{
+    color:#ffffff; 
+    transition: all 0.5s ease 0s;
+}
+
 nav ul li a:hover i{
     color:#ffffff; 
     transition: all 0.5s ease 0s;

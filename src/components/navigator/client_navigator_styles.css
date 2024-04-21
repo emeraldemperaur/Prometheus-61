@@ -1,0 +1,24 @@
+.client-enquiry-logo{
+    justify-content: end;
+    display: grid;
+    margin-top: 13px;
+}
+
+.client-enquiry-text{
+    font-family: 'Montserrat';
+    letter-spacing: 0.13em;
+    font-weight: 400;
+    text-align: end;
+}
+
+.client-enquiry-platform{
+    font-family: 'Montserrat';
+    letter-spacing: 0.13em;
+    font-weight: 600;
+    text-align: end;
+    color: #000000;
+}
+
+.client-enquiry a{
+    color: #000000;
+}

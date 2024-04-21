@@ -1,0 +1,117 @@
+body {
+	background: #002C51;
+}
+
+.pin-ui-logo{
+    font-size: 30px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    letter-spacing: 0.33em;
+    text-transform: uppercase;
+    color: #ffffff;
+    padding-top: 69px;
+}
+
+.pin-ui-slogan{
+    font-family: 'Montserrat';
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 0.33em;
+    color: #ffffff;
+
+}
+
+.pin-ui-firm-logo {
+  
+    margin-left: 76%;
+    z-index: 3;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+
+  #PINform input:focus,
+  #PINform select:focus,
+  #PINform textarea:focus,
+  #PINform button:focus {
+      outline: none;
+  }
+  #PINform {
+    background: #ededed;
+    position: absolute;
+    width: 303px;
+    height: 413px;
+    left: 50%;
+    margin-left: -156px;
+    top: 50%;
+    margin-top: -215px;
+    padding: 30px;
+        -webkit-box-shadow: 0px 5px 5px -0px rgba(0,0,0,0.3);
+           -moz-box-shadow: 0px 5px 5px -0px rgba(0,0,0,0.3);
+                box-shadow: 0px 5px 5px -0px rgba(0,0,0,0.3);
+  }
+  #PINbox {
+      background: #ededed;
+      margin: 3.5%;
+      width: 92%;
+      font-size: 4em;
+      text-align: center;
+      border: 1px solid #d5d5d5;
+  }
+.PINprompttext{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 69px;
+    font-family: 'Montserrat';
+    font-weight: 300;
+    margin-top: -69px;
+    letter-spacing: 0.23em;
+    color: #ffffff;
+}
+
+  .PINbutton {
+      background: #ededed;
+      color: #7e7e7e;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.8em;
+      font-family: 'Montserrat';
+      font-weight: 300;
+      text-align: center;
+      width: 60px;
+      height: 60px;
+      margin-left: 1px;
+      margin-right: 1px;
+      margin-top: 1px;
+  }
+  .clear, .enter {
+      font-size: 1em;
+  }
+  .PINbutton:hover {
+       box-shadow: #002C51 0 0 1px 1px;
+  }
+  .PINbutton:active {
+       background: #216CA6;
+      color: #fff;
+  }
+  .clear:hover {
+       box-shadow: #000000 0 0 1px 1px;
+  }
+  .clear:active {
+       background: #000000;
+      color: #fff;
+  }
+  .enter:hover {
+       box-shadow: #216CA6 0 0 1px 1px;
+  }
+  .enter:active {
+       background: #002C51;
+      color: #fff;
+  }
+  .shadow{
+        -webkit-box-shadow: 0px 5px 5px -0px rgba(0,0,0,0.3);
+           -moz-box-shadow: 0px 5px 5px -0px rgba(0,0,0,0.3);
+                box-shadow: 0px 5px 5px -0px rgba(0,0,0,0.3);
+  }

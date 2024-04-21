@@ -28,6 +28,22 @@
     transition: height 0.5s, width 0.5s;
     transition-delay: 0s, 0.75s;
   }
+
+  .navigation-absolute {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 120px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    background: var(--deep-blue);
+    box-shadow: 0 25px 35px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: height 0.5s, width 0.5s;
+    transition-delay: 0s, 0.75s;
+  }
   
   .navigation .user-box {
     position: relative;

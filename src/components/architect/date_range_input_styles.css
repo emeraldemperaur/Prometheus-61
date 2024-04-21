@@ -1,0 +1,73 @@
+.dr-input-box{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.dr-input-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .dr-input-container {
+    padding: 0rem;
+  }
+  
+  .dr-input-calendarStyle {
+    border: 1px solid #eee;
+    font-family: 'Montserrat';
+    border-radius: 1.5rem;
+    z-index: 999;
+    position: relative;
+    background-color: #fff;
+    margin-bottom: 13px;
+  }
+  s
+  .dr-input-icon {
+    height: 1.6rem;
+    width: 2rem;
+    margin-left: -33px !important;
+  }
+  
+  .dr-input{
+    height: 100%;
+    width: 90%;
+    border: none;
+    outline: none;
+  }
+  
+  .single-calendar-input {
+    border-radius: 0.5rem;
+    border: 0px solid #ddd;
+    font-weight: 500;
+    color: #686868;
+    display: flex;
+    align-items: center;
+  }
+  
+  .element-container {
+    position: relative;
+  }
+  
+  .dr-input-dropdown {
+    position: absolute;
+    bottom: 23px;
+    left: 0px;
+  }
+  
+  .dr-input-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: 500ms ease;
+    z-index: 2;
+  }
+  
+  .dr-input-dropdown.inactive {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: 500ms ease;
+    display: none;
+  }

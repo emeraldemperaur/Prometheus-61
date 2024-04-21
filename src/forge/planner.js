@@ -22,6 +22,7 @@ export const plannerSlice = createSlice({
                 enquiryID: 1,
                 enquiryPlatformName: 'UBS Group',
                 autoShare:false,
+                accessPIN: '693324',
                 status: 1,
                 buildRank: 0,
                 correspondenceName:'Bruce Wayne',

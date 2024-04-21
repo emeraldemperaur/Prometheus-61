@@ -5,22 +5,26 @@ import { toast } from 'react-toastify';
 import PlannerViewerOverview from './planner_viewer_overview';
 import PlannerViewerInput from './planner_viewer_input';
 import { Link } from 'react-router-dom';
+import LogoHolder from '../planner/assets/placeholder-circle.png';
+
 
 
 const PlannerViewer = (props) => {
 
     const [inputViewActive, setInputViewActive] = useState('OVERVIEW');
     const handleInputViewClick = (value) => { if (value === inputViewActive) {return;} setInputViewActive(value); };
+    let queryLink = `${window.location.origin.toString()}/questionnaire/${props.id}`;
     const copyLink = () => {
-        toast.info(`Questionnaire link copied to clipboard!`,{
-        position: "top-right",
-        autoClose: 1000,
-        closeOnClick: true
-      })
-      console.log(`Questionnaire link copied to clipboard!`);   
+        try {
+            navigator.clipboard.writeText(queryLink);
+            toast.info(`Questionnaire link copied`,{position: "top-right", autoClose: 1000, closeOnClick: true});
+            console.log(`Questionnaire link '${queryLink}' copied to clipboard!`);
+          }catch (err) {
+                console.error(`Failed to copy '${queryLink}' to clipboard!`, err);
+          } 
     }
     const shareEnquiry = (queryCorrespondence) => {
-        toast.success(`Questionnaire notification sent to ${queryCorrespondence}.`,{
+        toast.success(`Questionnaire notification sent to ${queryCorrespondence}`,{
         position: "top-right",
         autoClose: 1000,
         closeOnClick: true
@@ -34,7 +38,7 @@ const PlannerViewer = (props) => {
         <MDBRow>
             <MDBCol size={3}>
                 <>
-                <img src='https://csncollision.com/wp-content/uploads/2019/10/placeholder-circle.png'alt='' style={{ width: '169px', height: '169px', float:'left' }} className='rounded-circle'/>
+                <img src={LogoHolder} alt='Logo Holder' style={{ width: '169px', height: '169px', float:'left' }} className='rounded-circle'/>
                 </>
                 <>
                     <p className='planner-viewer-region'>{props.companyRegion}</p>
@@ -49,6 +53,7 @@ const PlannerViewer = (props) => {
                 </>
             </MDBCol>
             <MDBCol size={3}>
+                
                 <p className='planner-viewer-heading'>Status</p>
                 {props.status == 1 ?
                 <><MDBBadge className='planner-badge planner-view-badge' color='warning' pill>Client Onboarding</MDBBadge></>
@@ -60,6 +65,8 @@ const PlannerViewer = (props) => {
                 <><MDBBadge className='planner-badge planner-view-badge' color='success' pill>Complete</MDBBadge></>
                 :null} 
 
+               
+               
             </MDBCol>
             <MDBCol size={3}>
                 <p className='planner-viewer-heading'>Build Rank</p>
@@ -85,6 +92,7 @@ const PlannerViewer = (props) => {
         <MDBRow>
             <MDBCol size={12}>
             <>
+                        
             <MDBBtnGroup style={{position: 'absolute', right: '360px', fontFamily: 'Montserrat', 
             fontWeight: 800, fontSize:'14px', letterSpacing: '0.21em'}} shadow='0' aria-label='share plan synopsis'>
                     <MDBBtn onClick={() => copyLink()} 
@@ -104,8 +112,9 @@ const PlannerViewer = (props) => {
                 <MDBDropdownItem link onClick={() => console.log(".XLSX Data Export")}><i className="fa-regular fa-file-excel"></i> .XLSX Data</MDBDropdownItem>
                 <MDBDropdownItem link onClick={() => console.log("PDF Outline Export")}><i className="fa-regular fa-file-pdf"></i> PDF Outline</MDBDropdownItem>
                 <MDBDropdownItem link onClick={() => console.log("Manual Guide Export")}><i className="fa-brands fa-mandalorian"></i> Manual Guide</MDBDropdownItem>
-                <MDBDropdownItem divider />
                 <MDBDropdownItem link onClick={() => console.log("Auto Deploy Export")}><i className="fa-solid fa-robot"></i> Auto Deploy</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem link disabled><i className="fa-solid fa-key"></i> PIN: {props.accessPIN}</MDBDropdownItem>
                 </MDBDropdownMenu>
             </MDBDropdown>
             </MDBCol>
@@ -133,7 +142,7 @@ const PlannerViewer = (props) => {
 
             <MDBTabsContent>
                 <MDBTabsPane open={inputViewActive === 'OVERVIEW'}>
-                    <PlannerViewerOverview platformName={props.platformName}/>
+                    <PlannerViewerOverview companyName={props.companyName} status={props.status} platformName={props.platformName}/>
                 </MDBTabsPane>
                 <MDBTabsPane open={inputViewActive === 'INPUT'}>
                     <PlannerViewerInput platformName={props.platformName}/>

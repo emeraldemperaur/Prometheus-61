@@ -1,0 +1,17 @@
+.no-data-badge {
+    font-size: 19px !important;
+    letter-spacing: 0.13em !important;
+    background-color: white !important;
+    color: #e4a11b !important;
+    border: 2px solid #e4a11b !important;
+}
+
+.no-data-badge-text{
+    font-family: 'Montserrat';
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 0.33em;
+    margin-top: 9px;
+    margin-bottom: 9px;
+    color: #000000;
+}

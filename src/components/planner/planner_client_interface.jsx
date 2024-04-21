@@ -1,10 +1,6 @@
-import { MDBCol, MDBRow, MDBCard, MDBAccordion, MDBAccordionItem, MDBCollapse } from "mdb-react-ui-kit";
-import '../planner/planner_styles.css'
-import '../artificer/neo_toggle_styles.css'
-import MSLogo from '../planner/assets/MorganStanleyLogo.png';
-import ShareworksLogo from '../planner/assets/MorganStanleyAtWorkLogo.png';
-import ETradeLogo from '../planner/assets/ETradeLogo.png';
-import UBSGroupLogo from '../planner/assets/UBSLogo.png';
+import { MDBCol, MDBRow, MDBContainer, MDBBadge, MDBBtn, MDBIcon, MDBCard, MDBAccordion, MDBAccordionItem } from 'mdb-react-ui-kit';
+import ClientNavigatorMenu from '../navigator/clientnavigator_component';
+import PlannerViewerFooter from '../artificer/planner_viewer_footer';
 import TextInput from "../architect/text_input_component";
 import NumberInput from "../architect/number_input_component";
 import DateInput from "../architect/date_input_component";
@@ -12,9 +8,9 @@ import DateTimeInput from "../architect/datetime_input_component";
 import TimeInput from "../architect/time_input_component";
 import TextAreaInput from "../architect/textarea_input_component";
 import NumberRangeInput from "../architect/number_range_input_component";
-import PlannerViewerFooter from "../artificer/planner_viewer_footer";
 import SectionTitle from "../architect/section_title_component";
-import { useState } from "react";
+import '../artificer/neo_toggle_styles.css'
+import { useState, useEffect } from "react";
 import SelectInput from "../architect/select_input_component";
 import MultiSelectInput from "../architect/multiselect_input_component";
 import CheckboxInput from "../architect/checkbox_input_component";
@@ -23,41 +19,123 @@ import ToggleInput from "../architect/toggle_input_component";
 import ToggledInput from "../architect/toggled_input_component";
 import FileInput from "../architect/file_input_component";
 import DateRangeInput from "../architect/date_range_input_component";
-import { tr } from "date-fns/locale";
+import ClientLoader from '../artificer/client_loader_component';
+import LogoHolder from '../planner/assets/placeholder-circle.png';
+import '../planner/planner_client_styles.css';
 
-const PlannerViewerInput = (props) => {
+
+
+
+
+const PlannerClientInterface = ({planRecord}) => {
+    document.body.style.backgroundColor = "#ffffff"
+    document.body.style.fontFamily = "Montserrat"
     const [stackedMode, setStackedMode] = useState(false);
     const [stackedActive, setStackedActive] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
     const toggleStackView = () => {
         if(document.getElementById("stackedMode").checked){setStackedMode(true);console.log("Stacked Mode - ON");}
         if(!document.getElementById("stackedMode").checked){setStackedMode(false);console.log("Stacked Mode - OFF")}  
         //document.getElementById("stackedMode").focus();
     }
+    useEffect(() => {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1569);
+      });
 
     return(
     <>
-    <MDBRow>
-        <MDBCol size={12}>
-            {props.platformName == "Global - All Platforms" ?
-            <><img className="planner-platform-img" src={MSLogo} alt="Global - All Platforms"/></>
-            :null}
-            {props.platformName == "Shareworks" ?
-            <><img className="planner-platform-img-sw" src={ShareworksLogo} alt="Shareworks"/></>
-            :null}
-            {props.platformName == "E-Trade" ?
-            <><img className="planner-platform-img-etrade" src={ETradeLogo} alt="E-Trade"/></>
-            :null}
-            {props.platformName == "UBS Group" ?
-            <><img className="planner-platform-img-ubs" src={UBSGroupLogo} alt="UBS Group"/></>
-            :null}
-            {props.platformName == "Stockvantage" ?
-            <><img className="planner-platform-img" src={MSLogo} alt="Stockvantage"/></>
-            :null}
-        </MDBCol>
-    </MDBRow>
-    <MDBRow>
-        <MDBCol className="planner-viewer-formbox" size={12}>
-            <MDBCard>
+    {isLoading ?
+    <>
+    <MDBContainer style={{height: '100vh', backgroundColor: '#ffffff'}} fluid>
+        <ClientLoader/>
+    </MDBContainer>
+    </>
+    :
+    <>
+        <MDBRow>
+            <ClientNavigatorMenu platformName={planRecord.enquiryPlatformName}/>
+            <MDBRow className='client-form-info'>
+                    <MDBCol size='2'>
+                    <img src={LogoHolder} alt='' style={{ width: '169px', height: '169px'}} className='rounded-circle'/>
+                    <MDBRow>
+                    <a style={{color:'#000000'}} className='client-form-corp'>{planRecord.companyName}</a><br/>
+                    </MDBRow>
+                    </MDBCol>
+                    <MDBCol size='5'>
+                    {planRecord.status == 1 ?
+                        <><MDBBadge className='planner-badge planner-view-badge' color='warning' pill>Client Onboarding</MDBBadge></>
+                        :null}
+                    {planRecord.status == 2 ?
+                        <><MDBBadge className='planner-badge planner-view-badge' color='secondary' pill>In Progress</MDBBadge></>
+                        :null}
+                    {planRecord.status == 3 ?
+                        <><MDBBadge className='planner-badge planner-view-badge' color='success' pill>Complete</MDBBadge></>
+                        :null} 
+                    
+                    <br></br>
+                        <div className="form-records-box">
+                        <a style={{color:'#002c51', fontFamily: "Montserrat"}} className="client-form-info-title form-records-found">{planRecord.productPlanName}</a><br></br>
+                        <MDBRow start>
+                    <MDBCol size='4'>
+                     <div>
+                        <a className="client-form-title-subtitle-text">Requirements By</a><br></br>
+                        <a style={{color:'#000000', fontFamily: "Montserrat"}} className="client-form-title-subtext-text">{planRecord.correspondenceName}</a>
+                      </div>
+                    </MDBCol>
+                    <MDBCol size='6'>
+                      <div>
+                        <a className="client-form-title-subtitle-text">Correspondence as at</a><br></br>
+                        <a style={{color:'#000000', fontFamily: "Montserrat"}} className="client-form-time-text client-form-title-subtext-text">{planRecord.correspondenceTime}</a>
+                      </div>
+                    </MDBCol>
+                    </MDBRow>
+                        </div>
+                    </MDBCol>
+                    <MDBCol size='5'>
+                    <div className='client-form-actions'>
+                   
+                        <MDBBtn className='client-form-button' style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 13, fontWeight: 600, letterSpacing: '0.21em', margin: '10px' }} 
+                        href='#'>
+                            <MDBIcon icon='save' />  SAVE DETAILS&nbsp;&nbsp;&nbsp;&nbsp;
+                        </MDBBtn>
+                        <MDBBtn className='client-form-button' style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 13, fontWeight: 600, letterSpacing: '0.21em', margin: '10px' }} 
+                        href='#'>
+                            <MDBIcon  icon='paper-plane' />  COMPLETE FORM
+                        </MDBBtn>
+                        </div>
+                    </MDBCol>
+                
+                </MDBRow>
+                <MDBRow>
+                    <hr/>
+                <MDBCol size={12}>
+                    {planRecord.enquiryPlatformName == "Global - All Platforms" ?
+                    <><img className="planner-platform-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Morgan_Stanley_Logo_1.svg/576px-Morgan_Stanley_Logo_1.svg.png" alt="Global - All Platforms"/></>
+                    :null}
+                    {planRecord.enquiryPlatformName == "Shareworks" ?
+                    <><img className="planner-platform-img-sw" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlfH_kFG94vQnLD9u84V_f9XcItQrECmwQDqahi5cW&s" alt="Shareworks"/></>
+                    :null}
+                    {planRecord.enquiryPlatformName == "E-Trade" ?
+                    <><img className="planner-platform-img-etrade" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/ETrade.svg/2560px-ETrade.svg.png" alt="E-Trade"/></>
+                    :null}
+                    {planRecord.enquiryPlatformName == "UBS Group" ?
+                    <><img className="planner-platform-img-ubs" src="https://upload.wikimedia.org/wikipedia/commons/3/34/UBS_Logo.png" alt="UBS Group"/></>
+                    :null}
+                    {planRecord.enquiryPlatformName == "Stockvantage" ?
+                    <><img className="planner-platform-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Morgan_Stanley_Logo_1.svg/576px-Morgan_Stanley_Logo_1.svg.png" alt="Stockvantage"/></>
+                    :null}
+                </MDBCol>
+                </MDBRow>
+                <MDBRow style={{marginTop: '33px'}}>
+                    <MDBCol>
+                        <p className="client-form-edit-hint-title">Tell us more about your {planRecord.productPlanName}</p>
+                    </MDBCol>
+                </MDBRow>
+                <MDBRow>
+                    <MDBCol className='planner-viewer-formbox' size={12}>
+                    <MDBCard>
             <MDBRow className="toggle-box">
                 <MDBCol className="" size={12}>
                     <label className="label">
@@ -237,13 +315,15 @@ const PlannerViewerInput = (props) => {
             </MDBRow>
             </>}
             </MDBCard>
-        </MDBCol>
-        <PlannerViewerFooter platformName={props.platformName}/>
-    </MDBRow>
+                    </MDBCol>
+                    <PlannerViewerFooter style={{marginBottom: '6px'}} platformName={planRecord.enquiryPlatformName}/>
+                </MDBRow>
+
+        </MDBRow>
+    <div className="client-form-fab fab-btn"> ✔ </div>
     </>
-
+    }
+    </>
     )
-
-
 }
-export default PlannerViewerInput;
+export default PlannerClientInterface;

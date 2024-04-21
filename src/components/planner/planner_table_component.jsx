@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { CSSTransition, TransitionGroup} from 'react-transition-group';
 import '../planner/planner_styles.css'
 import PlannerViewer from './planner_viewer';
+import LogoHolder from '../planner/assets/placeholder-circle.png';
 
 const PlannerTable = ({plannerList}) => {
 
@@ -40,7 +41,7 @@ const PlannerTable = ({plannerList}) => {
                                     <td>
                                         <div className='d-flex align-items-center'>
                                         <img
-                                            src='https://csncollision.com/wp-content/uploads/2019/10/placeholder-circle.png'
+                                            src={LogoHolder}
                                             alt=''
                                             style={{ width: '69px', height: '69px' }}
                                             className='rounded-circle'
@@ -123,11 +124,11 @@ const PlannerTable = ({plannerList}) => {
                     </MDBModalHeader>
                     <MDBModalBody>{plannerItem ?
                         <>
-                        <PlannerViewer companyName={plannerItem.companyName} productPlanName={plannerItem.productPlanName} status={plannerItem.status} buildRank={plannerItem.buildRank} 
+                        <PlannerViewer id={plannerItem.id} companyName={plannerItem.companyName} productPlanName={plannerItem.productPlanName} status={plannerItem.status} buildRank={plannerItem.buildRank} 
                         companyRegion={plannerItem.companyRegion} companyStockExchange={plannerItem.companyStockExchange}
                         companyTickerSymbol={plannerItem.companyTickerSymbol} isCorpDualListed={plannerItem.isCorpDualListed} companyDualStockExchange={plannerItem.companyDualStockExchange}
                         companyDualTickerSymbol={plannerItem.companyDualTickerSymbol} correspondenceName={plannerItem.correspondenceName} correspondenceTime={plannerItem.correspondenceTime} 
-                        platformName={plannerItem.enquiryPlatformName}/>
+                        platformName={plannerItem.enquiryPlatformName} accessPIN={plannerItem.accessPIN}/>
                         </>
                             :null}
                     </MDBModalBody>

@@ -17,6 +17,7 @@ import ExtantModal from '../artificer/extant_modal_component';
 
 const EnquirerInterface = () => {
     document.body.style.backgroundColor = "#ffffff"
+    document.body.style.fontFamily = "Montserrat"
     const [staticModal, setStaticModal] = useState(false);
     const [toggleExtantModal, setToggleExtantModal] = useState(false);
     const [extantQuery, setExtantQuery] = useState(" ");

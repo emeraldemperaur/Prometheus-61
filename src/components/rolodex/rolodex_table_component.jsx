@@ -3,6 +3,7 @@ import { MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitl
 import { useState } from 'react';
 import '../rolodex/rolodex_styles.css'
 import RolodexViewer from './rolodex_viewer';
+import LogoHolder from '../planner/assets/placeholder-circle.png';
 
 const RolodexTable = ({rolodexList}) => {
 
@@ -37,7 +38,7 @@ const RolodexTable = ({rolodexList}) => {
                                             <td>
                                                 <div className='d-flex align-items-center'>
                                                 <img
-                                                    src='https://csncollision.com/wp-content/uploads/2019/10/placeholder-circle.png'
+                                                    src={LogoHolder}
                                                     alt=''
                                                     style={{ width: '69px', height: '69px' }}
                                                     className='rounded-circle'

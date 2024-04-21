@@ -4,6 +4,7 @@
 
 #root {
   display: contents;
+  font-family: 'Montserrat';
   
 }
 
@@ -45,6 +46,7 @@
 .Toastify__toast-body {
   font-family: 'Montserrat';
   color: #000000;
+  text-align: left;
 }
 
 

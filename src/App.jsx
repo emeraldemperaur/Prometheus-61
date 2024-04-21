@@ -17,6 +17,9 @@ import CounselInterface from './components/counsel/counsel_interface.jsx';
 import { P61Context } from './context/index.jsx'
 import { ToastContainer } from 'react-toastify'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PlannerPinConsole from './components/planner/planner_pin_component.jsx';
+import PlannerClientInterface from './components/planner/planner_client_interface.jsx';
+
 
 
 
@@ -30,18 +33,20 @@ function App() {
     <>
     <div className="App">
     <ToastContainer stacked/>
+   
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<AuthOstiary/>}/>
-      <Route path='/dashboard' element={<DashboardInterface/>}/>
-      <Route path='/company-profiles' element={<RolodexInterface/>}/>
-      <Route path='/query-models' element={<EnquirerInterface/>}/>
-      <Route path='/plan-forms' element={<PlannerInterface/>}/>
-      <Route path='/insights' element={<OracleInterface/>}/>
-      <Route path='/terminal' element={<TerminalInterface/>}/>
-      <Route path='/user-profile' element={<ProfilerInterface/>}/>
-      <Route path='/documentation' element={<CounselInterface/>}/>
-      <Route path='/logout' element={<AuthOstiary/>}/>
+      <Route path='dashboard' element={<DashboardInterface/>}/>
+      <Route path='company-profiles' element={<RolodexInterface/>}/>
+      <Route path='query-models' element={<EnquirerInterface/>}/>
+      <Route path='plan-forms' element={<PlannerInterface/>}/>
+      <Route path="questionnaire/:id" element={<PlannerPinConsole accessPIN={'693324'}/>}/>      
+      <Route path='insights' element={<OracleInterface/>}/>
+      <Route path='terminal' element={<TerminalInterface/>}/>
+      <Route path='user-profile' element={<ProfilerInterface/>}/>
+      <Route path='documentation' element={<CounselInterface/>}/>
+      <Route path='logout' element={<AuthOstiary/>}/>
     </Routes>
     </BrowserRouter>
     </div>

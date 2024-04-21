@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200&display=swap');
+
 .planner-forms-title{
     font-family: 'Montserrat';
     font-size: 22px;
@@ -100,6 +102,7 @@
     font-family: 'Montserrat';
     letter-spacing: 0.16em;
     color: #002C51;
+    text-align: start;
   }
 
 .planner-viewer-subtitle{
@@ -258,4 +261,99 @@
   margin-bottom: 0px;
 }
 
-  
+.lock-box{
+float: left;
+margin-top: 23px;
+margin-left: 6px;
+}
+
+.client-form-info{
+  margin-top: 116px;
+}
+
+
+ 
+.client-form-button{
+  color: #ffffff !important;
+  background-color: '#002C51';
+  font-family: 'Montserrat';
+  font-size: 13;
+  font-weight: 600; 
+  letter-spacing: '0.21em'; 
+  margin: '10px'; 
+}
+
+.client-form hr {
+  border:none;
+  height: 20px;
+ 	width: 90%;
+	height: 50px;
+	margin-top: 29px;
+	border-bottom: 1px solid #1f1209;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  margin: -50px auto 10px; 
+}
+
+.client-form-info-title{
+  font-family: 'Montserrat';
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+}
+
+.client-form-title-subtitle-text{
+  font-family: 'Montserrat';
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #216CA6 !important;
+    font-size: 13px;
+}
+
+.client-form-title-subtext-text{
+  font-family: 'Montserrat';
+  font-size: 16px;
+  font-style: oblique;
+  font-weight: 300;
+  color: #002c51;
+  letter-spacing: 0.13em;
+  }
+
+.client-form-time-text{
+  color: #000000 !important;
+  font-size: 16px !important;
+  text-align: left;
+  font-style: oblique;
+  font-family: 'Montserrat';
+  letter-spacing: 0.01em !important;
+  font-weight: 300 !important;
+}
+
+.client-form-corp{
+  font-weight: 300;
+  font-style: unset;
+  letter-spacing: 0.21em;
+  font-family: 'Montserrat';
+  margin-bottom: 9px;
+  color: #636363;
+}
+
+.client-form-edit-hint-title{
+  font-family: 'Montserrat';
+  font-size: 19px;
+  font-weight: 300;
+  letter-spacing: 0.21em;
+  color: #216CA6;
+}
+
+.client-form-fab{
+  font-size: 36px !important;
+  z-index: 3;
+}
+
+.client-footer{
+  margin-bottom: 6px !important;
+}
+
+
+

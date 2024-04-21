@@ -15,3 +15,9 @@ export const hubGreeting = (userName) =>{
     if(greetNow.hour >= 17 && greetNow.hour <= 23){ greeting = `Good Evening, ${userName}`; }
     return greeting
 }
+
+export const fetchPIN = () =>{
+    let PIN = Math.floor(100000 + Math.random() * 900000)
+    console.log("PIN fetch test:" + PIN);
+    return PIN
+}

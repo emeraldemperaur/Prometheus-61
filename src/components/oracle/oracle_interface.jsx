@@ -9,6 +9,7 @@ import { useState } from 'react';
 
 const OracleInterface = () => {
     document.body.style.backgroundColor = "#ffffff"
+    document.body.style.fontFamily = "Montserrat"
     const [staticModal, setStaticModal] = useState(false);
     const toggleOpen = () => setStaticModal(!staticModal);
 
