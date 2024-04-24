@@ -11,7 +11,7 @@ const TextAreaInput = (props) => {
             <><div className='w-100'></div></>
             :null}
     <MDBCol size={props.width}>
-    <MDBTextArea label={props.inputLabel} id={`${props.alias}FormInput`} aria-describedby={`${props.alias}InputLabel`}  
+    <MDBTextArea label={false} id={`${props.alias}FormInput`} aria-describedby={`${props.alias}InputLabel`}  
     placeholder={props.placeholder} defaultValue={props.defaultValue} rows={props.rows} readonly={props.readOnly}/>
                 <div id={`${props.alias}InputLabel`} className='form-text core-input-label'>
                     <p className='core-input-label-text'>{props.inputLabel}  
@@ -23,7 +23,12 @@ const TextAreaInput = (props) => {
                     </MDBTooltip>
                     </>
                     :null}
-                    </p>    
+                    </p>
+                    {props.errorText ?
+                        <>
+                        <p className='core-input-label-error'>{props.errorText}</p>
+                        </>
+                        : null}     
                 </div>
     </MDBCol> 
     </>

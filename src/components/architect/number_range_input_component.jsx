@@ -10,7 +10,7 @@ const NumberRangeInput = (props) => {
             <><div className='w-100'></div></>
             :null}
      <MDBCol size={props.width}>
-     <MDBRange label={props.inputLabel} id={`${props.alias}FormInput`} aria-describedby={`${props.alias}InputLabel`} min={props.min} max={props.max} step={props.step} 
+     <MDBRange label={false} id={`${props.alias}FormInput`} aria-describedby={`${props.alias}InputLabel`} min={props.min} max={props.max} step={props.step} 
      placeholder={props.placeholder} defaultValue={props.defaultValue} readOnly={props.readOnly} disabled={props.disabled}/>
                 <div id={`${props.alias}InputLabel`} className='form-text core-input-label'>
                     <p className='core-input-label-text'>{props.inputLabel}  
@@ -22,7 +22,12 @@ const NumberRangeInput = (props) => {
                     </MDBTooltip>
                     </>
                     :null}  
-                    </p>    
+                    </p>
+                    {props.errorText ?
+                        <>
+                        <p className='core-input-label-error'>{props.errorText}</p>
+                        </>
+                        : null}        
                 </div>
     </MDBCol> 
     </>

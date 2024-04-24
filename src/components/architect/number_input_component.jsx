@@ -10,7 +10,7 @@ const NumberInput = (props) => {
             <><div className='w-100'></div></>
             :null}
     <MDBCol size={props.width}>
-    <MDBInput label={props.inputLabel} id={`${props.alias}FormInput`} type='number' aria-describedby={`${props.alias}InputLabel`} 
+    <MDBInput label={false} id={`${props.alias}FormInput`} type='number' aria-describedby={`${props.alias}InputLabel`} 
     placeholder={props.placeholder} defaultValue={props.defaultValue} readonly={props.readOnly} min={props.min} max={props.max}/>
             <div id={`${props.alias}InputLabel`} className='form-text core-input-label'>
                 <p className='core-input-label-text'>{props.inputLabel}  
@@ -22,7 +22,12 @@ const NumberInput = (props) => {
                     </MDBTooltip>
                     </>
                 :null} 
-                </p>    
+                </p>
+                {props.errorText ?
+                        <>
+                        <p className='core-input-label-error'>{props.errorText}</p>
+                        </>
+                        : null}     
             </div>
     </MDBCol>
     </>

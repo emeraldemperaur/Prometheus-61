@@ -16,6 +16,16 @@
     text-decoration: none;
 }
 
+.core-input-label-error{
+    margin-top: -13px;
+    margin-bottom: 13px;
+    font-family: 'Montserrat';
+    color: #800020;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.13em;
+}
+
 .core-input-section-ribbon{
     background-color: #216cb5;
     border-radius: 0px;

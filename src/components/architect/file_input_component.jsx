@@ -13,7 +13,7 @@ const FileInput = (props) => {
          <MDBCol size={props.width}>
          <>
                     <MDBFile id={`${props.alias}FormInput`} multiple={props.multipleFiles} accept={props.fileTypes}
-                    readOnly={props.readOnly} disabled={props.disabled} label={props.inputLabel} aria-describedby={`${props.alias}InputLabel`}/>
+                    readOnly={props.readOnly} disabled={props.disabled} label={false} aria-describedby={`${props.alias}InputLabel`}/>
          </>
                     <div id={`${props.alias}InputLabel`} className='form-text core-input-label'>
                         <p className='core-input-label-text'>{props.inputLabel}  
@@ -25,7 +25,12 @@ const FileInput = (props) => {
                         </MDBTooltip>
                         </>
                         :null}  
-                        </p>    
+                        </p>
+                        {props.errorText ?
+                        <>
+                        <p className='core-input-label-error'>{props.errorText}</p>
+                        </>
+                        : null}      
                     </div>
         </MDBCol>
         </>

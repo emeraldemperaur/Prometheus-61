@@ -11,7 +11,7 @@ const DateTimeInput = (props) => {
             <><div className='w-100'></div></>
             :null}
     <MDBCol size={props.width}>
-    <MDBInput label={props.inputLabel} id={`${props.alias}FormInput`} type='datetime-local' aria-describedby={`${props.alias}InputLabel`} 
+    <MDBInput label={false} id={`${props.alias}FormInput`} type='datetime-local' aria-describedby={`${props.alias}InputLabel`} 
     placeholder={props.placeholder} defaultValue={props.defaultValue} readonly={props.readOnly}/>
                 <div id={`${props.alias}InputLabel`} className='form-text core-input-label'>
                     <p className='core-input-label-text'>{props.inputLabel}
@@ -23,7 +23,12 @@ const DateTimeInput = (props) => {
                     </MDBTooltip>
                     </>
                     :null}
-                    </p>    
+                    </p>
+                    {props.errorText ?
+                        <>
+                        <p className='core-input-label-error'>{props.errorText}</p>
+                        </>
+                        : null}       
                 </div>
     </MDBCol> 
     </>

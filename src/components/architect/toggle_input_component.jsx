@@ -26,7 +26,12 @@ const ToggleInput = (props) => {
                         </MDBTooltip>
                         </>
                         :null}  
-                        </p>    
+                        </p>
+                        {props.errorText ?
+                        <>
+                        <p className='core-input-label-error'>{props.errorText}</p>
+                        </>
+                        : null} 
                     </div>
         </MDBCol>
         </>

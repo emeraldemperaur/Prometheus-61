@@ -34,7 +34,7 @@ const DateRangeInput = (props) => {
                 <div className='element-container' ref={calendarRef}>
                 <div className='single-calendar-input'>
                     <MDBInput id={`${props.alias}FormInput`} multiple={props.multipleFiles} accept={props.fileTypes}
-                    readOnly={false} disabled={props.disabled} label={props.inputLabel} aria-describedby={`${props.alias}InputLabel`}
+                    readOnly={false} disabled={props.disabled} label={false} aria-describedby={`${props.alias}InputLabel`}
                     onClick={() => {setInputOpen(!inputOpen)}} value={`${formatDate.startDate} - ${formatDate.endDate}`}/>
                     <div style={{marginLeft: '-33px'}} className='dr-input-icon'>
                         <i className="fa-regular fa-calendar-days"></i>
@@ -59,7 +59,12 @@ const DateRangeInput = (props) => {
                         </MDBTooltip>
                         </>
                         :null}  
-                        </p>    
+                        </p>
+                        {props.errorText ?
+                        <>
+                        <p className='core-input-label-error'>{props.errorText}</p>
+                        </>
+                        : null}         
                     </div>
         </MDBCol>
     </>
