@@ -18,6 +18,12 @@ export const hubGreeting = (userName) =>{
 
 export const fetchPIN = () =>{
     let PIN = Math.floor(100000 + Math.random() * 900000)
-    console.log("PIN fetch test:" + PIN);
+    console.log("PIN fetched:" + PIN);
+    return PIN
+}
+
+export const fetchActionID = () =>{
+    let PIN = Math.floor(100000 + Math.random() * 900000)
+    console.log("Action ID:" + PIN);
     return PIN
 }

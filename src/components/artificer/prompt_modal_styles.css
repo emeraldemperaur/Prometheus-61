@@ -9,6 +9,10 @@
     background-color: #216CA6;
 }
 
+.client-prompt-modal-header{
+    background-color: #216ca6;
+}
+
 .form-hint{
     text-align: left;
 }
@@ -20,4 +24,18 @@
     letter-spacing: 0.13em;
     font-family: 'Montserrat';
     font-weight: 400;
+}
+
+.saved-modal-badge{
+    justify-self: center !important;
+    display: grid;
+    margin-top: 0px;
+}
+
+.saved-spinner-one{
+    background-color: #002c51 !important;
+}
+
+.saved-spinner-two{
+    background-color: #216ca6 !important;
 }

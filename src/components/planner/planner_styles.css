@@ -139,6 +139,14 @@
   font-weight: 400;
 }
 
+.planner-client-update-on{
+  font-size: 11px;
+  text-align: center;
+  margin-top: 6px;
+  letter-spacing: 0.13em;
+  font-weight: 400;
+}
+
 .planner-viewer-region{
   padding-top: 13px;
   font-size: 13px;
@@ -299,6 +307,22 @@ margin-left: 6px;
   font-size: 30px;
   font-weight: 500;
   letter-spacing: 0.10em;
+}
+
+.client-form-prompt-title{
+  font-family: 'Montserrat';
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  color: #002c51;
+  margin-top: -13px;
+}
+
+.client-form-prompt-corp{
+    font-size: 19px;
+    letter-spacing: 0.13em;
+    color: #216ca6;
+    font-weight: 400;
 }
 
 .client-form-title-subtitle-text{

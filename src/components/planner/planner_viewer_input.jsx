@@ -84,10 +84,10 @@ const PlannerViewerInput = (props) => {
                         placeholder={'1-100'} defaultValue={''} readOnly={true} isHinted={true} hintLink={null} 
                         hintText={'This is test hint text content for Number Input Element 1'} min={null} max={100} errorText={'This field is required'}/>
                         <DateInput newRow={false} width={4} alias={'dateInput1'} inputLabel={'Date Input Element 1'} type={'time'} 
-                        placeholder={''} defaultValue={''} readOnly={false} isHinted={true} hintLink={'www.mekaegwim.ca'} 
+                        placeholder={''} defaultValue={''} readOnly={true} isHinted={true} hintLink={'www.mekaegwim.ca'} 
                         hintText={'This is test hint text content for Date Input Element 1'} errorText={'This field is required'}/>
                         <DateTimeInput newRow={false} width={4} alias={'datetimeInput1'} inputLabel={'Date Time Input Element 1'} type={'time'} 
-                        placeholder={''} defaultValue={''} readOnly={false} isHinted={true} hintLink={'www.mekaegwim.ca/portfolio'} 
+                        placeholder={''} defaultValue={''} readOnly={true} isHinted={true} hintLink={'www.mekaegwim.ca/portfolio'} 
                         hintText={'This is test hint text content for Date Time Input Element 1'} errorText={'This field is required'}/>
                         <TimeInput newRow={false} width={4} alias={'timeInput1'} inputLabel={'Time Input Element 1'} type={'time'} 
                         placeholder={''} defaultValue={''} readOnly={true} isHinted={true} hintLink={'www.mekaegwim.ca/portfolio'} 
@@ -96,19 +96,19 @@ const PlannerViewerInput = (props) => {
                         placeholder={'This is test text content for Text Area Input Element 1'} defaultValue={''} readOnly={true} isHinted={true} hintLink={'www.mekaegwim.ca/portfolio'} 
                         hintText={'This is test hint text content for Text Area Input Element 1'} errorText={'This field is required'} rows={4}/>
                         <NumberInput newRow={true} width={6} alias={'numberInput2'} inputLabel={'Number Input Element 2'} type={null}
-                        placeholder={'USD$ 1-1000'} defaultValue={''} readOnly={false} isHinted={true} hintLink={null} 
+                        placeholder={'USD$ 1-1000'} defaultValue={''} readOnly={true} isHinted={true} hintLink={null} 
                         hintText={'This is test hint text content for Number Input Element 2'} errorText={'This field is required'} min={50} max={100}/>
                         <NumberInput newRow={false} width={6} alias={'numberInput3'} inputLabel={'Number Input Element 3'} type={'month'}
                         placeholder={'1-100'} defaultValue={''} readOnly={true} isHinted={true} hintLink={null} 
                         hintText={'This is test hint text content for Number Input Element 3'} errorText={'This field is required'} min={1} max={100}/>
                         <NumberRangeInput newRow={true} width={12} alias={'numberRangeInput1'} inputLabel={'Number Range Input Element 1'} type={'month'}
-                        placeholder={'50-100'} defaultValue={''} readOnly={true} isHinted={true} hintLink={null} 
-                        hintText={'This is test hint text content for Number Range Input Element 1'} errorText={'This field is required'} min={50} max={100} step={0.01} disabled={false}/>
+                        placeholder={'50-100'} defaultValue={''} readOnly={true} isHinted={true} hintLink={null}
+                        hintText={'This is test hint text content for Number Range Input Element 1'} errorText={'This field is required'} min={50} max={100} step={0.01} disabled={true}/>
                         <NumberInput newRow={true} width={8} alias={'numberInput4'} inputLabel={'Number Input Element 4'} type={'month'}
-                        placeholder={'1-100%'} defaultValue={69} readOnly={false} isHinted={true} hintLink={null} 
+                        placeholder={'1-100%'} defaultValue={69} readOnly={true} isHinted={true} hintLink={null} 
                         hintText={'This is test hint text content for Number Input Element 4'} errorText={'This field is required'} min={1} max={100}/>
                         <NumberInput newRow={false} width={4} alias={'numberInput5'} inputLabel={'Number Input Element 5'} type={'month'}
-                        placeholder={''} defaultValue={''} readOnly={false} isHinted={false} hintLink={null} 
+                        placeholder={''} defaultValue={''} readOnly={true} isHinted={false} hintLink={null} 
                         hintText={'This is test hint text content for Number Input Element 5'} errorText={'This field is required'} min={0} max={100}/>
                         </MDBRow>
                     </MDBAccordionItem>
@@ -142,7 +142,7 @@ const PlannerViewerInput = (props) => {
                         hintText={'This is test hint text content for Radio Input Element 1'} errorText={'This field is required'}
                         optionsList={[{id:"1", text:"Dashboard"}, {id:"2", text:"Company Profiles"}, {id:"3", text:"Query Models"}, {id:"4", text:"Plan Forms"}, {id:"5", text:"Insight Models"}]}/>
                         <ToggleInput newRow={true} width={4} alias={'toggleInput1'} inputLabel={'Toggle Input Element 1'} type={'text'} 
-                        placeholder={' '} defaultValue={true} readOnly={true} disabled={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
+                        placeholder={' '} defaultValue={false} readOnly={true} disabled={true} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
                         hintText={'This is test hint text content for Toggle Input Element 1'} errorText={'This field is required'}/>
                         <ToggledInput newRow={false} width={4} alias={'toggledInput1'} inputLabel={'Toggled Input Element 1'} type={'text'} 
                         toggledInputWidth={4} toggledInputElement={<TextInput newRow={true} width={12} alias={'toggledTextInput1'} inputLabel={'Toggled Text Input Element 1'} type={'text'} 
@@ -166,10 +166,10 @@ const PlannerViewerInput = (props) => {
                         placeholder={'Date Range Input Element 1'} defaultValue={''} readOnly={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
                         hintText={'This is test hint text content for Date Range Input Element 1'} errorText={'This field is required'}/>
                         <DateRangeInput newRow={false} width={4} alias={'daterangeInput2'} inputLabel={'Date Range Input Element 2'} type={'text'} 
-                        placeholder={'Date Range Input Element 2'} defaultValue={'daterangeInput2'} readOnly={false} isHinted={false} hintLink={'https://mekaegwim.ca/portfolio'} 
+                        placeholder={'Date Range Input Element 2'} defaultValue={'daterangeInput2'} readOnly={true} isHinted={false} hintLink={'https://mekaegwim.ca/portfolio'} 
                         hintText={'This is test hint text content for Date Range Input Element 2'} errorText={'This field is required'}/>
                         <DateRangeInput newRow={false} width={4} alias={'daterangeInput3'} inputLabel={'Date Range Input Element 3'} type={'text'} 
-                        placeholder={'Date Range Input Element 3'} defaultValue={'daterangeInput3'} readOnly={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
+                        placeholder={'Date Range Input Element 3'} defaultValue={'daterangeInput3'} readOnly={true} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
                         hintText={'This is test hint text content for Date Range Input Element 3'} errorText={'This field is required'}/>
                         </MDBRow>
                     </MDBAccordionItem>
@@ -187,10 +187,10 @@ const PlannerViewerInput = (props) => {
             placeholder={'1-100'} defaultValue={''} readOnly={true} isHinted={true} hintLink={null} 
             hintText={'This is test hint text content for Number Input Element 1'} errorText={'This field is required'} min={null} max={100}/>
             <DateInput newRow={false} width={4} alias={'dateInput1'} inputLabel={'Date Input Element 1'} type={'time'} 
-            placeholder={''} defaultValue={''} readOnly={false} isHinted={true} hintLink={'www.mekaegwim.ca'} 
+            placeholder={''} defaultValue={''} readOnly={true} isHinted={true} hintLink={'www.mekaegwim.ca'} 
             hintText={'This is test hint text content for Date Input Element 1'} errorText={'This field is required'}/>
             <DateTimeInput newRow={false} width={4} alias={'datetimeInput1'} inputLabel={'Date Time Input Element 1'} type={'time'} 
-            placeholder={''} defaultValue={''} readOnly={false} isHinted={true} hintLink={'www.mekaegwim.ca/portfolio'} 
+            placeholder={''} defaultValue={''} readOnly={true} isHinted={true} hintLink={'www.mekaegwim.ca/portfolio'} 
             hintText={'This is test hint text content for Date Time Input Element 1'} errorText={'This field is required'}/>
             <TimeInput newRow={false} width={4} alias={'timeInput1'} inputLabel={'Time Input Element 1'} type={'time'} 
             placeholder={''} defaultValue={''} readOnly={true} isHinted={true} hintLink={'www.mekaegwim.ca/portfolio'} 
@@ -199,19 +199,19 @@ const PlannerViewerInput = (props) => {
             placeholder={'This is test text content for Text Area Input Element 1'} defaultValue={''} readOnly={true} isHinted={true} hintLink={'www.mekaegwim.ca/portfolio'} 
             hintText={'This is test hint text content for Text Area Input Element 1'} errorText={'This field is required'} rows={4}/>
             <NumberInput newRow={true} width={6} alias={'numberInput2'} inputLabel={'Number Input Element 2'} type={null}
-            placeholder={'USD$ 1-1000'} defaultValue={''} readOnly={false} isHinted={true} hintLink={null} 
+            placeholder={'USD$ 1-1000'} defaultValue={''} readOnly={true} isHinted={true} hintLink={null} 
             hintText={'This is test hint text content for Number Input Element 2'} errorText={'This field is required'} min={50} max={100}/>
             <NumberInput newRow={false} width={6} alias={'numberInput3'} inputLabel={'Number Input Element 3'} type={'month'}
             placeholder={'1-100'} defaultValue={''} readOnly={true} isHinted={true} hintLink={null} 
             hintText={'This is test hint text content for Number Input Element 3'} errorText={'This field is required'} min={1} max={100}/>
             <NumberRangeInput newRow={true} width={12} alias={'numberRangeInput1'} inputLabel={'Number Range Input Element 1'} type={'month'}
             placeholder={'50-100'} defaultValue={''} readOnly={true} isHinted={true} hintLink={null} 
-            hintText={'This is test hint text content for Number Range Input Element 1'} errorText={'This field is required'} min={50} max={100} step={0.01} disabled={false}/>
+            hintText={'This is test hint text content for Number Range Input Element 1'} errorText={'This field is required'} min={50} max={100} step={0.01} disabled={true}/>
             <NumberInput newRow={true} width={8} alias={'numberInput4'} inputLabel={'Number Input Element 4'} type={'month'}
-            placeholder={'1-100%'} defaultValue={69} readOnly={false} isHinted={true} hintLink={null} 
+            placeholder={'1-100%'} defaultValue={69} readOnly={true} isHinted={true} hintLink={null} 
             hintText={'This is test hint text content for Number Input Element 4'} errorText={'This field is required'} min={1} max={100}/>
             <NumberInput newRow={false} width={4} alias={'numberInput5'} inputLabel={'Number Input Element 5'} type={'month'}
-            placeholder={''} defaultValue={''} readOnly={false} isHinted={false} hintLink={null} 
+            placeholder={''} defaultValue={''} readOnly={true} isHinted={false} hintLink={null} 
             hintText={'This is test hint text content for Number Input Element 5'} errorText={'This field is required'} min={0} max={100}/>
             <SectionTitle sectionIcon={'fa-solid fa-feather'} sectionTitle={'Omega Section'}/>
             <TextInput newRow={false} width={4} alias={'textInput2'} inputLabel={'Text Input Element 2'} type={'month'}
@@ -256,13 +256,13 @@ const PlannerViewerInput = (props) => {
             placeholder={'File Input Element 2'} defaultValue={true} readOnly={true} disabled={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
             hintText={'This is test hint text content for File Input Element 2'} errorText={'This field is required'}/>
             <DateRangeInput newRow={false} width={4} alias={'daterangeInput1'} inputLabel={'Date Range Input Element 1'} type={'text'} 
-            placeholder={'Date Range Input Element 1'} defaultValue={''} readOnly={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
+            placeholder={'Date Range Input Element 1'} defaultValue={''} readOnly={true} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
             hintText={'This is test hint text content for Date Range Input Element 1'} errorText={'This field is required'}/>
             <DateRangeInput newRow={false} width={4} alias={'daterangeInput2'} inputLabel={'Date Range Input Element 2'} type={'text'} 
-            placeholder={'Date Range Input Element 2'} defaultValue={'daterangeInput2'} readOnly={false} isHinted={false} hintLink={'https://mekaegwim.ca/portfolio'} 
+            placeholder={'Date Range Input Element 2'} defaultValue={'daterangeInput2'} readOnly={true} isHinted={false} hintLink={'https://mekaegwim.ca/portfolio'} 
             hintText={'This is test hint text content for Date Range Input Element 2'} errorText={'This field is required'}/>
             <DateRangeInput newRow={false} width={4} alias={'daterangeInput3'} inputLabel={'Date Range Input Element 3'} type={'text'} 
-            placeholder={'Date Range Input Element 3'} defaultValue={'daterangeInput3'} readOnly={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
+            placeholder={'Date Range Input Element 3'} defaultValue={'daterangeInput3'} readOnly={true} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
             hintText={'This is test hint text content for Date Range Input Element 3'} errorText={'This field is required'}/>
             </MDBRow>
             </>}
