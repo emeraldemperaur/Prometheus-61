@@ -25,6 +25,7 @@ import '../planner/planner_client_styles.css';
 import SaveActionModal from '../artificer/save_modal_component';
 import { tr } from 'date-fns/locale';
 import SubmitActionModal from '../artificer/submit_modal_component';
+import ClientPromptModal from '../artificer/client_prompt_modal_component';
 
 
 
@@ -38,6 +39,7 @@ const PlannerClientInterface = ({planRecord}) => {
     const [isLoading, setIsLoading] = useState(true);
     const [actionComplete, setActionComplete] = useState(false);
     const [saveTogglePromptModal, setSaveTogglePromptModal] = useState(false);
+    const [confirmTogglePromptModal, setConfirmTogglePromptModal] = useState(false);
     const [submitTogglePromptModal, setSubmitTogglePromptModal] = useState(false);
 
     const toggleStackView = () => {
@@ -52,11 +54,8 @@ const PlannerClientInterface = ({planRecord}) => {
         }, 0);   
     }
     const submitDetails = () => {
-        setSubmitTogglePromptModal(!submitTogglePromptModal);
-        setTimeout(() => {
-            setActionComplete(false);
-            console.log(`Submitting Plan Details`)  
-        }, 0);
+        setConfirmTogglePromptModal(!confirmTogglePromptModal);
+        setActionComplete(true);
     }
     const saveOrSubmitDetails = () => {
         console.log(`Saving or Submitting Plan Details`)   
@@ -388,9 +387,28 @@ const PlannerClientInterface = ({planRecord}) => {
                 <SaveActionModal title={'Saving Details...'} icon="save" size="lg" isCompleted={false}
                     togglePromptModal={saveTogglePromptModal} setTogglePromptModal={setSaveTogglePromptModal} scrollable={false} 
                     productPlan={planRecord.productPlanName} corpName={planRecord.companyName}/>
-                <SubmitActionModal title="Submitting Details..." icon="paper-plane" size="lg" isCompleted={false}
+                {planRecord.status == 3 ?
+                        <>
+                        <ClientPromptModal title="Resubmitting Details..." icon="paper-plane" size="lg" staticModal={submitTogglePromptModal} setStaticModal={setSubmitTogglePromptModal}
+                        togglePromptModal={confirmTogglePromptModal} setTogglePromptModal={setConfirmTogglePromptModal} scrollable={false} 
+                        productPlan={planRecord.productPlanName} corpName={planRecord.companyName}
+                        />
+                        <SubmitActionModal title="Resubmitting Details..." icon="upload" size="lg" isCompleted={false}
                     togglePromptModal={submitTogglePromptModal} setTogglePromptModal={setSubmitTogglePromptModal} scrollable={false} 
                     productPlan={planRecord.productPlanName} corpName={planRecord.companyName}/>
+                        </>
+                        :
+                        <>
+                        <ClientPromptModal title="Submitting Details..." icon="paper-plane" size="lg" staticModal={submitTogglePromptModal} setStaticModal={setSubmitTogglePromptModal}
+                        togglePromptModal={confirmTogglePromptModal} setTogglePromptModal={setConfirmTogglePromptModal} scrollable={false} 
+                        productPlan={planRecord.productPlanName} corpName={planRecord.companyName}
+                        />
+                        <SubmitActionModal title="Submitting Details..." icon="paper-plane" size="lg" isCompleted={false}
+                    togglePromptModal={submitTogglePromptModal} setTogglePromptModal={setSubmitTogglePromptModal} scrollable={false} 
+                    productPlan={planRecord.productPlanName} corpName={planRecord.companyName}/> 
+                        
+                        </>}
+                
 
         </MDBRow>
     <div className="client-form-fab fab-btn" onClick={() => saveOrSubmitDetails()}> ✔ </div>

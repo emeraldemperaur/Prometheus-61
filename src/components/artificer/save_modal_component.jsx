@@ -22,7 +22,7 @@ const SaveActionModal = ({title, icon, size, isCompleted, togglePromptModal, set
     
     return(
     <>
-    <MDBModal key={fetchActionID()} staticBackdrop tabIndex='-1' open={togglePromptModal} setOpen={setTogglePromptModal}>
+    <MDBModal key={currentTime()} staticBackdrop tabIndex='-1' open={togglePromptModal} setOpen={setTogglePromptModal}>
         <MDBModalDialog scrollable={scrollable} centered size={size}>
             <MDBModalContent>
                 <MDBModalHeader className='client-prompt-modal-header'>
