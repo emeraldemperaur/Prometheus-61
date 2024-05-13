@@ -14,8 +14,8 @@ const RadioInput = (props) => {
          {props.optionsList ?
                 <>
                 { props.optionsList.map( optionItem => (
-                                            <MDBRadio name={props.alias} key={optionItem.id} id={`${props.alias}${optionItem.id}FormInput`} value={optionItem.text} label={optionItem.text} 
-                                            aria-describedby={`${props.alias}InputLabel`} readOnly={props.readOnly} disabled={props.disabled} inline />
+                                            <MDBRadio key={optionItem.id} id={`${props.alias}${optionItem.id}FormInput`} name={`${props.alias}`} value={optionItem.text} label={optionItem.text} 
+                                            onChange={props.onChange} aria-describedby={`${props.alias}InputLabel`} readOnly={props.readOnly} disabled={props.disabled} inline />
                                             ))}
                 </>
                 :null}

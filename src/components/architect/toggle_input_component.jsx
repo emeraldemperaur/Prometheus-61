@@ -13,8 +13,8 @@ const ToggleInput = (props) => {
          <MDBCol size={props.width}>
          <>
          <div id={`${props.alias}Label`} className='form-text form-hint'>{props.placeholder}</div>
-                    <label className="switch switch-input-label"><input id={`${props.alias}FormInput`} type="checkbox" aria-describedby={`${props.alias}InputLabel`}
-                    readOnly={props.readOnly} disabled={props.disabled} defaultChecked={props.defaultValue}/><span className="slider round"></span></label>
+                    <label className="switch switch-input-label"><input id={`${props.alias}FormInput`} name={`${props.alias}`} type="checkbox" aria-describedby={`${props.alias}InputLabel`}
+                    readOnly={props.readOnly} disabled={props.disabled} defaultChecked={props.defaultValue} value={props.value} onChange={props.onChange}/><span className="slider round"></span></label>
          </>
                     <div id={`${props.alias}InputLabel`} className='form-text core-input-label'>
                         <p className='core-input-label-text'>{props.inputLabel}  

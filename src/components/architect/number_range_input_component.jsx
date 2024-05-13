@@ -10,8 +10,8 @@ const NumberRangeInput = (props) => {
             <><div className='w-100'></div></>
             :null}
      <MDBCol size={props.width}>
-     <MDBRange label={false} id={`${props.alias}FormInput`} aria-describedby={`${props.alias}InputLabel`} min={props.min} max={props.max} step={props.step} 
-     placeholder={props.placeholder} defaultValue={props.defaultValue} readOnly={props.readOnly} disabled={props.disabled}/>
+     <MDBRange label={false} id={`${props.alias}FormInput`} name={`${props.alias}`} aria-describedby={`${props.alias}InputLabel`} min={props.min} max={props.max} step={props.step} 
+     placeholder={props.placeholder} defaultValue={props.defaultValue} value={props.value} onChange={props.onChange} readOnly={props.readOnly} disabled={props.disabled}/>
                 <div id={`${props.alias}InputLabel`} className='form-text core-input-label'>
                     <p className='core-input-label-text'>{props.inputLabel}  
                     {props.isHinted ?

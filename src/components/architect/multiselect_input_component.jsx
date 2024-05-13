@@ -12,8 +12,8 @@ const MultiSelectInput = (props) => {
                 <><div className='w-100'></div></>
                 :null}
          <MDBCol size={props.width}>
-         <Form.Select multiple={true} label={props.inputLabel} id={`${props.alias}FormInput`} aria-describedby={`${props.alias}InputLabel`} 
-         placeholder={props.placeholder} defaultValue={props.defaultValue} readOnly={props.readOnly} disabled={props.disabled}>
+         <Form.Select multiple={true} label={props.inputLabel} id={`${props.alias}FormInput`} name={`${props.alias}`} aria-describedby={`${props.alias}InputLabel`} 
+         placeholder={props.placeholder} defaultValue={props.defaultValue} value={props.value} onChange={props.onChange} readOnly={props.readOnly} disabled={props.disabled}>
           <option></option>
           {props.optionsList ?
                 <>

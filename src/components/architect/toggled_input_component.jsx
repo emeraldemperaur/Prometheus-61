@@ -17,9 +17,9 @@ const ToggledInput = (props) => {
          <MDBCol size={props.width}>
          <>
          <div id={`${props.alias}Label`} className='form-text form-hint'>{props.placeholder}</div>
-                    <label className="switch switch-input-label"><input id={`${props.alias}FormInput`} aria-describedby={`${props.alias}InputLabel`} 
-                    type="checkbox" onClick={()=>{inputCollapse()}}
-                    readOnly={props.readOnly} disabled={props.disabled} defaultChecked={props.defaultValue}/><span className="slider round"></span></label>
+                    <label className="switch switch-input-label"><input id={`${props.alias}FormInput`} name={`${props.alias}`} aria-describedby={`${props.alias}InputLabel`} 
+                    type="checkbox" onClick={()=>{inputCollapse()}} onChange={props.onChange}
+                    readOnly={props.readOnly} disabled={props.disabled} defaultChecked={props.defaultValue} value={props.value}/><span className="slider round"></span></label>
          </>
                     <div id={`${props.alias}InputLabel`} className='form-text core-input-label'>
                         <p className='core-input-label-text'>{props.inputLabel}  

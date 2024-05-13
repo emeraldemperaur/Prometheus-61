@@ -11,8 +11,8 @@ const DateTimeInput = (props) => {
             <><div className='w-100'></div></>
             :null}
     <MDBCol size={props.width}>
-    <MDBInput label={false} id={`${props.alias}FormInput`} type='datetime-local' aria-describedby={`${props.alias}InputLabel`} 
-    placeholder={props.placeholder} defaultValue={props.defaultValue} readonly={props.readOnly}/>
+    <MDBInput label={false} id={`${props.alias}FormInput`} name={`${props.alias}`} type='datetime-local' aria-describedby={`${props.alias}InputLabel`} 
+    placeholder={props.placeholder} defaultValue={props.defaultValue} value={props.value} onChange={props.onChange} readonly={props.readOnly}/>
                 <div id={`${props.alias}InputLabel`} className='form-text core-input-label'>
                     <p className='core-input-label-text'>{props.inputLabel}
                     {props.isHinted ?

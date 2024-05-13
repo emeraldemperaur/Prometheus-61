@@ -33,9 +33,9 @@ const DateRangeInput = (props) => {
             <div className='dr-input-container'>
                 <div className='element-container' ref={calendarRef}>
                 <div className='single-calendar-input'>
-                    <MDBInput id={`${props.alias}FormInput`} multiple={props.multipleFiles} accept={props.fileTypes}
+                    <MDBInput id={`${props.alias}FormInput`} name={`${props.alias}`} multiple={props.multipleFiles} accept={props.fileTypes}
                     readOnly={false} disabled={props.disabled} label={false} aria-describedby={`${props.alias}InputLabel`}
-                    onClick={() => {setInputOpen(!inputOpen)}} value={`${formatDate.startDate} - ${formatDate.endDate}`}/>
+                    onClick={() => {setInputOpen(!inputOpen)}} value={`${formatDate.startDate} - ${formatDate.endDate}`} onChange={props.onChange}/>
                     <div style={{marginLeft: '-33px'}} className='dr-input-icon'>
                         <i className="fa-regular fa-calendar-days"></i>
                     </div>
