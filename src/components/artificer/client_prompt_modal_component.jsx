@@ -1,10 +1,10 @@
 import '../artificer/prompt_modal_styles.css'
 import { MDBBtn, MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBModalBody, MDBModalFooter, MDBIcon, MDBCol, MDBRow, MDBInput } from 'mdb-react-ui-kit';
 
-const ClientPromptModal = ({title, size, setStaticModal, icon, staticModal, togglePromptModal, setTogglePromptModal, scrollable, productPlan, corpName, onClickFunc}) => {
+const ClientPromptModal = ({title, size, setStaticModal, icon, staticModal, togglePromptModal, setTogglePromptModal, scrollable, productPlan, corpName, id, onClickFunc}) => {
     return(
     <>
-    <MDBModal staticBackdrop tabIndex='-1' open={togglePromptModal} setOpen={setTogglePromptModal}>
+    <MDBModal key={id} staticBackdrop tabIndex='-1' open={togglePromptModal} setOpen={setTogglePromptModal}>
         <MDBModalDialog scrollable={scrollable} centered size={size}>
             <MDBModalContent>
                 <MDBModalHeader className='prompt-modal-header'>

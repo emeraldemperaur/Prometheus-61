@@ -26,7 +26,7 @@ import SaveActionModal from '../artificer/save_modal_component';
 import { tr } from 'date-fns/locale';
 import SubmitActionModal from '../artificer/submit_modal_component';
 import ClientPromptModal from '../artificer/client_prompt_modal_component';
-import { Formik } from 'formik';
+import { Formik, useFormikContext } from 'formik';
 
 
 
@@ -79,6 +79,7 @@ const PlannerClientInterface = ({planRecord}) => {
     <>
     
     <Formik
+    
     initialValues={{
         textInput1: '',
         numberInput1: '',
@@ -108,6 +109,12 @@ const PlannerClientInterface = ({planRecord}) => {
         daterangeInput3:'',
 
     }}
+    validate={values =>{
+        console.log(`Validating: ${values}`)
+    }}
+    onSubmit={(values) => {
+        console.log(`Submitting: ${values}`)
+    }}
     >  
     {
             ({values,
@@ -118,6 +125,7 @@ const PlannerClientInterface = ({planRecord}) => {
               handleSubmit,
               isSubmitting,}) => (
           <>
+           <form onSubmit={handleSubmit}>
            <MDBRow>
             <ClientNavigatorMenu platformName={planRecord.enquiryPlatformName}/>
             
@@ -163,21 +171,21 @@ const PlannerClientInterface = ({planRecord}) => {
                     <div className='client-form-actions'>
                    
                         <MDBBtn className='client-form-button' style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 13, fontWeight: 600, letterSpacing: '0.21em', margin: '10px' }} 
-                        onClick={() => saveDetails()}>
+                        onClick={() => saveDetails()} type='submit'>
                             <MDBIcon icon='save' />  SAVE DETAILS&nbsp;&nbsp;&nbsp;&nbsp;
                         </MDBBtn>
                         <>
                         {planRecord.status == 3 ?
                         <>
                         <MDBBtn className='client-form-button' style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 13, fontWeight: 600, letterSpacing: '0.21em', margin: '10px' }} 
-                        onClick={() => submitDetails()}>
+                        onClick={() => submitDetails()} type='submit'>
                             <i class="fa-solid fa-upload"></i>  RESUBMIT FORM&nbsp;
                         </MDBBtn>
                         </>
                         :
                         <>
                         <MDBBtn className='client-form-button' style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 13, fontWeight: 600, letterSpacing: '0.21em', margin: '10px' }} 
-                        onClick={() => submitDetails()}>
+                        onClick={() => submitDetails()} type='submit'>
                             <MDBIcon  icon='paper-plane' />  COMPLETE FORM
                         </MDBBtn>
                         </>}
@@ -291,21 +299,21 @@ const PlannerClientInterface = ({planRecord}) => {
                         hintText={'This is test hint text content for MultiSelect Input Element 1'} errorText={''}
                         optionsList={[{id:"1", text:"Dashboard"}, {id:"2", text:"Company Profiles"}, {id:"3", text:"Query Models"}, {id:"4", text:"Plan Forms"}, {id:"5", text:"Insight Models"}]}/>
                         <CheckboxInput newRow={true} width={12} alias={'checkboxInput1'} inputLabel={'CheckBox Input Element 1'} type={'text'} 
-                        placeholder={'Checkbox Input Element 1'} value={values.checkboxInput1} onChange={handleChange} defaultValue={[{id:"0", text:""}]} readOnly={false} disabled={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
+                        placeholder={'Checkbox Input Element 1'} value={values.checkboxInput1} onChange={handleChange} onBlur={handleBlur} readOnly={true} disabled={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
                         hintText={'This is test hint text content for Checkbox Input Element 1'} errorText={''}
                         optionsList={[{id:"1", text:"Dashboard"}, {id:"2", text:"Company Profiles"}, {id:"3", text:"Query Models"}, {id:"4", text:"Plan Forms"}, {id:"5", text:"Insight Models"}]}/>
                         <RadioInput newRow={true} width={12} alias={'radioInput1'} inputLabel={'Radio Input Element 1'} type={'text'} 
-                        placeholder={'Radio Input Element 1'} value={values.radioInput1} onChange={handleChange} defaultValue={[{id:"0", text:""}]} readOnly={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
+                        placeholder={'Radio Input Element 1'} value={values.radioInput1} onChange={handleChange} onBlur={handleBlur} readOnly={true} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
                         hintText={'This is test hint text content for Radio Input Element 1'} errorText={''}
                         optionsList={[{id:"1", text:"Dashboard"}, {id:"2", text:"Company Profiles"}, {id:"3", text:"Query Models"}, {id:"4", text:"Plan Forms"}, {id:"5", text:"Insight Models"}]}/>
                         <ToggleInput newRow={true} width={4} alias={'toggleInput1'} inputLabel={'Toggle Input Element 1'} type={'text'} 
-                        placeholder={' '} value={values.toggleInput1} onChange={handleChange} defaultValue={true} readOnly={false} disabled={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
+                        placeholder={' '} value={values.toggleInput1} onChange={handleChange} onBlur={handleBlur} readOnly={true} disabled={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
                         hintText={'This is test hint text content for Toggle Input Element 1'} errorText={''}/>
                         <ToggledInput newRow={false} width={4} alias={'toggledInput1'} inputLabel={'Toggled Input Element 1'} type={'text'} 
                         toggledInputWidth={4} toggledInputElement={<TextInput newRow={true} width={12} alias={'toggledTextInput1'} inputLabel={'Toggled Text Input Element 1'} type={'text'} 
                         placeholder={'Toggled Text Input'} value={values.toggledTextInput1} onChange={handleChange} readOnly={false} isHinted={true} hintLink={'https://mekaegwim.ca/'} 
                         hintText={'This is test hint text content for Toggled Text Input Element 1'} errorText={''}/>}
-                        placeholder={' '} value={values.toggledInput1} onChange={handleChange} readOnly={false} disabled={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
+                        placeholder={' '} value={values.toggledInput1} onChange={handleChange} onBlur={handleBlur} readOnly={false} disabled={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
                         hintText={'This is test hint text content for Toggled Text Input Element 1'} errorText={''}/>
                         </MDBRow>
                     </MDBAccordionItem>
@@ -335,6 +343,7 @@ const PlannerClientInterface = ({planRecord}) => {
             </>
             :
             <>
+           
             <MDBRow className="input-codex-box">
             <SectionTitle sectionIcon={'fa-solid fa-dumpster-fire'} sectionTitle={'Alpha Section'}/>
             <TextInput newRow={false} width={4} alias={'textInput1'} inputLabel={'Text Input Element 1'} type={'text'} 
@@ -389,21 +398,21 @@ const PlannerClientInterface = ({planRecord}) => {
             hintText={'This is test hint text content for MultiSelect Input Element 1'} errorText={''}
             optionsList={[{id:"1", text:"Dashboard"}, {id:"2", text:"Company Profiles"}, {id:"3", text:"Query Models"}, {id:"4", text:"Plan Forms"}, {id:"5", text:"Insight Models"}]}/>
             <CheckboxInput newRow={true} width={12} alias={'checkboxInput1'} inputLabel={'CheckBox Input Element 1'} type={'text'} 
-            placeholder={'Checkbox Input Element 1'} value={values.checkboxInput1} onChange={handleChange} defaultValue={[{id:"0", text:""}]} readOnly={false} disabled={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
+            placeholder={'Checkbox Input Element 1'} value={values.checkboxInput1} onChange={handleChange} onBlur={handleBlur} readOnly={false} disabled={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
             hintText={'This is test hint text content for Checkbox Input Element 1'} errorText={''}
             optionsList={[{id:"1", text:"Dashboard"}, {id:"2", text:"Company Profiles"}, {id:"3", text:"Query Models"}, {id:"4", text:"Plan Forms"}, {id:"5", text:"Insight Models"}]}/>
             <RadioInput newRow={true} width={12} alias={'radioInput1'} inputLabel={'Radio Input Element 1'} type={'text'} 
-            placeholder={'Radio Input Element 1'} value={values.radioInput1} onChange={handleChange} defaultValue={[{id:"0", text:""}]} readOnly={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
+            placeholder={'Radio Input Element 1'} value={values.radioInput1} onChange={handleChange} onBlur={handleBlur} readOnly={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
             hintText={'This is test hint text content for Radio Input Element 1'} errorText={''}
             optionsList={[{id:"1", text:"Dashboard"}, {id:"2", text:"Company Profiles"}, {id:"3", text:"Query Models"}, {id:"4", text:"Plan Forms"}, {id:"5", text:"Insight Models"}]}/>
             <ToggleInput newRow={true} width={4} alias={'toggleInput1'} inputLabel={'Toggle Input Element 1'} type={'text'} 
-            placeholder={' '} value={values.toggleInput1} onChange={handleChange} defaultValue={true} readOnly={false} disabled={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
+            placeholder={' '} value={values.toggleInput1} onChange={handleChange} onBlur={handleBlur} defaultValue={false} readOnly={false} disabled={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
             hintText={'This is test hint text content for Toggle Input Element 1'} errorText={''}/>
             <ToggledInput newRow={false} width={4} alias={'toggledInput1'} inputLabel={'Toggled Input Element 1'} type={'text'} 
             toggledInputWidth={4} toggledInputElement={<TextInput newRow={true} width={12} alias={'toggledTextInput1'} inputLabel={'Toggled Text Input Element 1'} type={'text'} 
             placeholder={'Toggled Text Input'} value={values.toggledTextInput1} onChange={handleChange} readOnly={false} isHinted={true} hintLink={'https://mekaegwim.ca/'} 
             hintText={'This is test hint text content for Toggled Text Input Element 1'} errorText={''}/>}
-            placeholder={' '} value={values.toggledInput1} onChange={handleChange} readOnly={false} disabled={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
+            placeholder={' '} value={values.toggledInput1} onChange={handleChange} onBlur={handleBlur} readOnly={false} disabled={false} isHinted={true} hintLink={'https://mekaegwim.ca/portfolio'} 
             hintText={'This is test hint text content for Toggled Text Input Element 1'} errorText={''}/>
             <SectionTitle sectionIcon={'fa-solid fa-icons'} sectionTitle={'Epsilon Section'}/>
             <FileInput newRow={false} width={6} alias={'fileInput1'} inputLabel={'File Input Element 1'} type={'text'} multipleFiles={true} fileTypes={'.pdf,.doc,.docx,.xlsx'}
@@ -431,37 +440,37 @@ const PlannerClientInterface = ({planRecord}) => {
 
                 <SaveActionModal title={'Saving Details...'} icon="save" size="lg" isCompleted={false}
                     togglePromptModal={saveTogglePromptModal} setTogglePromptModal={setSaveTogglePromptModal} scrollable={false} 
-                    productPlan={planRecord.productPlanName} corpName={planRecord.companyName}/>
+                    productPlan={planRecord.productPlanName} corpName={planRecord.companyName} id={planRecord.id}/>
                 {planRecord.status == 3 ?
                         <>
                         <ClientPromptModal title="Resubmitting Details..." icon="paper-plane" size="lg" staticModal={submitTogglePromptModal} setStaticModal={setSubmitTogglePromptModal}
                         togglePromptModal={confirmTogglePromptModal} setTogglePromptModal={setConfirmTogglePromptModal} scrollable={false} 
-                        productPlan={planRecord.productPlanName} corpName={planRecord.companyName}
+                        productPlan={planRecord.productPlanName} corpName={planRecord.companyName} id={planRecord.id}
                         />
                         <SubmitActionModal title="Resubmitting Details..." icon="upload" size="lg" isCompleted={false}
                     togglePromptModal={submitTogglePromptModal} setTogglePromptModal={setSubmitTogglePromptModal} scrollable={false} 
-                    productPlan={planRecord.productPlanName} corpName={planRecord.companyName}/>
+                    productPlan={planRecord.productPlanName} corpName={planRecord.companyName} id={planRecord.id}/>
                         </>
                         :
                         <>
                         <ClientPromptModal title="Submitting Details..." icon="paper-plane" size="lg" staticModal={submitTogglePromptModal} setStaticModal={setSubmitTogglePromptModal}
                         togglePromptModal={confirmTogglePromptModal} setTogglePromptModal={setConfirmTogglePromptModal} scrollable={false} 
-                        productPlan={planRecord.productPlanName} corpName={planRecord.companyName}
+                        productPlan={planRecord.productPlanName} corpName={planRecord.companyName} id={planRecord.id}
                         />
                         <SubmitActionModal title="Submitting Details..." icon="paper-plane" size="lg" isCompleted={false}
                     togglePromptModal={submitTogglePromptModal} setTogglePromptModal={setSubmitTogglePromptModal} scrollable={false} 
-                    productPlan={planRecord.productPlanName} corpName={planRecord.companyName}/> 
+                    productPlan={planRecord.productPlanName} corpName={planRecord.companyName} id={planRecord.id}/> 
                         
                         </>}
                 
 
         </MDBRow>
-          </>      
+        <div className="client-form-fab fab-btn" onClick={() => {submitForm(); saveOrSubmitDetails();}}> ✔ </div>
+        </form>
+    </>      
         )}  
-       
     </Formik>
 
-    <div className="client-form-fab fab-btn" onClick={() => saveOrSubmitDetails()}> ✔ </div>
     </>
     }
     </>

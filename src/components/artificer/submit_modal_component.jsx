@@ -5,24 +5,22 @@ import { MDBBtn, MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBM
 import { useEffect, useState } from 'react';
 import { currentTime, fetchActionID } from '../../utils/chronos';
 
-const SubmitActionModal = ({title, icon, size, isCompleted, togglePromptModal, setTogglePromptModal, scrollable, productPlan, corpName}) => {
+const SubmitActionModal = ({title, icon, size, isCompleted, togglePromptModal, setTogglePromptModal, scrollable, productPlan, corpName, id}) => {
     
     const [isComplete, setIsComplete] = useState(false);
     let notPending = isCompleted
     useEffect(() => {
-        
-        
-      });
-    if(!isComplete && togglePromptModal){
-        setTimeout(() => {
-            setIsComplete(true);
-          }, 3696);
-    }
+        if(!isComplete && togglePromptModal){
+            setTimeout(() => {
+                setIsComplete(true);
+              }, 3696);
+        }  
+      }, [isComplete, togglePromptModal]);
     
     
     return(
     <>
-    <MDBModal key={currentTime()} staticBackdrop tabIndex='-1' open={togglePromptModal} setOpen={setTogglePromptModal}>
+    <MDBModal key={id} staticBackdrop tabIndex='-1' open={togglePromptModal} setOpen={setTogglePromptModal}>
         <MDBModalDialog scrollable={scrollable} centered size={size}>
             <MDBModalContent>
                 <MDBModalHeader className='client-prompt-modal-header'>

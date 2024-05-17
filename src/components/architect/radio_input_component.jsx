@@ -10,11 +10,12 @@ const RadioInput = (props) => {
         {props.newRow ?
                 <><div className='w-100'></div></>
                 :null}
-         <MDBCol className='checkbox-input-border' size={props.width}>
+         <MDBCol key={props.alias} className='checkbox-input-border' size={props.width}>
          {props.optionsList ?
                 <>
                 { props.optionsList.map( optionItem => (
-                                            <MDBRadio key={optionItem.id} id={`${props.alias}${optionItem.id}FormInput`} name={`${props.alias}`} value={optionItem.text} label={optionItem.text} 
+                                            <MDBRadio key={optionItem.id} id={`${props.alias}${optionItem.id}FormInput`} name={`${props.alias}`}  
+                                            label={optionItem.text} checked={props.value.includes(`${optionItem.text}`)} value={optionItem.text} onBlur={props.onBlur}
                                             onChange={props.onChange} aria-describedby={`${props.alias}InputLabel`} readOnly={props.readOnly} disabled={props.disabled} inline />
                                             ))}
                 </>
