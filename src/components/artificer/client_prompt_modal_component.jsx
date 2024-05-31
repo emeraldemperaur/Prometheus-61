@@ -21,7 +21,7 @@ const ClientPromptModal = ({title, size, setStaticModal, icon, staticModal, togg
                     </MDBModalBody>
                     <MDBModalFooter>
                     <MDBBtn onClick={() => setTogglePromptModal(!togglePromptModal)} outline rounded><i className="fa-regular fa-hand-point-left"></i> Cancel</MDBBtn>
-                        <MDBBtn outline rounded onClick={() => {
+                        <MDBBtn type='submit' outline rounded onClick={() => {
                             setTogglePromptModal(!togglePromptModal);
                             setStaticModal(!staticModal);
                             }}><MDBIcon icon="paper-plane" /> Submit

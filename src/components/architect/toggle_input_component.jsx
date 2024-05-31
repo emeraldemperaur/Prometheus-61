@@ -27,7 +27,7 @@ const ToggleInput = (props) => {
                         </>
                         :null}  
                         </p>
-                        {props.errorText ?
+                        {props.errorText && props.touched ?
                         <>
                         <p className='core-input-label-error'>{props.errorText}</p>
                         </>
