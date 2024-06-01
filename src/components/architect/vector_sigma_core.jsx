@@ -16,6 +16,7 @@ import TextAreaInput from "../architect/textarea_input_component";
 import NumberRangeInput from "../architect/number_range_input_component";
 import SectionTitle from "../architect/section_title_component";
 import { useState, useEffect } from "react";
+import React from 'react'
 import { MDBCol, MDBRow, MDBContainer, MDBBadge, MDBBtn, MDBIcon, MDBCard, MDBAccordion, MDBAccordionItem } from 'mdb-react-ui-kit';
 import { fetchActionID } from '../../utils/chronos';
 
@@ -151,7 +152,7 @@ const VectorSigma = (props) => {
                 {
         vectorJSON ?
         vectorJSON.model.map( vectorElement => (
-            <>
+            <React.Fragment key={vectorElement.sectionId}>
 
                     <MDBAccordionItem key={vectorElement.sectionId} collapseId={vectorElement.sectionId} onClick={()=> setStackedActive(vectorElement.sectionId)} headerTitle={<><h5 className="input-stack-title">
                     <i className={vectorElement.icon}></i>
@@ -160,20 +161,20 @@ const VectorSigma = (props) => {
                             {
                                 vectorElement.queries ?
                                 vectorElement.queries.map( inputElement => (
-                                  <>
+                                  <React.Fragment key={inputElement.queryId}>
                                     {inputArchitect(inputElement.inputType, inputElement.newRow, inputElement.inputWidth, inputElement.inputAlias, inputElement.inputLabel, 
                                         inputElement.inputPlaceholder, props.values[inputElement.inputAlias], props.handleChange, clientMode, clientMode, inputElement.isHinted, inputElement.hintURL,
                                         inputElement.hintText, inputElement.minValue, inputElement.maxValue, inputElement.inputHeight, inputElement.stepValue, 
                                         inputElement.inputOptions, inputElement.fileTypes, props.errors[inputElement.inputAlias], props.touched[inputElement.inputAlias], props.handleBlur, inputElement.queryId)
                                     }
-                                   </>
+                                   </React.Fragment>
                                     )):null
                                 
 
                             }
                          </MDBRow>
                     </MDBAccordionItem>
-                    </>
+                    </React.Fragment>
                      )):null
                     }
                 </MDBAccordion>
@@ -185,23 +186,25 @@ const VectorSigma = (props) => {
                 {
         vectorJSON ?
         vectorJSON.model.map( vectorElement => (
-                    <MDBRow key={vectorElement.sectionId}>
+                    <React.Fragment key={vectorElement.sectionId}>
+
                     <SectionTitle key={vectorElement.sectionId} sectionIcon={vectorElement.icon} sectionTitle={vectorElement.title}/>
                     {
                                 vectorElement.queries ?
                                 vectorElement.queries.map( inputElement => (
-                                  <>
-                                    {inputArchitect(inputElement.inputType, inputElement.newRow, inputElement.inputWidth, inputElement.inputAlias, inputElement.inputLabel, 
+                                  <React.Fragment key={inputElement.queryId}>
+                                    { inputArchitect(inputElement.inputType, inputElement.newRow, inputElement.inputWidth, inputElement.inputAlias, inputElement.inputLabel, 
                                         inputElement.inputPlaceholder, props.values[inputElement.inputAlias], props.handleChange, clientMode, clientMode, inputElement.isHinted, inputElement.hintURL,
                                         inputElement.hintText, inputElement.minValue, inputElement.maxValue, inputElement.inputHeight, inputElement.stepValue, 
                                         inputElement.inputOptions, inputElement.fileTypes, props.errors[inputElement.inputAlias], props.touched[inputElement.inputAlias], props.handleBlur, inputElement.queryId)
                                     }
-                                  </> 
+                                   </React.Fragment>
                                     )):null
                                 
 
                     }
-                    </MDBRow>
+                    
+                    </React.Fragment>
                      )):null
                     }
                 </MDBRow>
