@@ -62,7 +62,7 @@ const DateRangeInput = (props) => {
                 </div>
                 <div className={`dr-input-dropdown ${inputOpen ? 'active' : 'inactive'}`}>
                     
-                    <DateRange key={props.alias} className='dr-input-calendarStyle' onChange={(item) => {setState([item.selection])}} ranges={state}
+                    <DateRange key={props.alias} id={`${props.alias}DRFormInput`} className='dr-input-calendarStyle' onChange={(item) => {setState([item.selection])}} ranges={state}
                     showSelectionPreview={true} editableDateInputs={true} showMonthAndYearPickers={true} showDateDisplay={true} 
                     rangeColors={['#216cb5', '#216cb5', '#000000']} direction='horizontal' />
                     </div>      

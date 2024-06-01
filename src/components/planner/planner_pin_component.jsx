@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 import PlannerClientInterface from './planner_client_interface';
+import PlannerClientInterfaceSBX from './planner_client_interface_sbx';
 
 const PlannerPinConsole = (props) => {
     document.body.style.backgroundColor = "#002c51"
@@ -93,7 +94,7 @@ const PlannerPinConsole = (props) => {
     :
     <>
     <MDBContainer fluid style={{height:'100vh', backgroundColor: '#ffffff'}}>
-    <PlannerClientInterface planRecord={fetchPlanner(planner, plannerId)}/>
+    <PlannerClientInterfaceSBX planRecord={fetchPlanner(planner, plannerId)}/>
     </MDBContainer>
     </>}
     

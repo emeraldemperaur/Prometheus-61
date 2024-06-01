@@ -18,6 +18,8 @@ export const enquirerSlice = createSlice({
                 enquiryEditor: 'Jane Smith',
                 enquiryEditDate: 'February 23, 2024 at 06:39PM MST',
                 jsonQueryDefinition: `{
+                    "name": "Abode",
+                    "model":[
                     {
                         "sectionId": 1,
                         "title": "Alpha Section",
@@ -451,7 +453,7 @@ export const enquirerSlice = createSlice({
                             "queryResponse": null
                         }
                         ]
-                    }
+                    }]
                 }`
             }
         ]
