@@ -91,13 +91,13 @@ const VectorSigma = (props) => {
                 case "select":
                     return <SelectInput key={inputKey} newRow={newRow} width={inputWidth} alias={inputAlias} inputLabel={inputLabel} type={inputType} 
                     placeholder={inputPlaceholder} value={fvalues} onChange={fhandleChange} readOnly={readOnly} isHinted={isHinted} hintLink={hintLink} 
-                    hintText={hintText} errorText={ferrors} touched={ftouched}
+                    hintText={hintText} errorText={ferrors} touched={ftouched} disabled={disabled}
                     optionsList={inputOptions}/>
                     break;
                 case "multiselect":
                     return <MultiSelectInput key={inputKey} newRow={newRow} width={inputWidth} alias={inputAlias} inputLabel={inputLabel} type={inputType} 
                         placeholder={inputPlaceholder} value={fvalues || []} onChange={fhandleChange}  readOnly={readOnly} isHinted={isHinted} hintLink={hintLink} 
-                        hintText={hintText} errorText={ferrors} touched={ftouched}
+                        hintText={hintText} errorText={ferrors} touched={ftouched} disabled={disabled}
                         optionsList={inputOptions}/>
                     break;
                 case "checkbox":
@@ -109,7 +109,7 @@ const VectorSigma = (props) => {
                 case "radio":
                     return <RadioInput key={inputKey} newRow={newRow} width={inputWidth} alias={inputAlias} inputLabel={inputLabel} type={inputType} 
                         placeholder={inputPlaceholder} value={fvalues || []} onChange={fhandleChange} onBlur={fhandleBlur} readOnly={readOnly} isHinted={isHinted} hintLink={hintLink} 
-                        hintText={hintText} errorText={ferrors} touched={ftouched}
+                        hintText={hintText} errorText={ferrors} touched={ftouched} disabled={disabled}
                         optionsList={inputOptions}/>
                     break;
                 case "toggle":
@@ -131,7 +131,7 @@ const VectorSigma = (props) => {
                 case "daterange":
                     return <DateRangeInput key={inputKey} newRow={newRow} width={inputWidth} alias={inputAlias} inputLabel={inputLabel} type={inputType} 
                     placeholder={inputPlaceholder} value={fvalues} onChange={fhandleChange} readOnly={readOnly} isHinted={isHinted} hintLink={hintLink} 
-                    hintText={hintText} errorText={ferrors} touched={ftouched}/>
+                    hintText={hintText} errorText={ferrors} touched={ftouched} disabled={disabled}/>
                     break;
                 default:
                     return <TextInput key={inputKey} newRow={newRow} width={inputWidth} alias={inputAlias} inputLabel={inputLabel} type={inputType} 

@@ -27,7 +27,7 @@ const SaveActionModal = ({title, icon, size, isCompleted, togglePromptModal, set
                 <MDBModalHeader className='client-prompt-modal-header'>
                     <MDBModalTitle className='prompt-modal-title'><MDBIcon icon={icon} /> {`${title}`}</MDBModalTitle>
                     {isComplete ?
-                        <><MDBBtn className='btn-close' onClick={() => {setTogglePromptModal(!togglePromptModal), setIsComplete(false)}}></MDBBtn></>
+                        <><MDBBtn type='button' className='btn-close' onClick={() => {setTogglePromptModal(!togglePromptModal), setIsComplete(false)}}></MDBBtn></>
                         :null}
                     </MDBModalHeader>
                     <MDBModalBody>

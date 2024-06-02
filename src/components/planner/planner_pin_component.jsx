@@ -94,7 +94,7 @@ const PlannerPinConsole = (props) => {
     :
     <>
     <MDBContainer fluid style={{height:'100vh', backgroundColor: '#ffffff'}}>
-    <PlannerClientInterfaceSBX planRecord={fetchPlanner(planner, plannerId)}/>
+    <PlannerClientInterface planRecord={fetchPlanner(planner, plannerId)}/>
     </MDBContainer>
     </>}
     

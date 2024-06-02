@@ -44,11 +44,11 @@ export const plannerSlice = createSlice({
                             "inputPlaceholder": "TI1 Placeholder",
                             "newRow": false,
                             "inputWidth": 4,
-                            "isRequired": true,
+                            "isRequired": false,
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Text Input Element 1",
                             "hintURL": "https://www.dji.com/ca",
-                            "queryResponse": null
+                            "queryResponse": ""
                          },
                         {
                             "queryId": 2,
@@ -60,11 +60,11 @@ export const plannerSlice = createSlice({
                             "maxValue": 100,
                             "newRow": false,
                             "inputWidth": 4,
-                            "isRequired": true,
+                            "isRequired": false,
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Number Input Element 1",
                             "hintURL": "https://www.dji.com/ca/camera-drones?site=brandsite&from=nav",
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 3,
@@ -78,7 +78,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Date Input Element 1",
                             "hintURL": "https://www.dji.com/ca/handheld?site=brandsite&from=nav",
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 4,
@@ -92,7 +92,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Date Time Input Element 1",
                             "hintURL": "https://www.dji.com/ca/products/power-series?site=brandsite&from=nav",
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 5,
@@ -106,7 +106,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Time Input Element 1",
                             "hintURL": "https://www.dji.com/ca/products/power-series?site=brandsite&from=nav",
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 6,
@@ -121,7 +121,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Text Area Element 1",
                             "hintURL": "https://www.dji.com/ca/products/power-series?site=brandsite&from=nav",
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 7,
@@ -137,7 +137,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Number Input Element 2",
                             "hintURL": "https://www.dji.com/ca/products/power-series?site=brandsite&from=nav",
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 8,
@@ -153,7 +153,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Number Input Element 3",
                             "hintURL": "https://www.dji.com/ca/products/power-series?site=brandsite&from=nav",
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 9,
@@ -170,7 +170,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Number Range Input Element 1",
                             "hintURL": "https://www.dji.com/ca/products/camera-drones#avata-series",
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 10,
@@ -186,7 +186,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Number Input Element 4",
                             "hintURL": "",
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 11,
@@ -202,7 +202,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Number Input Element 5",
                             "hintURL": "",
-                            "queryResponse": null
+                            "queryResponse": ""
                         }
                         ]
                     }
@@ -224,7 +224,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Text Input Element 2",
                             "hintURL": "https://www.dji.com/ca",
-                            "queryResponse": null
+                            "queryResponse": ""
                          },
                         {
                             "queryId": 13,
@@ -238,7 +238,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Text Input Element 3",
                             "hintURL": "https://www.dji.com/ca",
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 14,
@@ -252,7 +252,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Text Input Element 4",
                             "hintURL": "https://www.dji.com/ca",
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 15,
@@ -273,7 +273,7 @@ export const plannerSlice = createSlice({
                                 {"id":4, "text":"Plan Forms", "queryNote": "HINT --> This is a sample hint for Select Input Element 1 --> https://www.dji.com/ca"}, 
                                 {"id":5, "text":"Insight Models", "queryNote": "WARN --> This is a sample warning for Select Input Element 1 --> https://www.dji.com/ca"}
                                             ],
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 16,
@@ -294,7 +294,7 @@ export const plannerSlice = createSlice({
                                 {"id":4, "text":"Plan Forms", "queryNote": "HINT --> This is a sample hint for Select Input Element 1 --> https://www.dji.com/ca"}, 
                                 {"id":5, "text":"Insight Models", "queryNote": "WARN --> This is a sample warning for Select Input Element 1 --> https://www.dji.com/ca"}
                                             ],
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 17,
@@ -315,7 +315,7 @@ export const plannerSlice = createSlice({
                                 {"id":4, "text":"Plan Forms", "queryNote": "HINT --> This is a sample hint for Select Input Element 1 --> https://www.dji.com/ca"}, 
                                 {"id":5, "text":"Insight Models", "queryNote": "WARN --> This is a sample warning for Select Input Element 1 --> https://www.dji.com/ca"}
                                             ],
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 18,
@@ -336,7 +336,7 @@ export const plannerSlice = createSlice({
                                 {"id":4, "text":"Plan Forms", "queryNote": "HINT --> This is a sample hint for Select Input Element 1 --> https://www.dji.com/ca"}, 
                                 {"id":5, "text":"Insight Models", "queryNote": "WARN --> This is a sample warning for Select Input Element 1 --> https://www.dji.com/ca"}
                                             ],
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 19,
@@ -351,7 +351,7 @@ export const plannerSlice = createSlice({
                             "hintText": "This is sample hint text content for Toggle Input Element 1",
                             "hintURL": "https://www.dji.com/ca/products/power-series?site=brandsite&from=nav",
                             "queryNote": "WARN --> This is a sample warning for Toggle Input Element 1 --> https://www.dji.com/ca",
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 20,
@@ -377,10 +377,10 @@ export const plannerSlice = createSlice({
                                 "isHinted": true,
                                 "hintText": "This is sample hint text content for Toggled Text Input Element 1",
                                 "hintURL": "https://www.dji.com/ca",
-                                "queryResponse": null
+                                "queryResponse": ""
                             },
                             "queryNote": "WARN --> This is a sample warning for Toggled Input Element 1 --> https://www.dji.com/ca",
-                            "queryResponse": null
+                            "queryResponse": ""
                         }
                         
                         ]
@@ -404,7 +404,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for File Input Element 1",
                             "hintURL": "https://www.dji.com/ca",
-                            "queryResponse": null
+                            "queryResponse": ""
                          },
                         {
                             "queryId": 23,
@@ -419,7 +419,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for File Input Element 2",
                             "hintURL": "https://www.dji.com/ca",
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 24,
@@ -433,7 +433,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Date Range Input Element 1",
                             "hintURL": "https://www.dji.com/ca",
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 25,
@@ -447,7 +447,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Date Range Input Element 2",
                             "hintURL": "https://www.dji.com/ca",
-                            "queryResponse": null
+                            "queryResponse": ""
                         },
                         {
                             "queryId": 26,
@@ -461,7 +461,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Date Range Input Element 3",
                             "hintURL": "https://www.dji.com/ca",
-                            "queryResponse": null
+                            "queryResponse": ""
                         }
                         ]
                     }]

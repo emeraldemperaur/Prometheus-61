@@ -9,7 +9,7 @@ const ClientPromptModal = ({title, size, setStaticModal, icon, staticModal, togg
             <MDBModalContent>
                 <MDBModalHeader className='prompt-modal-header'>
                     <MDBModalTitle className='prompt-modal-title'><MDBIcon icon={icon} /> {title}</MDBModalTitle>
-                    <MDBBtn className='btn-close' onClick={() => setTogglePromptModal(!togglePromptModal)}></MDBBtn>
+                    <MDBBtn type='button' className='btn-close' onClick={() => setTogglePromptModal(!togglePromptModal)}></MDBBtn>
                     </MDBModalHeader>
                     <MDBModalBody>
                         <MDBRow>
@@ -20,7 +20,7 @@ const ClientPromptModal = ({title, size, setStaticModal, icon, staticModal, togg
                         </MDBRow>          
                     </MDBModalBody>
                     <MDBModalFooter>
-                    <MDBBtn onClick={() => setTogglePromptModal(!togglePromptModal)} outline rounded><i className="fa-regular fa-hand-point-left"></i> Cancel</MDBBtn>
+                    <MDBBtn type='button' onClick={() => setTogglePromptModal(!togglePromptModal)} outline rounded><i className="fa-regular fa-hand-point-left"></i> Cancel</MDBBtn>
                         <MDBBtn type='submit' outline rounded onClick={() => {
                             setTogglePromptModal(!togglePromptModal);
                             setStaticModal(!staticModal);

@@ -24,6 +24,7 @@ import LogoHolder from '../planner/assets/placeholder-circle.png';
 import '../planner/planner_client_styles.css';
 import SaveActionModal from '../artificer/save_modal_component';
 import { tr } from 'date-fns/locale';
+import { toast } from 'react-toastify';
 import SubmitActionModal from '../artificer/submit_modal_component';
 import ClientPromptModal from '../artificer/client_prompt_modal_component';
 import { Formik, useFormikContext } from 'formik';
@@ -41,6 +42,8 @@ const PlannerClientInterfaceSBX = ({planRecord}) => {
     const [stackedActive, setStackedActive] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [actionComplete, setActionComplete] = useState(false);
+    const [yupvalue, setYupvalue] = useState({});
+    const [onSubmit, setOnSubmit] = useState(false);
     const [saveTogglePromptModal, setSaveTogglePromptModal] = useState(false);
     const [confirmTogglePromptModal, setConfirmTogglePromptModal] = useState(false);
     const [submitTogglePromptModal, setSubmitTogglePromptModal] = useState(false);
@@ -49,16 +52,88 @@ const PlannerClientInterfaceSBX = ({planRecord}) => {
         if(document.getElementById("stackedMode").checked){setStackedMode(true);console.log("Stacked Mode - ON");}
         if(!document.getElementById("stackedMode").checked){setStackedMode(false);console.log("Stacked Mode - OFF")}  
     }
+    const formikvalues = (jsonModel) =>{
+        let initialValues = {};
+        let vectorJSON = JSON.parse(jsonModel);
+        if(vectorJSON.model){
+        vectorJSON.model.map( vectorElement => {
+            vectorElement.queries.map( inputElement => {
+                initialValues[inputElement.inputAlias] = inputElement.queryResponse || "";
+            })
+        })
+        }
+        return initialValues;
+    }
+    const yupvalues = (jsonModel, onSubmitMode) =>{
+        let yupValues = {};
+        let vectorJSON = JSON.parse(jsonModel);
+        if(vectorJSON.model){
+        vectorJSON.model.map( vectorElement => {
+            vectorElement.queries.map( inputElement => {
+                yupValues[inputElement.inputAlias] = yupValidation(inputElement.inputType, onSubmitMode, inputElement.isRequired);
+            })
+        })
+        }
+        return yupValues;
+    }
+    const yupValidation = (inputType, isSubmit, isRequired) =>{
+        let initialValidation = Yup.string().notRequired('This field is not required')
+        if(!isSubmit && (!isRequired || isRequired)){
+            initialValidation = Yup.mixed().notRequired('This field is not required')
+        }
+        if(isSubmit && !isRequired){
+            initialValidation = Yup.mixed().notRequired('This field is required')
+        }
+        if(isSubmit && isRequired){
+            initialValidation = Yup.string().required('This field is required').max(33, 'Sorry, this is too long');
+        switch(inputType.toLowerCase()) {
+            case "text":
+                initialValidation = initialValidation
+                break;
+            case "number":
+                initialValidation = Yup.number().required('This field is required')
+                break;
+            case "multiselect":
+                initialValidation = Yup.array().of(Yup.string().required(1, 'This field is required')).min(1, 'This field is required').required('This field is required')
+                break;
+            case "checkbox":
+                initialValidation = Yup.array().of(Yup.string().required(1, 'This field is required')).min(1, 'This field is required').required('This field is required')
+                break;
+            case "toggle":
+                initialValidation = Yup.array().of(Yup.string().required(1, 'This field is required')).min(1, 'This field is required').required('This field is required')
+                break;
+            case "file":
+                initialValidation = Yup.mixed().required('This field is required')
+                break;
+            case "multifile":
+                initialValidation = Yup.mixed().required('This field is required')
+                break;
+            case "textarea":
+                initialValidation = Yup.string().required('This field is required')
+                break;
+            case "range":
+                initialValidation = Yup.number().required('This field is required')
+                break;
+            default:
+                initialValidation = initialValidation
+        }
+    }
+    return initialValidation
+    }
     const saveDetails = () => {
+        setOnSubmit(false)
         setSaveTogglePromptModal(!saveTogglePromptModal);
         setTimeout(() => {
             setActionComplete(false);
             console.log(`Saving Plan Details`)  
         }, 0);   
     }
-    const submitDetails = () => {
-        setConfirmTogglePromptModal(!confirmTogglePromptModal);
-        setActionComplete(true);
+    const submitDetails = (formikErrors) => {
+        setOnSubmit(true);
+        console.log(`Formik Errors: ${formikErrors}`)
+        if(!formikErrors){setConfirmTogglePromptModal(!confirmTogglePromptModal); setActionComplete(true);}
+        if(formikErrors){ toast.error('Missing required field!',{ position: "top-right", autoClose: 1000, closeOnClick: true});}
+        
     }
     const saveOrSubmitDetails = () => {
         console.log(`Saving or Submitting Plan Details`)   
@@ -82,68 +157,17 @@ const PlannerClientInterfaceSBX = ({planRecord}) => {
     
     <Formik
     
-    initialValues={{
-        textInput1: '',
-        numberInput1: '',
-        dateInput1: '',
-        datetimeInput1: '',
-        timeInput1: '',
-        textAreaInput1: '',
-        numberInput2: '',
-        numberInput3:'',
-        numberRangeInput1:'',
-        numberInput4: '',
-        numberInput5:'',
-        textInput2:'',
-        textInput3:'',
-        textInput4:'',
-        selectInput1:'',
-        multiselectInput1:'',
-        checkboxInput1:'',
-        radioInput1:'',
-        toggleInput1:'',
-        toggledTextInput1:'',
-        toggledInput1:'',
-        fileInput1:'',
-        fileInput2:'',
-        daterangeInput1:'',
-        daterangeInput2:'',
-        daterangeInput3:'',
-
-    }}
+    initialValues={
+        formikvalues(planRecord.jsonQueryDefinition)
+    }
    
-    validationSchema={Yup.object({
-        textInput1: Yup.string().required('This field is required').max(33, 'Sorry, this is too long'),
-        numberInput1: Yup.number().required('This field is required'),
-        dateInput1: Yup.string().required('This field is required'),
-        datetimeInput1: Yup.string().required('This field is required'),
-        timeInput1: Yup.string().required('This field is required'),
-        textAreaInput1: Yup.string().required('This field is required').max(1000, 'Sorry, this is too long'),
-        numberInput2: Yup.number().required('This field is required'),
-        numberInput3:Yup.number().required('This field is required'),
-        numberRangeInput1:Yup.number().required('This field is required'),
-        numberInput4: Yup.number().required('This field is required'),
-        numberInput5:Yup.number().required('This field is required'),
-        textInput2:Yup.string().required('This field is required').max(33, 'Sorry, this is too long'),
-        textInput3:Yup.string().required('This field is required').max(33, 'Sorry, this is too long'),
-        textInput4:Yup.string().required('This field is required').max(33, 'Sorry, this is too long'),
-        selectInput1:Yup.string().required('This field is required'),
-        multiselectInput1:Yup.array().of(Yup.string().min(1, 'This field is required')).min(1, 'This field is required').required('This field is required'),
-        checkboxInput1:Yup.array().of(Yup.string().min(1, 'This field is required')).min(1, 'This field is required').required('This field is required'),
-        radioInput1:Yup.string().required('This field is required'),
-        toggleInput1:Yup.array().of(Yup.string().min(1, 'This field is required')).min(1, 'This field is required').required('This field is required'),
-        toggledTextInput1:Yup.string().required('This field is required'),
-        toggledInput1:Yup.string().required('This field is required'),
-        fileInput1:Yup.mixed().required('This field is required'),
-        fileInput2:Yup.mixed().required('This field is required'),
-        daterangeInput1:Yup.string().required('This field is required'),
-        daterangeInput2:Yup.string().required('This field is required'),
-        daterangeInput3:Yup.string().required('This field is required'),
-
-    })}
+    validationSchema={
+        Yup.object(
+            yupvalues(planRecord.jsonQueryDefinition, onSubmit)
+        )}
 
     onSubmit={(values) => {
-        console.log(`Submitting: ${values}`)
+        console.log(`FormData: ${values}`)
     }}
     >  
     {
@@ -208,14 +232,14 @@ const PlannerClientInterfaceSBX = ({planRecord}) => {
                         {planRecord.status == 3 ?
                         <>
                         <MDBBtn className='client-form-button' style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 13, fontWeight: 600, letterSpacing: '0.21em', margin: '10px' }} 
-                        onClick={() => submitDetails()} type='submit'>
+                        onClick={() => submitDetails(errors)} type='submit'>
                             <i className="fa-solid fa-upload"></i>  RESUBMIT FORM&nbsp;
                         </MDBBtn>
                         </>
                         :
                         <>
                         <MDBBtn className='client-form-button' style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 13, fontWeight: 600, letterSpacing: '0.21em', margin: '10px' }} 
-                        onClick={() => submitDetails()} type='submit'>
+                        onClick={() => submitDetails(errors)} type='submit'>
                             <MDBIcon  icon='paper-plane' />  COMPLETE FORM
                         </MDBBtn>
                         </>}

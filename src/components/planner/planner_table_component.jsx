@@ -128,7 +128,7 @@ const PlannerTable = ({plannerList}) => {
                         companyRegion={plannerItem.companyRegion} companyStockExchange={plannerItem.companyStockExchange}
                         companyTickerSymbol={plannerItem.companyTickerSymbol} isCorpDualListed={plannerItem.isCorpDualListed} companyDualStockExchange={plannerItem.companyDualStockExchange}
                         companyDualTickerSymbol={plannerItem.companyDualTickerSymbol} correspondenceName={plannerItem.correspondenceName} correspondenceTime={plannerItem.correspondenceTime} 
-                        platformName={plannerItem.enquiryPlatformName} accessPIN={plannerItem.accessPIN}/>
+                        platformName={plannerItem.enquiryPlatformName} accessPIN={plannerItem.accessPIN} jsonQueryDefinition={plannerItem.jsonQueryDefinition} planRecord={plannerItem}/>
                         </>
                             :null}
                     </MDBModalBody>

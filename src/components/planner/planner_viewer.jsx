@@ -142,10 +142,11 @@ const PlannerViewer = (props) => {
 
             <MDBTabsContent>
                 <MDBTabsPane open={inputViewActive === 'OVERVIEW'}>
-                    <PlannerViewerOverview companyName={props.companyName} status={props.status} platformName={props.platformName}/>
+                    <PlannerViewerOverview companyName={props.companyName} status={props.status} platformName={props.platformName} 
+                    planRecord={props.planRecord}/>
                 </MDBTabsPane>
                 <MDBTabsPane open={inputViewActive === 'INPUT'}>
-                    <PlannerViewerInput platformName={props.platformName}/>
+                    <PlannerViewerInput platformName={props.platformName} planRecord={props.planRecord}/>
                 </MDBTabsPane>
             </MDBTabsContent>
             </>
