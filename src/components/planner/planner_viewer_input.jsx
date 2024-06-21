@@ -101,11 +101,6 @@ const PlannerViewerInput = (props) => {
                     </MDBCol>
                     <PlannerViewerFooter style={{marginBottom: '6px'}} platformName={props.planRecord.enquiryPlatformName}/>
                 </MDBRow>
-
-
-          
-                
-        <div className="client-form-fab fab-btn" type="submit" onClick={() => {saveOrSubmitDetails();}}> ✔ </div>
         </form>
         </MDBRow>
        

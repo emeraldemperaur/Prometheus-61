@@ -18,6 +18,7 @@ import MSLogo from '../planner/assets/MorganStanleyLogo.png';
 import ShareworksLogo from '../planner/assets/MorganStanleyAtWorkLogo.png';
 import ETradeLogo from '../planner/assets/ETradeLogo.png';
 import UBSGroupLogo from '../planner/assets/UBSLogo.png';
+import { formClerk } from '../../utils/form_clerk';
 
 
 
@@ -35,6 +36,13 @@ const PlannerClientInterface = ({planRecord}) => {
     const [saveTogglePromptModal, setSaveTogglePromptModal] = useState(false);
     const [confirmTogglePromptModal, setConfirmTogglePromptModal] = useState(false);
     const [submitTogglePromptModal, setSubmitTogglePromptModal] = useState(false);
+    const [isClientUI, setIsClientUI] = useState(true)
+    const [isDisabled, setIsDisabled] = useState(false)
+    const [isLocked, setIsLocked] = useState(false)
+    
+
+
+
 
     const toggleStackView = () => {
         if(document.getElementById("stackedMode").checked){setStackedMode(true);console.log("Stacked Mode - ON");}
@@ -46,7 +54,8 @@ const PlannerClientInterface = ({planRecord}) => {
         if(vectorJSON.model){
         vectorJSON.model.map( vectorElement => {
             vectorElement.queries.map( inputElement => {
-                initialValues[inputElement.inputAlias] = inputElement.queryResponse || "";
+                if(inputElement.queryResponse == null){inputElement.queryResponse = ""}
+                initialValues[inputElement.inputAlias] = inputElement.queryResponse;
             })
         })
         }
@@ -88,7 +97,7 @@ const PlannerClientInterface = ({planRecord}) => {
                 initialValidation = Yup.array().of(Yup.string().required(1, 'This field is required')).min(1, 'This field is required').required('This field is required')
                 break;
             case "toggle":
-                initialValidation = Yup.array().of(Yup.string().required(1, 'This field is required')).min(1, 'This field is required').required('This field is required')
+                initialValidation = Yup.boolean().required('This field is required')
                 break;
             case "file":
                 initialValidation = Yup.mixed().required('This field is required')
@@ -108,25 +117,68 @@ const PlannerClientInterface = ({planRecord}) => {
     }
     return initialValidation
     }
+    const errorCheck = (formikErrors) =>{
+        let isError = false;
+        for (const [key, value] of Object.entries(formikErrors)) {
+            if(value){isError = true;}
+            console.log(`formik Error Check: ${isError} \n${value}`);
+          }
+          return isError;
+    }
+    
     const saveDetails = () => {
         setOnSubmit(false)
-        setSaveTogglePromptModal(!saveTogglePromptModal);
         setTimeout(() => {
-            setActionComplete(false);
-            console.log(`Saving Plan Details`)  
-        }, 0);   
+        setSaveTogglePromptModal(!saveTogglePromptModal);
+        setActionComplete(false);
+        console.log(`Saving Plan Details`)  
+    }, 333); 
+       
     }
-    const submitDetails = (formikErrors) => {
-        setOnSubmit(true);
-        console.log(`Formik Errors: ${formikErrors}`)
-        if(!formikErrors){setConfirmTogglePromptModal(!confirmTogglePromptModal); setActionComplete(true);}
-        if(formikErrors){ toast.error('Missing required field!',{ position: "top-right", autoClose: 1000, closeOnClick: true});}
-        
+    const submitDetails = (formikErrors, handleSubmit) => {
+        setOnSubmit(true)
+        setTimeout(() => {
+            console.log(`Formik Errors: ${formikErrors}`)
+            setTimeout(() => {
+                handleSubmit()
+                if(!formikErrors && onSubmit){setConfirmTogglePromptModal(!confirmTogglePromptModal); setActionComplete(true);}
+                if(formikErrors && (onSubmit || !onSubmit)){ toast.error('Missing required field!',{ position: "top-right", autoClose: 1000, closeOnClick: true});}
+            }, 212); 
+            
+    }, 333);  
     }
-    const saveOrSubmitDetails = () => {
-        console.log(`Saving or Submitting Plan Details`)   
+    const saveOrSubmitDetails = (formikErrors, handleSubmit) => {
+
+        setOnSubmit(true)
+        setTimeout(() => {
+            if(formikErrors && planRecord.status != 3 && onSubmit){
+                setOnSubmit(false)
+                setTimeout(() => {
+                    //submit form hook
+                    handleSubmit()
+                    toast.error('Missing required field!',{ position: "top-right", autoClose: 1111, closeOnClick: true});
+                    setSaveTogglePromptModal(!saveTogglePromptModal);  
+                }, 333);  
+            }
+            if(formikErrors && planRecord.status == 3 && !onSubmit){
+                toast.error('Missing required field!',{ position: "top-right", autoClose: 1111, closeOnClick: true});
+                console.log(`Resubmitting Plan Details`)   
+            }
+            if(!formikErrors && planRecord.status <= 3 && onSubmit){
+                setConfirmTogglePromptModal(!confirmTogglePromptModal); setActionComplete(true);
+                console.log(`Submitting Plan Details`)   
+            } 
+        }, 696);   
+       
        }
     useEffect(() => {
+        if(planRecord.status == 3){  
+            setIsDisabled(true);
+        }
+        if(planRecord.status == 3 && planRecord.isLocked){
+            setIsClientUI(false);
+            setIsLocked(true);
+        }
         setTimeout(() => {
           setIsLoading(false);
         }, 1569);
@@ -144,7 +196,7 @@ const PlannerClientInterface = ({planRecord}) => {
     <>
     
     <Formik
-    
+
     initialValues={
         formikvalues(planRecord.jsonQueryDefinition)
     }
@@ -156,6 +208,9 @@ const PlannerClientInterface = ({planRecord}) => {
 
     onSubmit={(values) => {
         console.log(`FormData: ${values}`)
+        let jsonModelEdit = formClerk(planRecord.jsonQueryDefinition, values)
+        console.log(`Edited Form Output: ${jsonModelEdit}`)
+
     }}
     >  
     {
@@ -213,21 +268,21 @@ const PlannerClientInterface = ({planRecord}) => {
                     <div className='client-form-actions'>
                    
                         <MDBBtn className='client-form-button' style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 13, fontWeight: 600, letterSpacing: '0.21em', margin: '10px' }} 
-                        onClick={() => saveDetails()} type='submit'>
+                        onClick={() => saveDetails()} disabled={isDisabled} type='submit'>
                             <MDBIcon icon='save' />  SAVE DETAILS&nbsp;&nbsp;&nbsp;&nbsp;
                         </MDBBtn>
                         <>
                         {planRecord.status == 3 ?
                         <>
                         <MDBBtn className='client-form-button' style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 13, fontWeight: 600, letterSpacing: '0.21em', margin: '10px' }} 
-                        onClick={() => submitDetails(errors)} type='submit'>
+                        onClick={() => submitDetails(errorCheck(errors), handleSubmit)} disabled={isLocked} type='submit'>
                             <i className="fa-solid fa-upload"></i>  RESUBMIT FORM&nbsp;
                         </MDBBtn>
                         </>
                         :
                         <>
                         <MDBBtn className='client-form-button' style={{ backgroundColor: '#002C51', fontFamily: 'Montserrat', fontSize: 13, fontWeight: 600, letterSpacing: '0.21em', margin: '10px' }} 
-                        onClick={() => submitDetails(errors)} type='submit'>
+                        onClick={() => submitDetails(errorCheck(errors), handleSubmit)} disabled={isLocked} type='submit'>
                             <MDBIcon  icon='paper-plane' />  COMPLETE FORM
                         </MDBBtn>
                         </>}
@@ -278,7 +333,7 @@ const PlannerClientInterface = ({planRecord}) => {
             </MDBRow>
            <VectorSigma jsonModel={planRecord.jsonQueryDefinition} stackedMode={stackedMode} handleChange={handleChange}
            values={values}
-            handleBlur={handleBlur} touched={touched} errors={errors} clientUI={true}/>
+            handleBlur={handleBlur} touched={touched} errors={errors} clientUI={isClientUI}/>
             </MDBCard>
                     </MDBCol>
                     <PlannerViewerFooter style={{marginBottom: '6px'}} platformName={planRecord.enquiryPlatformName}/>
@@ -310,7 +365,10 @@ const PlannerClientInterface = ({planRecord}) => {
                         
                         </>}
                 
-        <div className="client-form-fab fab-btn" type="submit" onClick={() => {saveOrSubmitDetails();}}> ✔ </div>
+                {isClientUI ?
+                    <><button style={{backgroundColor: 'transparent'}} width="max-content" type="submit"><div className="client-form-fab fab-btn" onClick={() => {saveOrSubmitDetails(errorCheck(errors), handleSubmit);}}> ✔ </div></button></>
+                    :null}    
+        
         </form>
         </MDBRow>
        

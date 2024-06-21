@@ -76,7 +76,10 @@ const PlannerInterface = () => {
                     buildRank: 0,
                     correspondenceName: selectedCorp.primaryContactName,
                     correspondenceEmail:selectedCorp.correspondenceEmail,
-                    correspondenceTime: currentTime()
+                    correspondenceTime: currentTime(),
+                    lastSavedCorrespondenceTime:'',
+                    isLocked: false,
+                    jsonQueryDefinition: selectedQuery.jsonQueryDefinition
                 }))
                 clearInputs([plannerCorpNameInput, plannerProductNameInput, plannerPlanNameInput, plannerEnquiryNameInput])
                 clearToggles([plannerAutoShareInput])
@@ -202,7 +205,10 @@ const PlannerInterface = () => {
                                 buildRank: 0,
                                 correspondenceName: portmanteauCorp.primaryContactName,
                                 correspondenceEmail:portmanteauCorp.correspondenceEmail,
-                                correspondenceTime: currentTime()
+                                correspondenceTime: currentTime(),
+                                lastSavedCorrespondenceTime:'',
+                                isLocked: false,
+                                jsonQueryDefinition: portmanteauQuery.jsonQueryDefinition
                             }))
                             clearInputs([document.getElementById("formPlannerCorpName"), document.getElementById("formPlannerProductName"), document.getElementById("formPlannerPlanName"), document.getElementById("formPlannerEnquiryName"), plannerPortmanteauInput])
                             clearToggles([document.getElementById("formPlannerEnquiryShare")])

@@ -8,6 +8,27 @@ import MSLogo from '../planner/assets/MorganStanleyLogo.png';
 import ShareworksLogo from '../planner/assets/MorganStanleyAtWorkLogo.png';
 import ETradeLogo from '../planner/assets/ETradeLogo.png';
 import UBSGroupLogo from '../planner/assets/UBSLogo.png';
+import TextOutput from "../architect/text_output_component";
+import NumberOutput from "../architect/number_output_component";
+import DateOutput from "../architect/date_output_component";
+import DateTimeOutput from "../architect/datetime_output_component";
+import TimeOutput from "../architect/time_output_component";
+import TextAreaInput from "../architect/textarea_input_component";
+import TextAreaOutput from "../architect/textarea_output_component";
+import NumberRangeOutput from "../architect/number_range_output_component";
+import TextWeekOutput from "../architect/textweek_output_component";
+import TextMonthOutput from "../architect/textmonth_output_component";
+import SelectOutput from "../architect/select_output_component";
+import MultiselectOutput from "../architect/multiselect_output_component";
+import CheckboxOutput from "../architect/checkbox_output_component";
+import RadioOutput from "../architect/radio_output_component";
+import ToggleOutput from "../architect/toggle_output_component";
+import MultiFileOutput from "../architect/multifile_output_component";
+import FileOutput from "../architect/file_output_component";
+import DateRangeOutput from "../architect/date_range_output_component";
+import AlertOutput from "../architect/output_alert_component";
+import AlertBadgeOutput from "../architect/output_alertbadge_component";
+import VectorPrimus from "../architect/vector_primus_core";
 
 
 
@@ -44,7 +65,7 @@ const PlannerViewerOverview = (props) => {
             :
             <>
             <MDBRow>
-                <SectionTitle sectionIcon={'fa-solid fa-dumpster-fire'} sectionTitle={'Alpha Section'}/>
+                <VectorPrimus jsonModel={props.jsonModel}/>
             </MDBRow>
             </>}
             </MDBCard>

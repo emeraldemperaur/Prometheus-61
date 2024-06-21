@@ -1,4 +1,4 @@
-import { MDBBadge, MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem, MDBRow, MDBCol, MDBBtnGroup, MDBBtn, MDBTabs, MDBTabsItem, MDBTabsLink, MDBTabsContent, MDBTabsPane } from 'mdb-react-ui-kit';
+import { MDBBadge, MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem, MDBRow, MDBCol, MDBBtnGroup, MDBBtn, MDBTabs, MDBTabsItem, MDBTabsLink, MDBTabsContent, MDBTabsPane, MDBTooltip } from 'mdb-react-ui-kit';
 import { useState, useEffect } from 'react';
 import '../planner/planner_styles.css'
 import { toast } from 'react-toastify';
@@ -84,7 +84,14 @@ const PlannerViewer = (props) => {
                                                 :null} 
             </MDBCol>
             <MDBCol size={3}>
-                <p className='planner-viewer-heading'>Correspondence</p>
+                <p className='planner-viewer-heading'>
+                <>
+                    <MDBTooltip tag='a'
+                    title={`Last saved ${props.lastSavedCorrespondenceTime}`} placement='bottom'>
+                    &nbsp;Correspondence
+                    </MDBTooltip>
+                    </>
+                    </p>
                 <p className='planner-viewer-prime-contact'>{props.correspondenceName}</p>
                 <p className='planner-viewer-update-on'>as at {props.correspondenceTime}</p>
             </MDBCol>
@@ -143,7 +150,7 @@ const PlannerViewer = (props) => {
             <MDBTabsContent>
                 <MDBTabsPane open={inputViewActive === 'OVERVIEW'}>
                     <PlannerViewerOverview companyName={props.companyName} status={props.status} platformName={props.platformName} 
-                    planRecord={props.planRecord}/>
+                    planRecord={props.planRecord} jsonModel={props.jsonQueryDefinition}/>
                 </MDBTabsPane>
                 <MDBTabsPane open={inputViewActive === 'INPUT'}>
                     <PlannerViewerInput platformName={props.platformName} planRecord={props.planRecord}/>

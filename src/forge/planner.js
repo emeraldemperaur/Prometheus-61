@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { currentTime } from "../utils/chronos";
 
 export const plannerSlice = createSlice({
     name: 'planner',
@@ -23,11 +24,13 @@ export const plannerSlice = createSlice({
                 enquiryPlatformName: 'UBS Group',
                 autoShare:false,
                 accessPIN: '693324',
-                status: 1,
+                status: 2,
                 buildRank: 0,
                 correspondenceName:'Bruce Wayne',
                 correspondenceEmail:'bruce.wayne@wayneenterprises.ca',
-                correspondenceTime:'February 23, 2024 at 06:39 PM MST',
+                correspondenceTime: currentTime(),
+                lastSavedCorrespondenceTime:'not available',
+                isLocked: false,
                 jsonQueryDefinition: `{
                     "name": "Abode",
                     "model":[
@@ -48,7 +51,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Text Input Element 1",
                             "hintURL": "https://www.dji.com/ca",
-                            "queryResponse": ""
+                            "queryResponse": null
                          },
                         {
                             "queryId": 2,
@@ -64,7 +67,7 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Number Input Element 1",
                             "hintURL": "https://www.dji.com/ca/camera-drones?site=brandsite&from=nav",
-                            "queryResponse": ""
+                            "queryResponse": null
                         },
                         {
                             "queryId": 3,
@@ -279,7 +282,7 @@ export const plannerSlice = createSlice({
                             "queryId": 16,
                             "inputType":"multiselect",
                             "inputAlias": "multiselectInput1",
-                            "inputLabel":"Time Input Element 1",
+                            "inputLabel":"Multiselect Input Element 1",
                             "inputPlaceholder": " ",
                             "newRow": false,
                             "inputWidth": 6,

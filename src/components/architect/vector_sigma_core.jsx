@@ -25,13 +25,11 @@ import { fetchActionID } from '../../utils/chronos';
 const VectorSigma = (props) => {
 
     let jsonModel = props.jsonModel
-    let vectorJSON = JSON.parse(jsonModel);
-    let stackedMode = props.stackedMode;
-    let formikvalues = null;
-    let formikErrors = null;
-    let formikHandleChange = null;
-    let formikfHandleBlur = null;
-    let formikTouched = null;
+    let vectorJSON = {}
+    if(jsonModel){
+        vectorJSON = JSON.parse(jsonModel);
+    }
+    
     const clientMode = props.clientUI;
     const [stackedActive, setStackedActive] = useState(0);
 

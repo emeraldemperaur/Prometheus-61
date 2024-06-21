@@ -50,6 +50,150 @@
     color: #216cb5 !important;
 }
 
+.core-overview-output-box{
+    margin-bottom: 33px;
+}
+
+.core-overview-heading{
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: #216cb5;
+    font-family: 'Montserrat';
+    text-align: left;
+    padding-top: 0px;
+}
+
+.core-overview-output-holder{
+    text-align: left;
+    float: left;
+    color: #002c51 !important;
+    font-size: 18px;
+    letter-spacing: 0.09em;
+    font-weight: 300;
+}
+
+.core-overview-output-text{
+    text-align: left;
+    float: left;
+    color: #002c51 !important;
+    font-size: 18px;
+    letter-spacing: 0.13em;
+    font-weight: 500;
+}
+
+.core-overview-card{
+    padding: 0em !important;
+    margin-left: 1px !important;  
+    margin-right: 1px !important; 
+    border-radius: 0px;  
+    border-style: solid;
+    border-width: 1px;
+     
+}
+
+.core-overview-alert{
+    text-align: left;
+}
+
+.core-overview-alert-box{
+    margin-top: 0px;
+    margin-bottom: 33px;
+    text-align: end;
+    font-size: 33px;
+}
+
+.core-overview-alert-icon{
+    margin-left: 33px;
+    margin-right: 33px;
+}
+
+.core-overview-alert-warn{
+    color: #800020;
+}
+
+.core-overview-alert-hint{
+    color:#e4a11b;
+}
+
+.core-overview-alert-info{
+    color: #216cb5;
+}
+
+.core-overview-card-box{
+    background: #F5F5F5; 
+    border-radius: 3px; 
+    box-shadow: inset -3px -3px 7px #ffffffb0,  
+         inset 3px 3px 5px rgba(94, 104, 121, 0.692);
+ }
+
+.core-overview-highlights{
+    font-size: 21px;
+    font-weight: 200;
+    letter-spacing: 0.13em;
+    color: #002c51 !important;
+}
+
+.core-overview-output-listitem{
+    text-align: left;
+    color: #002c51 !important;
+    font-size: 18px;
+    letter-spacing: 0.13em;
+    font-weight: 500;
+}
+
+.core-overview-output-list{
+    text-align: left;
+}
+
+.core-overview-output-list ol li{
+        counter-increment: step-counter;
+        margin-bottom: 10px;
+        list-style-type:circle !important;
+}
+
+.core-overview-output-time{
+    font-size: 33px !important;
+}
+
+.core-overview-output-textarea{
+    text-align: justify !important;
+    font-weight: 300 !important;
+}
+
+.core-overview-output-year{
+    margin-left: 23px;
+    font-weight: 600 !important;
+}
+
+.core-overview-output-superscript{
+    text-align: left;
+    float: left;
+    color: #002c51 !important;
+    font-size: 18px;
+    letter-spacing: 0.13em;
+    font-weight: 300;
+}
+
+.core-overview-output-subscript{
+    text-align: left;
+    float: left;
+    color: #002c51 !important;
+    letter-spacing: 0.13em;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.core-overview-output-number{
+    font-weight: 500;
+    font-size: 33px;
+    letter-spacing: 0.44em;
+    text-align: left;
+    float: left;
+    color: #002c51 !important;
+}
+
 .checkbox-input-border{
     margin-top: 6px;
 }

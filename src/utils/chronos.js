@@ -16,6 +16,15 @@ export const hubGreeting = (userName) =>{
     return greeting
 }
 
+export const fetchMonth = (monthInt) =>{
+    let monthIndex = monthInt - 1
+    let monthText = ""
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August",
+     "September", "October", "November", "December"]
+    monthText = months[monthIndex]
+    return monthText
+}
+
 export const fetchPIN = () =>{
     let PIN = Math.floor(100000 + Math.random() * 900000)
     console.log("PIN fetched:" + PIN);
