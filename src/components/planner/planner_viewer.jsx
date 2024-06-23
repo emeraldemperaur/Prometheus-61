@@ -32,6 +32,8 @@ const PlannerViewer = (props) => {
      console.log(`Questionnaire notification sent to ${queryCorrespondence}`);   
     }
 
+    
+
 
     return(
         <>
@@ -150,7 +152,7 @@ const PlannerViewer = (props) => {
             <MDBTabsContent>
                 <MDBTabsPane open={inputViewActive === 'OVERVIEW'}>
                     <PlannerViewerOverview companyName={props.companyName} status={props.status} platformName={props.platformName} 
-                    planRecord={props.planRecord} jsonModel={props.jsonQueryDefinition}/>
+                    planRecord={props.planRecord} jsonModel={props.jsonQueryDefinition} isLocked={props.isLocked}/>
                 </MDBTabsPane>
                 <MDBTabsPane open={inputViewActive === 'INPUT'}>
                     <PlannerViewerInput platformName={props.platformName} planRecord={props.planRecord}/>

@@ -4,22 +4,26 @@ import { Alert } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
 
-const AlertOutput = (props) => {
-    let outputInfoNote = props.infoNote.split("|", 3)
+const AlertOutput = ({infoNote}) => {
+    let outputInfoNote = infoNote.split("|", 3)
+    const [outputObject, setOutputObject] = useState(infoNote.split("|", 3))
     const [alertType, setAlertType] = useState("")
     const [alertIcon, setAlertIcon] = useState("fa-regular fa-lightbulb")
     
     const setType = (inputInfoNote) =>{
         switch(inputInfoNote[0].trim().toLowerCase()) {
-            case "w" || "warning":
+            case "w":
+                console.log(`Running Output Type: W`)
                 setAlertType("danger")
                 setAlertIcon("fa-solid fa-radiation");
                  break;
-            case "h" || "hint":
+            case "h":
+                console.log(`Running Output Type: H`)
                 setAlertType("warning")
                 setAlertIcon("fa-regular fa-lightbulb");
                 break;
-            case "i" || "info":
+            case "i":
+                console.log(`Running Output Type: I`)
                 setAlertType("primary");
                 setAlertIcon("fa-solid fa-info");
                 break;
@@ -27,23 +31,29 @@ const AlertOutput = (props) => {
     }
 
     useEffect(() => {
-        console.log(`Output Note:   ${outputInfoNote}`)
-        console.log(`Output Note 1:   ${outputInfoNote[0]}`)
-        console.log(`Output Note 2:   ${outputInfoNote[1]}`)
-        console.log(`Output Note 3:   ${outputInfoNote[2]}`)
+        console.log(`Running Output Note:   ${outputObject}`)
+        console.log(`Running Output Note 1:   ${outputObject[0]}`)
+        console.log(`Running Output Note 2:   ${outputObject[1]}`)
+        console.log(`Running Output Note 3:   ${outputObject[2]}`)
 
-        setType(outputInfoNote)
+        setType(outputObject)
         
-        }, [alertType, props.infoNote]);
+        }, [outputObject, alertType]);
     return(
     <>
-    <MDBRow>
      <MDBCol size={12}>
-     <Alert className='core-overview-alert' key={props.infoId} variant={alertType}><i className={alertIcon}></i>&nbsp;&nbsp;
-     {outputInfoNote[1].trim()}<Alert.Link href={outputInfoNote[2]} target='_blank'>&nbsp;&nbsp;More Info</Alert.Link>
+     <Alert className='core-overview-alert' variant={alertType}><i className={alertIcon}></i>&nbsp;&nbsp;
+     {outputObject[1] ?
+                    <>{outputObject[1].trim()}</>
+                    :null}
+    {outputObject[2] ?
+                    <>{outputObject[2].trim().length > 1 ?
+                        <Alert.Link href={outputObject[2]} target='_blank'>&nbsp;&nbsp;More Info</Alert.Link>
+                        :null}</>
+                    :null}
+     
      </Alert>
     </MDBCol>
-    </MDBRow>
     </>
     )
 

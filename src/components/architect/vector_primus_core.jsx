@@ -141,7 +141,7 @@ const VectorPrimus = (props) => {
                     }
                      {
                                 vectorElement.queries ?
-                                <AlphaPaxForge inputElements={vectorElement.queries}/>
+                                <AlphaPaxForge sectionId={vectorElement.sectionId} inputElements={vectorElement.queries}/>
                                 :null
                     }
                 

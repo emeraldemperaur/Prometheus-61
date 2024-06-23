@@ -33,13 +33,22 @@ import VectorPrimus from "../architect/vector_primus_core";
 
 
 const PlannerViewerOverview = (props) => {
+    const lockClientInput = () =>{
+        if(props.isLocked){
+            console.log(`>>> Unlocking Query`)
+        } 
+        if(!props.isLocked){
+            console.log(`>>> Locking Query`)
+        }
+    }
+
     return(
     <>
     <MDBRow>
         <MDBCol size={12}>
-            <div className="lock-box">
-            <PlanLock/>
-            </div>
+            {props.status > 1 ?
+            <><div className="lock-box"><PlanLock onClickFunc={lockClientInput} isLocked={props.isLocked}/></div></>
+            :null}
             {props.platformName == "Global - All Platforms" ?
             <><img className="planner-platform-img" src={MSLogo} alt="Global - All Platforms"/></>
             :null}

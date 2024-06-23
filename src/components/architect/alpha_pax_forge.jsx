@@ -1,15 +1,22 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../architect/architect_core_styles.css'
 import AlertOutput from './output_alert_component';
+import { MDBRow } from 'mdb-react-ui-kit';
 
 
-const AlphaPaxForge = ({inputElements}) => {
+const AlphaPaxForge = ({sectionId, inputElements}) => {
     const [alertsList, setAlertsList] = useState(inputElements);
     const [hasAlerts, setHasAlerts] = useState(false);
+    const [noteList, setNoteList] = useState([]);
+    let queryNotes = []
+    const notesRef = useRef(new Set(queryNotes));
+    const notesListRef = useRef(queryNotes);
+    let index = 0;
 
     useEffect(() => {
-        
-        }, [inputElements, hasAlerts]);
+        notesRef.current = []
+        alertsList.map( inputElement => (orionPrime(inputElement)))
+        }, []);
 
 const isValidNote = (queryNote) =>{
     let isValid = false;
@@ -21,62 +28,87 @@ const isValidNote = (queryNote) =>{
     return isValid;
 }
 
-const orionPax = (inputElement) =>{
-    switch(inputElement.inputType.toLowerCase()) {
-        case "select":
-            {
-                inputElement.inputOptions ?
+const orionPrime = (inputElement) =>{
+
+    if(inputElement.inputType.trim().toLowerCase() == "select"){
+        inputElement.inputOptions ?
                 inputElement.inputOptions.map( inputOption => {
                     if(inputOption.text == inputElement.queryResponse){
                         if(isValidNote(inputOption.queryNote.trim())){
+                            console.log(`Orion Prime Test 1 -- ${inputElement.inputType}:: ${hasAlerts}`);
+                            queryNotes.push(inputOption.queryNote)
+                            //setNoteList(queryNotes) 
+                            notesRef.current = new Set(queryNotes);
+                            notesListRef.current = Array.from(notesRef.current);
+                            console.log(`Note List Objects: ${queryNotes}`)
                             if(!hasAlerts){setHasAlerts(true);}
-                            return <React.Fragment key={inputOption.id}><AlertOutput infoId={inputOption.id} infoNote={inputOption.queryNote}/></React.Fragment>
                         }}
-            }):null}
-            break;
-        case "multiselect":
-            {
-                inputElement.inputOptions ?
+            }):null
+    }
+    if(inputElement.inputType.trim().toLowerCase() == "multiselect"){
+        inputElement.inputOptions ?
+                inputElement.inputOptions.map( inputOption => {
+                    if(inputElement.queryResponse.includes(inputOption.text)){
+                        if(isValidNote(inputOption.queryNote.trim())){
+                            console.log(`Orion Prime Test 1 -- ${inputElement.inputType}:: ${hasAlerts}`);
+                            queryNotes.push(inputOption.queryNote)
+                            //setNoteList(queryNotes)
+                            notesRef.current = new Set(queryNotes);
+                            notesListRef.current = Array.from(notesRef.current);
+                            console.log(`Note List Objects: ${queryNotes}`)
+                            if(!hasAlerts){setHasAlerts(true);}
+                        }}
+            }):null
+    }
+    if(inputElement.inputType.trim().toLowerCase() == "checkbox"){
+        inputElement.inputOptions ?
+                inputElement.inputOptions.map( inputOption => {
+                    if(inputElement.queryResponse.includes(inputOption.text)){
+                        if(isValidNote(inputOption.queryNote.trim())){
+                            console.log(`Orion Prime Test 1 -- ${inputElement.inputType}:: ${hasAlerts}`);
+                            queryNotes.push(inputOption.queryNote)
+                            //setNoteList(queryNotes)
+                            notesRef.current = new Set(queryNotes);
+                            notesListRef.current = Array.from(notesRef.current);
+                            console.log(`Note List Objects: ${queryNotes}`)
+                            if(!hasAlerts){setHasAlerts(true);}
+                        }}
+            }):null
+    }
+    if(inputElement.inputType.trim().toLowerCase() == "radio"){
+        inputElement.inputOptions ?
                 inputElement.inputOptions.map( inputOption => {
                     if(inputOption.text == inputElement.queryResponse){
                         if(isValidNote(inputOption.queryNote.trim())){
+                            console.log(`Orion Prime Test 1 -- ${inputElement.inputType}:: ${hasAlerts}`);
+                            queryNotes.push(inputOption.queryNote)
+                            //setNoteList(queryNotes)
+                            notesRef.current = new Set(queryNotes);
+                            notesListRef.current = Array.from(notesRef.current);
+                            console.log(`Note List Objects: ${queryNotes}`)
                             if(!hasAlerts){setHasAlerts(true);}
-                            return <React.Fragment key={inputOption.id}><AlertOutput infoId={inputOption.id} infoNote={inputOption.queryNote}/></React.Fragment>
                         }}
-            }):null}
-            break;
-        case "checkbox":
-            {
-                inputElement.inputOptions ?
-                inputElement.inputOptions.map( inputOption => {
-                    if(isValidNote(inputOption.queryNote.trim())){
-                        if(!hasAlerts){setHasAlerts(true);}
-                        return<React.Fragment key={inputOption.id}><AlertOutput infoId={inputOption.id} infoNote={inputOption.queryNote}/></React.Fragment>
-                    }
-            }):null}
-            break;
-        case "radio":
-            {
-                inputElement.inputOptions ?
-                inputElement.inputOptions.map( inputOption => {
-                    if(inputOption.text == inputElement.queryResponse){
-                        if(isValidNote(inputOption.queryNote.trim())){
+            }):null
+    }
+    if(inputElement.inputType.trim().toLowerCase() == "toggle"){                
+                    if(inputElement.queryResponse == true){
+                        if(isValidNote(inputElement.queryNote.trim())){
+                            console.log(`Orion Prime Test 1 -- ${inputElement.inputType}:: ${hasAlerts}`);
+                            queryNotes.push(inputElement.queryNote)
+                            //setNoteList(queryNotes)
+                            notesRef.current = new Set(queryNotes);
+                            notesListRef.current = Array.from(notesRef.current);
+                            console.log(`Note List Objects: ${queryNotes}`)
                             if(!hasAlerts){setHasAlerts(true);}
-                            return <React.Fragment key={inputOption.id}><AlertOutput infoId={inputOption.id} infoNote={inputOption.queryNote}/></React.Fragment>
                         }}
-            }):null}
-            break;
-        case "toggle":
-            {
-                inputElement.queryResponse == true && isValidNote(inputElement.queryNote.trim()) ?
-                <React.Fragment key={inputElement.queryId}>
-                {setHasAlerts(true)}
-                <AlertOutput infoId={inputElement.queryId} infoNote={inputElement.queryNote}/>
-                </React.Fragment>
-                :null}
-            break;
-       
-        }
+    }
+}
+
+const orionPax = (queryNote) =>{
+    noteList.map( inputNotes => {})
+    let QNObject = queryNote.split("|", 3);
+    let queryType = QNObject[0].trim();
+    let queryText
 
 }
 
@@ -84,8 +116,17 @@ const orionPax = (inputElement) =>{
     <>
     
       {hasAlerts ?
-            <MDBRow id={`${props.sectionId}Alerts`}>
-            {alertsList.map( inputElement => (orionPax(inputElement)))}
+            <MDBRow id={`Section${sectionId}Alerts`}>
+            {console.log(`Alerts List Check -->> ${noteList}`)}
+            {
+        notesListRef.current ?
+        notesListRef.current.map( inputNote => (
+                <React.Fragment key={index++}>
+                        <AlertOutput infoNote={inputNote}/>
+                        {console.log(`Alerts Note Check -->> ${inputNote}`)}
+                </React.Fragment>
+                     )):null
+                    }
             </MDBRow>
             :null}
     

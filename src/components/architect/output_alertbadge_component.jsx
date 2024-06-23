@@ -30,13 +30,13 @@ const AlertBadgeOutput = (props) => {
                 <MDBCol size={6}>
                 <a className='core-overview-highlights'>HIGHLIGHTS</a>
                 {hasInfo ?
-                    <><a href={`#${props.sectionId}Alerts`}><i className="core-overview-alert-info core-overview-alert-icon fa-solid fa-info"></i></a></>
+                    <><a href={`#Section${props.sectionId}Alerts`}><i className="core-overview-alert-info core-overview-alert-icon fa-solid fa-info"></i></a></>
                 :null}
                 {hasHint ?
-                    <><a href={`#${props.sectionId}Alerts`}><i className="core-overview-alert-hint core-overview-alert-icon fa-regular fa-lightbulb"></i></a></>
+                    <><a href={`#Section${props.sectionId}Alerts`}><i className="core-overview-alert-hint core-overview-alert-icon fa-regular fa-lightbulb"></i></a></>
                 :null}
                 {hasWarn ?
-                    <><a href={`#${props.sectionId}Alerts`}><i className="core-overview-alert-warn core-overview-alert-icon fa-solid fa-radiation"></i></a></>
+                    <><a href={`#Section${props.sectionId}Alerts`}><i className="core-overview-alert-warn core-overview-alert-icon fa-solid fa-radiation"></i></a></>
                 :null}
                 </MDBCol>
             </MDBRow>

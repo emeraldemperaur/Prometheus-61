@@ -30,7 +30,7 @@ export const plannerSlice = createSlice({
                 correspondenceEmail:'bruce.wayne@wayneenterprises.ca',
                 correspondenceTime: currentTime(),
                 lastSavedCorrespondenceTime:'not available',
-                isLocked: false,
+                isLocked: true,
                 jsonQueryDefinition: `{
                     "name": "Abode",
                     "model":[
@@ -270,13 +270,13 @@ export const plannerSlice = createSlice({
                             "hintText": "This is sample hint text content for Select Input Element 1",
                             "hintURL": "https://www.dji.com/ca/products/power-series?site=brandsite&from=nav",
                             "inputOptions":[
-                                {"id":1, "text":"Dashboard", "queryNote": "HINT --> This is a sample hint for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":2, "text":"Company Profiles", "queryNote": "WARN --> This is a sample warning for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":3, "text":"Query Models", "queryNote": "TIP --> This is a sample tip for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":4, "text":"Plan Forms", "queryNote": "HINT --> This is a sample hint for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":5, "text":"Insight Models", "queryNote": "WARN --> This is a sample warning for Select Input Element 1 --> https://www.dji.com/ca"}
+                                {"id":1, "text":"Dashboard", "queryNote": "H | This is a sample hint for Select Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":2, "text":"Company Profiles", "queryNote": "W | This is a sample warning for Select Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":3, "text":"Query Models", "queryNote": "I | This is a sample tip for Select Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":4, "text":"Plan Forms", "queryNote": "H | This is a sample hint for Select Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":5, "text":"Insight Models", "queryNote": "W | This is a sample warning for Select Input Element 1 | https://www.dji.com/ca"}
                                             ],
-                            "queryResponse": ""
+                            "queryResponse": "Company Profiles"
                         },
                         {
                             "queryId": 16,
@@ -291,13 +291,13 @@ export const plannerSlice = createSlice({
                             "hintText": "This is sample hint text content for Time Input Element 1",
                             "hintURL": "https://www.dji.com/ca/products/power-series?site=brandsite&from=nav",
                             "inputOptions":[
-                                {"id":1, "text":"Dashboard", "queryNote": "HINT --> This is a sample hint for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":2, "text":"Company Profiles", "queryNote": "WARN --> This is a sample warning for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":3, "text":"Query Models", "queryNote": "TIP --> This is a sample tip for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":4, "text":"Plan Forms", "queryNote": "HINT --> This is a sample hint for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":5, "text":"Insight Models", "queryNote": "WARN --> This is a sample warning for Select Input Element 1 --> https://www.dji.com/ca"}
+                                {"id":1, "text":"Dashboard", "queryNote": "H | This is a sample hint for MultiSelect Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":2, "text":"Company Profiles", "queryNote": "W | This is a sample warning for MultiSelect Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":3, "text":"Query Models", "queryNote": "I | This is a sample tip for MultiSelect Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":4, "text":"Plan Forms", "queryNote": "H | This is a sample hint for MultiSelect Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":5, "text":"Insight Models", "queryNote": "W | This is a sample warning for MultiSelect Input Element 1 | https://www.dji.com/ca"}
                                             ],
-                            "queryResponse": ""
+                            "queryResponse": ["Company Profiles","Query Models"]
                         },
                         {
                             "queryId": 17,
@@ -312,13 +312,13 @@ export const plannerSlice = createSlice({
                             "hintText": "This is sample hint text content for CheckBox Input Element 1",
                             "hintURL": "https://www.dji.com/ca/products/power-series?site=brandsite&from=nav",
                             "inputOptions":[
-                                {"id":1, "text":"Dashboard", "queryNote": "HINT --> This is a sample hint for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":2, "text":"Company Profiles", "queryNote": "WARN --> This is a sample warning for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":3, "text":"Query Models", "queryNote": "TIP --> This is a sample tip for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":4, "text":"Plan Forms", "queryNote": "HINT --> This is a sample hint for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":5, "text":"Insight Models", "queryNote": "WARN --> This is a sample warning for Select Input Element 1 --> https://www.dji.com/ca"}
+                                {"id":1, "text":"Dashboard", "queryNote": "H | This is a sample hint for Checkbox Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":2, "text":"Company Profiles", "queryNote": "W | This is a sample warning for Checkbox Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":3, "text":"Query Models", "queryNote": "I | This is a sample tip for Checkbox Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":4, "text":"Plan Forms", "queryNote": "H | This is a sample hint for Checkbox Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":5, "text":"Insight Models", "queryNote": "WARN | This is a sample warning for Checkbox Input Element 1 | https://www.dji.com/ca"}
                                             ],
-                            "queryResponse": ""
+                            "queryResponse": ["Plan Forms","Company Profiles"]
                         },
                         {
                             "queryId": 18,
@@ -333,13 +333,13 @@ export const plannerSlice = createSlice({
                             "hintText": "This is sample hint text content for Radio Input Element 1",
                             "hintURL": "https://www.dji.com/ca/products/power-series?site=brandsite&from=nav",
                             "inputOptions":[
-                                {"id":1, "text":"Dashboard", "queryNote": "HINT --> This is a sample hint for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":2, "text":"Company Profiles", "queryNote": "WARN --> This is a sample warning for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":3, "text":"Query Models", "queryNote": "TIP --> This is a sample tip for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":4, "text":"Plan Forms", "queryNote": "HINT --> This is a sample hint for Select Input Element 1 --> https://www.dji.com/ca"}, 
-                                {"id":5, "text":"Insight Models", "queryNote": "WARN --> This is a sample warning for Select Input Element 1 --> https://www.dji.com/ca"}
+                                {"id":1, "text":"Dashboard", "queryNote": "H | This is a sample hint for Radio Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":2, "text":"Company Profiles", "queryNote": "W | This is a sample warning for Radio Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":3, "text":"Query Models", "queryNote": "I | This is a sample tip for Radio Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":4, "text":"Plan Forms", "queryNote": "H | This is a sample hint for Radio Input Element 1 | https://www.dji.com/ca"}, 
+                                {"id":5, "text":"Insight Models", "queryNote": "W | This is a sample warning for Radio Input Element 1 | https://www.dji.com/ca"}
                                             ],
-                            "queryResponse": ""
+                            "queryResponse": "Insight Models"
                         },
                         {
                             "queryId": 19,
@@ -353,8 +353,8 @@ export const plannerSlice = createSlice({
                             "isHinted": true,
                             "hintText": "This is sample hint text content for Toggle Input Element 1",
                             "hintURL": "https://www.dji.com/ca/products/power-series?site=brandsite&from=nav",
-                            "queryNote": "WARN --> This is a sample warning for Toggle Input Element 1 --> https://www.dji.com/ca",
-                            "queryResponse": ""
+                            "queryNote": "W | This is a sample warning for Toggle Input Element 1 | https://www.dji.com/ca",
+                            "queryResponse": true
                         },
                         {
                             "queryId": 20,

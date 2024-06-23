@@ -10,6 +10,7 @@ import { useState } from "react";
 import { Formik } from 'formik';
 import VectorSigma from '../architect/vector_sigma_core';
 import { tr } from "date-fns/locale";
+import PlanLock from "../artificer/planner_lock_component";
 
 const PlannerViewerInput = (props) => {
     const [stackedMode, setStackedMode] = useState(false);
