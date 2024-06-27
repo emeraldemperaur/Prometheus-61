@@ -461,11 +461,32 @@ export const enquirerSlice = createSlice({
     reducers:{
         addQueryModel:(state, action)=>{
             
-            state.list = [...state.list, action.payload]
+            state.list = [...state.list, action.payload];
 
-        }
+        },
+        editQueryModel:(state, action)=>{
+            let index = state.list.findIndex(enquirerrecord => enquirerrecord.id === action.payload.id);
+            let list = [...state.list];
+            list[index] = action.payload;
+            state.list = [...list];
+        },
+        deleteQueryModel:(state, action)=>{
+            
+            let delList = state.list.filter(enquirerrecord => enquirerrecord.id !== action.payload.id)
+            state.list = [...delList];
+
+        },
+        lockQueryModel:(state, action)=>{
+            
+            let delList = state.list.filter(enquirerrecord => enquirerrecord.id !== action.payload.id)
+            state.list = [...delList];
+
+        },
     }
 });
 
 export const {addQueryModel} = enquirerSlice.actions;
+export const {editQueryModel} = enquirerSlice.actions;
+export const {deleteQueryModel} = enquirerSlice.actions;
+export const {lockQueryModel} = enquirerSlice.actions;
 export default enquirerSlice.reducer;

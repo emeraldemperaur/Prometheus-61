@@ -4,17 +4,50 @@ import { useState } from 'react';
 import '../rolodex/rolodex_styles.css'
 import RolodexViewer from './rolodex_viewer';
 import LogoHolder from '../planner/assets/placeholder-circle.png';
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteCompanyProfile } from '../../forge/rolodex';
+import ConfirmModal from '../artificer/confirm_modal_component';
+import CascadeModal from '../artificer/cascade_modal_component';
+
+
 
 const RolodexTable = ({rolodexList}) => {
 
     const [rolodexModal, setRolodexModal] = useState(false);
     const [rolodexItem, setRolodexItem] = useState(null);
+    const [confirmModal, setConfirmModal] = useState(false);
+    const [cascadeModal, setCascadeModal] = useState(false);
     const toggleOpen = () => setRolodexModal(!rolodexModal);
+    const rolodexDeleteDispatch = useDispatch();
+    const planner = useSelector((state)=> state.planner.list);
+
 
     const renderRolodexViewer = (rolodexItemObject) => {
         setRolodexItem(rolodexItemObject)
         setRolodexModal(!rolodexModal);
         console.log(rolodexItem)
+    }
+
+    const deleteRolodexRecord = (rolodexRecord) => {
+        setRolodexItem(rolodexRecord);
+        if(linkedRolodex(rolodexRecord)){
+            setCascadeModal(!cascadeModal);
+            console.log(`Note: This rolodex record is linked to an extant plan record`)
+        }
+        if(!linkedRolodex(rolodexRecord)){
+            setConfirmModal(!confirmModal)
+            console.log(`Deleting Record ${rolodexRecord.companyName}`);
+        }
+    }
+
+    const linkedRolodex = (rolodexRecord) => {
+        let isLinked = false;
+        for(const plan of planner){
+            if(rolodexRecord.id == plan.companyID){
+                isLinked = true;
+            }
+        }
+        return isLinked;
     }
 
     return(
@@ -32,7 +65,7 @@ const RolodexTable = ({rolodexList}) => {
             </tr>
             </MDBTableHead>
             <MDBTableBody style={{ fontFamily:'Montserrat' }}>
-                { rolodexList ?
+                { rolodexList.length > 0 ?
                 rolodexList.map( rolodexItem => (
                                             <tr key={rolodexItem.id}>
                                             <td>
@@ -74,7 +107,7 @@ const RolodexTable = ({rolodexList}) => {
                                                 <i className="fa-regular fa-eye"></i> View</MDBBtn>&nbsp;
                                                 <MDBBtn className="rolodex-form-button" rounded size='sm'>
                                                 <i className="fa-regular fa-pen-to-square"></i> Edit</MDBBtn>&nbsp;
-                                                <MDBBtn className="rolodex-form-button" rounded size='sm'>
+                                                <MDBBtn onClick={() => deleteRolodexRecord(rolodexItem)} className="rolodex-form-button" rounded size='sm'>
                                                 <i className="fa-solid fa-trash"></i> Delete</MDBBtn>
                                             </td>
                                             <td>
@@ -82,7 +115,16 @@ const RolodexTable = ({rolodexList}) => {
                                             </td>        
 
                                             </tr>
-                                            )):null
+                                            )):<> 
+                                            <tr>
+                                             <th scope='col'>&nbsp;</th>
+                                             <th scope='col'>&nbsp;</th>
+                                             <th scope='col'><a className='no-records-found'>No Records Found</a></th>
+                                             <th scope='col'>&nbsp;</th>
+                                             <th scope='col'>&nbsp;</th>
+                                             <th scope='col'>&nbsp;</th>
+                                            </tr>
+                                            </>
                                         }
             </MDBTableBody>
         </MDBTable>
@@ -112,6 +154,19 @@ const RolodexTable = ({rolodexList}) => {
             </MDBModalDialog>
         </MDBModal>
         </>
+        {rolodexItem ?
+        <>
+        <ConfirmModal title="Delete Company Profile" size="lg" confirmPromptModal={confirmModal} setConfirmPromptModal={setConfirmModal}
+                    scrollable={false} recordType={'company profile'} entityProductName={`${rolodexItem.companyName}`}
+                    recordIcon="fa-regular fa-registered"
+                    onClickFunc={() => {rolodexDeleteDispatch(deleteCompanyProfile({...rolodexItem})); setConfirmModal(!confirmModal);}}/>         
+        <CascadeModal title="Linked Company Profile" size="lg" confirmPromptModal={cascadeModal} setConfirmPromptModal={setCascadeModal}
+                    scrollable={false} entityProductName={`${rolodexItem.companyName}`}
+                    recordIcon="fa-solid fa-sign-hanging"
+                    />         
+        
+        </>
+         :null}
     </div>
     </>
     )

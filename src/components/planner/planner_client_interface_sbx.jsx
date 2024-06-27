@@ -297,7 +297,7 @@ const PlannerClientInterfaceSBX = ({planRecord}) => {
                 </MDBRow>
 
 
-                <SaveActionModal title={'Saving Details...'} icon="save" size="lg" isCompleted={false}
+                <SaveActionModal title={'Saving Details...'} icon="save" size="lg" isCompleted={isSubmitting}
                     togglePromptModal={saveTogglePromptModal} setTogglePromptModal={setSaveTogglePromptModal} scrollable={false} 
                     productPlan={planRecord.productPlanName} corpName={planRecord.companyName} id={planRecord.id}/>
                 {planRecord.status == 3 ?
@@ -306,7 +306,7 @@ const PlannerClientInterfaceSBX = ({planRecord}) => {
                         togglePromptModal={confirmTogglePromptModal} setTogglePromptModal={setConfirmTogglePromptModal} scrollable={false} 
                         productPlan={planRecord.productPlanName} corpName={planRecord.companyName} id={planRecord.id}
                         />
-                        <SubmitActionModal title="Resubmitting Details..." icon="upload" size="lg" isCompleted={false}
+                        <SubmitActionModal title="Resubmitting Details..." icon="upload" size="lg" isCompleted={isSubmitting}
                     togglePromptModal={submitTogglePromptModal} setTogglePromptModal={setSubmitTogglePromptModal} scrollable={false} 
                     productPlan={planRecord.productPlanName} corpName={planRecord.companyName} id={planRecord.id}/>
                         </>
@@ -316,7 +316,7 @@ const PlannerClientInterfaceSBX = ({planRecord}) => {
                         togglePromptModal={confirmTogglePromptModal} setTogglePromptModal={setConfirmTogglePromptModal} scrollable={false} 
                         productPlan={planRecord.productPlanName} corpName={planRecord.companyName} id={planRecord.id}
                         />
-                        <SubmitActionModal title="Submitting Details..." icon="paper-plane" size="lg" isCompleted={false}
+                        <SubmitActionModal title="Submitting Details..." icon="paper-plane" size="lg" isCompleted={isSubmitting}
                     togglePromptModal={submitTogglePromptModal} setTogglePromptModal={setSubmitTogglePromptModal} scrollable={false} 
                     productPlan={planRecord.productPlanName} corpName={planRecord.companyName} id={planRecord.id}/> 
                         

@@ -19,7 +19,8 @@ import ShareworksLogo from '../planner/assets/MorganStanleyAtWorkLogo.png';
 import ETradeLogo from '../planner/assets/ETradeLogo.png';
 import UBSGroupLogo from '../planner/assets/UBSLogo.png';
 import { formClerk } from '../../utils/form_clerk';
-
+import { useDispatch } from 'react-redux'
+import { postPlanQuestionnaire } from '../../forge/planner';
 
 
 
@@ -39,8 +40,7 @@ const PlannerClientInterface = ({planRecord}) => {
     const [isClientUI, setIsClientUI] = useState(true)
     const [isDisabled, setIsDisabled] = useState(false)
     const [isLocked, setIsLocked] = useState(false)
-    
-
+    const planPostDispatch = useDispatch();
 
 
 
@@ -340,7 +340,7 @@ const PlannerClientInterface = ({planRecord}) => {
                 </MDBRow>
 
 
-                <SaveActionModal title={'Saving Details...'} icon="save" size="lg" isCompleted={false}
+                <SaveActionModal title={'Saving Details...'} icon="save" size="lg" isCompleted={isSubmitting}
                     togglePromptModal={saveTogglePromptModal} setTogglePromptModal={setSaveTogglePromptModal} scrollable={false} 
                     productPlan={planRecord.productPlanName} corpName={planRecord.companyName} id={planRecord.id}/>
                 {planRecord.status == 3 ?
@@ -349,7 +349,7 @@ const PlannerClientInterface = ({planRecord}) => {
                         togglePromptModal={confirmTogglePromptModal} setTogglePromptModal={setConfirmTogglePromptModal} scrollable={false} 
                         productPlan={planRecord.productPlanName} corpName={planRecord.companyName} id={planRecord.id}
                         />
-                        <SubmitActionModal title="Resubmitting Details..." icon="upload" size="lg" isCompleted={false}
+                        <SubmitActionModal title="Resubmitting Details..." icon="upload" size="lg" isCompleted={isSubmitting}
                     togglePromptModal={submitTogglePromptModal} setTogglePromptModal={setSubmitTogglePromptModal} scrollable={false} 
                     productPlan={planRecord.productPlanName} corpName={planRecord.companyName} id={planRecord.id}/>
                         </>
@@ -359,7 +359,7 @@ const PlannerClientInterface = ({planRecord}) => {
                         togglePromptModal={confirmTogglePromptModal} setTogglePromptModal={setConfirmTogglePromptModal} scrollable={false} 
                         productPlan={planRecord.productPlanName} corpName={planRecord.companyName} id={planRecord.id}
                         />
-                        <SubmitActionModal title="Submitting Details..." icon="paper-plane" size="lg" isCompleted={false}
+                        <SubmitActionModal title="Submitting Details..." icon="paper-plane" size="lg" isCompleted={isSubmitting}
                     togglePromptModal={submitTogglePromptModal} setTogglePromptModal={setSubmitTogglePromptModal} scrollable={false} 
                     productPlan={planRecord.productPlanName} corpName={planRecord.companyName} id={planRecord.id}/> 
                         

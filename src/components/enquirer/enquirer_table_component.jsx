@@ -3,16 +3,29 @@ import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import '../planner/planner_styles.css'
 import EnquirerViewer from './enquirer_viewer';
+import { useDispatch } from 'react-redux'
+import { deleteQueryModel } from '../../forge/enquirer';
+import ConfirmModal from '../artificer/confirm_modal_component';
+
+
 
 const EnquirerTable = ({enquirerList}) => {
 
     const [enquirerModal, setEnquirerModal] = useState(false);
     const [enquirerItem, setEnquirerItem] = useState(null);
+    const [confirmModal, setConfirmModal] = useState(false);
     const toggleOpen = () => setEnquirerModal(!enquirerModal); 
+    const enquirerDeleteDispatch = useDispatch();
     const renderEnquirerViewer = (enquirerItemObject) => { 
         setEnquirerItem(enquirerItemObject); 
         setEnquirerModal(!enquirerModal); 
         console.log(enquirerItem)
+    }
+    const deleteEnquirerRecord = (enquirerRecord) => {
+        setEnquirerItem(enquirerRecord);
+        setConfirmModal(!confirmModal)
+        console.log(`Deleting Record ${enquirerRecord.modelName}`);
+
     }
    
 
@@ -32,7 +45,7 @@ const EnquirerTable = ({enquirerList}) => {
             </tr>
             </MDBTableHead>
             <MDBTableBody style={{ fontFamily:'Montserrat' }}>
-                    { enquirerList ?
+                    { enquirerList.length > 0 ?
                         enquirerList.map( enquirerItem => (
                                 <tr key={enquirerItem.id}>
                                     <td>
@@ -73,14 +86,24 @@ const EnquirerTable = ({enquirerList}) => {
                                         <i className="fa-regular fa-eye"></i> View</MDBBtn>&nbsp;
                                         <MDBBtn className="enquirer-form-button" rounded size='sm'>
                                         <i className="fa-regular fa-pen-to-square"></i> Edit</MDBBtn>&nbsp;
-                                        <MDBBtn className="enquirer-form-button" rounded size='sm'>
+                                        <MDBBtn onClick={() => deleteEnquirerRecord(enquirerItem)} className="enquirer-form-button" rounded size='sm'>
                                         <i className="fa-solid fa-trash"></i> Delete</MDBBtn>
                                     </td>
                                     <td>
                                     
                                     </td>
                                 </tr>
-                                )):null
+                                )):
+                                <> 
+                                <tr>
+                                 <th scope='col'>&nbsp;</th>
+                                 <th scope='col'>&nbsp;</th>
+                                 <th scope='col'><a className='no-records-found'>No Records Found</a></th>
+                                 <th scope='col'>&nbsp;</th>
+                                 <th scope='col'>&nbsp;</th>
+                                 <th scope='col'>&nbsp;</th>
+                                </tr>
+                                </>
                     }
      
             </MDBTableBody>
@@ -110,6 +133,14 @@ const EnquirerTable = ({enquirerList}) => {
             </MDBModalDialog>
         </MDBModal>
         </>
+        {enquirerItem ?
+        <>
+        <ConfirmModal title="Delete Query Model" size="lg" confirmPromptModal={confirmModal} setConfirmPromptModal={setConfirmModal}
+                    scrollable={false} recordType={'query model'} entityProductName={`${enquirerItem.productPlanName}: ${enquirerItem.modelName}`}
+                    recordIcon="fa-regular fa-circle-question"
+                    onClickFunc={() => {enquirerDeleteDispatch(deleteQueryModel({...enquirerItem})); setConfirmModal(!confirmModal);}}/>         
+        </>
+         :null}
     </div>
     </>
     )

@@ -1,20 +1,36 @@
-import { MDBBadge, MDBBtn, MDBIcon, MDBTable, MDBTableHead, MDBTableBody, MDBCheckbox, MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBModalBody, MDBTooltip } from 'mdb-react-ui-kit';
+import { MDBBadge, MDBBtn, MDBRow, MDBTable, MDBTableHead, MDBTableBody, MDBCheckbox, MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBModalBody, MDBTooltip } from 'mdb-react-ui-kit';
 import { useState } from 'react';
 import { CSSTransition, TransitionGroup} from 'react-transition-group';
 import '../planner/planner_styles.css'
 import PlannerViewer from './planner_viewer';
 import LogoHolder from '../planner/assets/placeholder-circle.png';
+import { useDispatch } from 'react-redux'
+import { deletePlanQuestionnaire } from '../../forge/planner';
+import ConfirmModal from '../artificer/confirm_modal_component';
+
+
 
 const PlannerTable = ({plannerList}) => {
 
     const [plannerModal, setPlannerModal] = useState(false);
     const [plannerItem, setPlannerItem] = useState(null);
+    const [confirmModal, setConfirmModal] = useState(false);
     const toggleOpen = () => setPlannerModal(!plannerModal);
+    const planDeleteDispatch = useDispatch();
+
+    
 
     const renderPlannerViewer = (plannerItemObject) => {
         setPlannerItem(plannerItemObject)
         setPlannerModal(!plannerModal);
         console.log(plannerItem)
+    }
+
+    const deletePlanRecord = (planRecord) => {
+        setPlannerItem(planRecord);
+        setConfirmModal(!confirmModal)
+        console.log(`Deleting Record ${planRecord}`);
+
     }
 
     return(
@@ -34,7 +50,7 @@ const PlannerTable = ({plannerList}) => {
             </MDBTableHead>
             <MDBTableBody style={{ fontFamily:'Montserrat' }}>
                 <>
-                    { plannerList ?
+                    { plannerList.length > 0 ?
                                 plannerList.map( plannerItem => (
                                 <tr key={plannerItem.id}>
                                     <th scope='col'><MDBCheckbox id={'plannerTableCheckRow' + plannerItem.id} style={{display: 'table'}}></MDBCheckbox></th>
@@ -90,14 +106,25 @@ const PlannerTable = ({plannerList}) => {
                                         <i className="fa-regular fa-eye"></i> View</MDBBtn>&nbsp;
                                         <MDBBtn className="planner-form-button" rounded size='sm'>
                                         <i className="fa-regular fa-pen-to-square"></i> Edit</MDBBtn>&nbsp;
-                                        <MDBBtn className="planner-form-button" rounded size='sm'>
+                                        <MDBBtn onClick={() => deletePlanRecord(plannerItem)} className="planner-form-button" rounded size='sm'>
                                         <i className="fa-solid fa-trash"></i> Delete</MDBBtn>
                                     </td>
                                     <td>
                                     
                                     </td>
                                 </tr>
-                                )):null
+                                )):
+                               <> 
+                               <tr>
+                                <th scope='col'>&nbsp;</th>
+                                <th scope='col'>&nbsp;</th>
+                                <th scope='col'>&nbsp;</th>
+                                <th scope='col'><a className='no-records-found'>No Records Found</a></th>
+                                <th scope='col'>&nbsp;</th>
+                                <th scope='col'>&nbsp;</th>
+                                <th scope='col'>&nbsp;</th>
+                               </tr>
+                               </>
                     }
                     </>
             </MDBTableBody>
@@ -137,6 +164,14 @@ const PlannerTable = ({plannerList}) => {
             </MDBModalDialog>
         </MDBModal>
         </>
+        {plannerItem ?
+        <>
+        <ConfirmModal title="Delete Plan Form" size="lg" confirmPromptModal={confirmModal} setConfirmPromptModal={setConfirmModal}
+                    scrollable={false} recordType={'plan form'} entityProductName={`${plannerItem.companyName}: ${plannerItem.productPlanName}`}
+                    recordIcon="fa-solid fa-file-signature"
+                    onClickFunc={() => {planDeleteDispatch(deletePlanQuestionnaire({...plannerItem})); setConfirmModal(!confirmModal);}}/>         
+        </>
+         :null}
     </div>
     </>
     )

@@ -47,7 +47,7 @@ const PlannerViewerOverview = (props) => {
     <MDBRow>
         <MDBCol size={12}>
             {props.status > 1 ?
-            <><div className="lock-box"><PlanLock onClickFunc={lockClientInput} isLocked={props.isLocked}/></div></>
+            <><div className="lock-box"><PlanLock onClickFunc={props.lockOnClick} isLocked={props.isLocked}/></div></>
             :null}
             {props.platformName == "Global - All Platforms" ?
             <><img className="planner-platform-img" src={MSLogo} alt="Global - All Platforms"/></>

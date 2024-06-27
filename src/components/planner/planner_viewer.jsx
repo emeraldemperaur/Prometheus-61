@@ -1,17 +1,29 @@
 import { MDBBadge, MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem, MDBRow, MDBCol, MDBBtnGroup, MDBBtn, MDBTabs, MDBTabsItem, MDBTabsLink, MDBTabsContent, MDBTabsPane, MDBTooltip } from 'mdb-react-ui-kit';
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import '../planner/planner_styles.css'
 import { toast } from 'react-toastify';
 import PlannerViewerOverview from './planner_viewer_overview';
 import PlannerViewerInput from './planner_viewer_input';
 import { Link } from 'react-router-dom';
 import LogoHolder from '../planner/assets/placeholder-circle.png';
+import { csvFormServer, xlsxFormServer } from '../../utils/form_server';
+import { lockPlanQuestionnaire } from '../../forge/planner';
+
 
 
 
 const PlannerViewer = (props) => {
 
     const [inputViewActive, setInputViewActive] = useState('OVERVIEW');
+    const [pendingFileService, setPendingFileService] = useState(true);
+    const [corpObject, setCorpObject] = useState({});
+    const [planObject, setPlanObject] = useState({});
+    const planner = useSelector((state) => state.planner.list);
+    const rolodex = useSelector((state)=> state.rolodex.list);
+    const planLockDispatch = useDispatch();
+
+    let corpId = props.planRecord.companyID;
     const handleInputViewClick = (value) => { if (value === inputViewActive) {return;} setInputViewActive(value); };
     let queryLink = `${window.location.origin.toString()}/questionnaire/${props.id}`;
     const copyLink = () => {
@@ -31,6 +43,43 @@ const PlannerViewer = (props) => {
     })
      console.log(`Questionnaire notification sent to ${queryCorrespondence}`);   
     }
+
+    const fileServicesCheck = (status) =>{
+        let pendingFileServices = true;
+        if(status > 1){pendingFileServices = false; setPendingFileService(pendingFileServices); console.log(`File Services Online >> Status -- ${props.status}`);
+        }else{console.log(`File Services Offline >> Status -- ${props.status}`);}
+        return pendingFileServices;
+    }
+
+    const lockClientInput = () =>{
+        let planRecord = props.planRecord;
+        if(props.isLocked){
+            planLockDispatch(lockPlanQuestionnaire({...planRecord, isLocked: false}));
+            console.log(`>>> Unlocking Query`)
+        } 
+        if(!props.isLocked){
+            planLockDispatch(lockPlanQuestionnaire({...planRecord, isLocked: true}));
+            console.log(`>>> Locking Query`)
+        }
+    }
+    
+    const fetchCompany = (rolodexList, selectedId) =>{
+        let corpObject = null
+        for(const corp of rolodexList){
+            if(corp.id == selectedId){
+                corpObject = corp
+            }
+        }
+        return corpObject;
+    }
+
+    useEffect(() => {
+       fileServicesCheck(props.status);
+       let corp = fetchCompany(rolodex, corpId);
+       console.log(`Corp Object Found   >>> ${corp}`)
+       setCorpObject(corp);
+       console.log(`File Services Check >>>>>>> \n\n ${props.status}`)
+    }, [props.status, planObject]);
 
     
 
@@ -117,11 +166,11 @@ const PlannerViewer = (props) => {
                 <MDBDropdownToggle style={{backgroundColor: '#002c51', letterSpacing: '0.21em'}} className='planner-viewer-export-btn' size='lg'>
                 <i className="fa-solid fa-file-export"></i> EXPORT SYNOPSIS</MDBDropdownToggle>
                 <MDBDropdownMenu>
-                <MDBDropdownItem link onClick={() => console.log(".CSV Data Export")}><i className="fa-solid fa-file-csv"></i> .CSV Data</MDBDropdownItem>
-                <MDBDropdownItem link onClick={() => console.log(".XLSX Data Export")}><i className="fa-regular fa-file-excel"></i> .XLSX Data</MDBDropdownItem>
-                <MDBDropdownItem link onClick={() => console.log("PDF Outline Export")}><i className="fa-regular fa-file-pdf"></i> PDF Outline</MDBDropdownItem>
-                <MDBDropdownItem link onClick={() => console.log("Manual Guide Export")}><i className="fa-brands fa-mandalorian"></i> Manual Guide</MDBDropdownItem>
-                <MDBDropdownItem link onClick={() => console.log("Auto Deploy Export")}><i className="fa-solid fa-robot"></i> Auto Deploy</MDBDropdownItem>
+                <MDBDropdownItem link disabled={pendingFileService} onClick={() => csvFormServer(props.planRecord, corpObject, props.jsonQueryDefinition)}><i className="fa-solid fa-file-csv"></i> .CSV Data</MDBDropdownItem>
+                <MDBDropdownItem link disabled={pendingFileService} onClick={() => xlsxFormServer(props.planRecord, corpObject, props.jsonQueryDefinition)}><i className="fa-regular fa-file-excel"></i> .XLSX Data</MDBDropdownItem>
+                <MDBDropdownItem link disabled={pendingFileService} onClick={() => console.log("PDF Outline Export")}><i className="fa-regular fa-file-pdf"></i> PDF Outline</MDBDropdownItem>
+                <MDBDropdownItem link disabled={pendingFileService} onClick={() => console.log("Manual Guide Export")}><i className="fa-brands fa-mandalorian"></i> Manual Guide</MDBDropdownItem>
+                <MDBDropdownItem link disabled={pendingFileService} onClick={() => console.log("Auto Deploy Export")}><i className="fa-solid fa-robot"></i> Auto Deploy</MDBDropdownItem>
                 <MDBDropdownItem divider />
                 <MDBDropdownItem link disabled><i className="fa-solid fa-key"></i> PIN: {props.accessPIN}</MDBDropdownItem>
                 </MDBDropdownMenu>
@@ -152,7 +201,7 @@ const PlannerViewer = (props) => {
             <MDBTabsContent>
                 <MDBTabsPane open={inputViewActive === 'OVERVIEW'}>
                     <PlannerViewerOverview companyName={props.companyName} status={props.status} platformName={props.platformName} 
-                    planRecord={props.planRecord} jsonModel={props.jsonQueryDefinition} isLocked={props.isLocked}/>
+                    planRecord={props.planRecord} jsonModel={props.jsonQueryDefinition} isLocked={props.isLocked} lockOnClick={lockClientInput}/>
                 </MDBTabsPane>
                 <MDBTabsPane open={inputViewActive === 'INPUT'}>
                     <PlannerViewerInput platformName={props.platformName} planRecord={props.planRecord}/>

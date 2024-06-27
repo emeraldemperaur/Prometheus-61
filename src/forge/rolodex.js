@@ -42,6 +42,17 @@ export const rolodexSlice = createSlice({
             
             state.list = [...state.list, action.payload]
 
+        },
+        editCompanyProfile:(state, action)=>{
+            let index = state.list.findIndex(rolodexrecord => rolodexrecord.id === action.payload.id);
+            let list = [...state.list];
+            list[index] = action.payload;
+            state.list = [...list]
+
+        },
+        deleteCompanyProfile:(state, action)=>{
+            let delList = state.list.filter(rolodexrecord => rolodexrecord.id !== action.payload.id)
+            state.list = [...delList]
         }
     },
     extraReducers:(builder)=>{
@@ -59,4 +70,6 @@ export const rolodexSlice = createSlice({
 });
 
 export const {addCompanyProfile} = rolodexSlice.actions;
+export const {editCompanyProfile} = rolodexSlice.actions;
+export const {deleteCompanyProfile} = rolodexSlice.actions;
 export default rolodexSlice.reducer;

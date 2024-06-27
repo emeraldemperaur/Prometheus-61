@@ -477,9 +477,41 @@ export const plannerSlice = createSlice({
             
             state.list = [...state.list, action.payload]
 
+        },
+        editPlanQuestionnaire:(state, action)=>{
+            let index = state.list.findIndex(planrecord => planrecord.id === action.payload.id);
+            let list = [...state.list];
+            list[index] = action.payload;
+            state.list = [...list]
+        },
+        postPlanQuestionnaire:(state, action)=>{
+            let index = state.list.findIndex(planrecord => planrecord.id === action.payload.id);
+            let list = [...state.list];
+            list[index] = {...list[index], 
+                correspondenceTime: action.payload.correspondenceTime,
+                lastSavedCorrespondenceTime: action.payload.lastSavedCorrespondenceTime,
+                status: action.payload.status,
+                buildRank: action.payload.buildRank,
+                jsonQueryDefinition: action.payload.jsonQueryDefinition};
+            state.list = [...list]
+        },
+        deletePlanQuestionnaire:(state, action)=>{
+            let delList = state.list.filter(planrecord => planrecord.id !== action.payload.id)
+            state.list = [...delList]
+        },
+        lockPlanQuestionnaire:(state, action)=>{
+            let index = state.list.findIndex(planrecord => planrecord.id === action.payload.id);
+            let list = [...state.list];
+            list[index] = {...action.payload, isLocked: action.payload.isLocked};
+            state.list = [...list]
+
         }
     }
 });
 
 export const {addPlanQuestionnaire} = plannerSlice.actions;
+export const {editPlanQuestionnaire} = plannerSlice.actions;
+export const {postPlanQuestionnaire} = plannerSlice.actions;
+export const {deletePlanQuestionnaire} = plannerSlice.actions;
+export const {lockPlanQuestionnaire} = plannerSlice.actions;
 export default plannerSlice.reducer;

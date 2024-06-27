@@ -138,3 +138,11 @@
   color: #2196F3 !important;
   border-color: #2196F3 !important;
 }
+
+.no-records-found{
+    color: #002c51 !important;
+    font-family: 'Montserrat';
+    letter-spacing: 0.13em;
+    font-size: 15px;
+    font-weight: 400;
+}
