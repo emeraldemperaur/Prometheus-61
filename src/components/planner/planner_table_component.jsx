@@ -7,6 +7,8 @@ import LogoHolder from '../planner/assets/placeholder-circle.png';
 import { useDispatch } from 'react-redux'
 import { deletePlanQuestionnaire } from '../../forge/planner';
 import ConfirmModal from '../artificer/confirm_modal_component';
+import RecordsModal from '../artificer/records_modal_component';
+import PlannerEditForm from './planner_edit_component';
 
 
 
@@ -15,7 +17,9 @@ const PlannerTable = ({plannerList}) => {
     const [plannerModal, setPlannerModal] = useState(false);
     const [plannerItem, setPlannerItem] = useState(null);
     const [confirmModal, setConfirmModal] = useState(false);
+    const [editModal, setEditModal] = useState(false);
     const toggleOpen = () => setPlannerModal(!plannerModal);
+    const toggleEditOpen = () => setEditModal(!editModal);
     const planDeleteDispatch = useDispatch();
 
     
@@ -23,14 +27,24 @@ const PlannerTable = ({plannerList}) => {
     const renderPlannerViewer = (plannerItemObject) => {
         setPlannerItem(plannerItemObject)
         setPlannerModal(!plannerModal);
-        console.log(plannerItem)
+        console.log(plannerItem);
     }
+    const editPlanRecord = (planRecord) => {
+        setPlannerItem(planRecord);
+        setEditModal(!editModal);
+        console.log(`Editing Plan Record ${planRecord.companyName}: ${planRecord.productPlanName}`);
 
+    }
     const deletePlanRecord = (planRecord) => {
         setPlannerItem(planRecord);
-        setConfirmModal(!confirmModal)
-        console.log(`Deleting Record ${planRecord}`);
+        setConfirmModal(!confirmModal);
+        console.log(`Deleting Plan Record ${planRecord.companyName}: ${planRecord.productPlanName}`);
 
+    }
+    const isInProgress = (planRecord) => {
+        let inProgress = false;
+        if(planRecord.status > 1){inProgress = true;}
+        return inProgress;
     }
 
     return(
@@ -104,7 +118,7 @@ const PlannerTable = ({plannerList}) => {
                                     <td>
                                         <MDBBtn onClick={() => renderPlannerViewer(plannerItem)} className="planner-form-button" rounded size='sm'>
                                         <i className="fa-regular fa-eye"></i> View</MDBBtn>&nbsp;
-                                        <MDBBtn className="planner-form-button" rounded size='sm'>
+                                        <MDBBtn onClick={() => editPlanRecord(plannerItem)} disabled={isInProgress(plannerItem)} className="planner-form-button" rounded size='sm'>
                                         <i className="fa-regular fa-pen-to-square"></i> Edit</MDBBtn>&nbsp;
                                         <MDBBtn onClick={() => deletePlanRecord(plannerItem)} className="planner-form-button" rounded size='sm'>
                                         <i className="fa-solid fa-trash"></i> Delete</MDBBtn>
@@ -170,6 +184,16 @@ const PlannerTable = ({plannerList}) => {
                     scrollable={false} recordType={'plan form'} entityProductName={`${plannerItem.companyName}: ${plannerItem.productPlanName}`}
                     recordIcon="fa-solid fa-file-signature"
                     onClickFunc={() => {planDeleteDispatch(deletePlanQuestionnaire({...plannerItem})); setConfirmModal(!confirmModal);}}/>         
+        </>
+         :null}
+        {plannerItem ?
+        <>
+        <RecordsModal title={`Edit Plan Questionnaire`} action="EDIT" size="xl" onClickFunc={()=>{}}
+                toggleOpen={toggleEditOpen} staticModal={editModal} setStaticModal={setEditModal} formComponent={
+                <>
+                <PlannerEditForm corpName={plannerItem.companyID} productName={plannerItem.productPlanName} autoShare={plannerItem.autoShare}
+                planName={plannerItem.productPlanName} enquiryName={plannerItem.enquiryName} status={plannerItem.status}/>
+                </>}/>
         </>
          :null}
     </div>

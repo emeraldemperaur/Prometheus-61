@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteCompanyProfile } from '../../forge/rolodex';
 import ConfirmModal from '../artificer/confirm_modal_component';
 import CascadeModal from '../artificer/cascade_modal_component';
+import RecordsModal from '../artificer/records_modal_component';
+import RolodexEditForm from './rolodex_edit_component';
 
 
 
@@ -17,6 +19,8 @@ const RolodexTable = ({rolodexList}) => {
     const [rolodexItem, setRolodexItem] = useState(null);
     const [confirmModal, setConfirmModal] = useState(false);
     const [cascadeModal, setCascadeModal] = useState(false);
+    const [editModal, setEditModal] = useState(false);
+    const toggleEditOpen = () => setEditModal(!editModal);
     const toggleOpen = () => setRolodexModal(!rolodexModal);
     const rolodexDeleteDispatch = useDispatch();
     const planner = useSelector((state)=> state.planner.list);
@@ -36,8 +40,14 @@ const RolodexTable = ({rolodexList}) => {
         }
         if(!linkedRolodex(rolodexRecord)){
             setConfirmModal(!confirmModal)
-            console.log(`Deleting Record ${rolodexRecord.companyName}`);
+            console.log(`Deleting Rolodex Record ${rolodexRecord.companyName}`);
         }
+    }
+    const editRolodexRecord = (rolodexRecord) => {
+        setRolodexItem(rolodexRecord);
+        setEditModal(!editModal);
+        console.log(`Editing Rolodex Record ${rolodexRecord.companyName}`);
+
     }
 
     const linkedRolodex = (rolodexRecord) => {
@@ -105,7 +115,7 @@ const RolodexTable = ({rolodexList}) => {
                                             <td>
                                                 <MDBBtn onClick={() => renderRolodexViewer(rolodexItem)} className="rolodex-form-button" rounded size='sm'>
                                                 <i className="fa-regular fa-eye"></i> View</MDBBtn>&nbsp;
-                                                <MDBBtn className="rolodex-form-button" rounded size='sm'>
+                                                <MDBBtn onClick={() => editRolodexRecord(rolodexItem)} className="rolodex-form-button" rounded size='sm'>
                                                 <i className="fa-regular fa-pen-to-square"></i> Edit</MDBBtn>&nbsp;
                                                 <MDBBtn onClick={() => deleteRolodexRecord(rolodexItem)} className="rolodex-form-button" rounded size='sm'>
                                                 <i className="fa-solid fa-trash"></i> Delete</MDBBtn>
@@ -167,6 +177,18 @@ const RolodexTable = ({rolodexList}) => {
         
         </>
          :null}
+         {rolodexItem ?
+        <>
+        <RecordsModal title={`Edit Company Profile`} action="EDIT" size="xl" onClickFunc={()=>{}}
+                toggleOpen={toggleEditOpen} staticModal={editModal} setStaticModal={setEditModal} formComponent={
+                <>
+                <RolodexEditForm companyName={rolodexItem.companyName} authorizedName={rolodexItem.primaryContactName}
+                 authorizedEmail={rolodexItem.primaryContactEmail} corpCountry={rolodexItem.incorporationCountry} corpMarket={rolodexItem.primeStockExchange} stockTicker={rolodexItem.primeTickerSymbol} duoListed={rolodexItem.dualListed} 
+                 corpDuoMarket={rolodexItem.dualStockExchange} duoStockTicker={rolodexItem.dualTickerSymbol} legendConditions={rolodexItem.legendConditions} distributesDividends={rolodexItem.distributesDividends} 
+                 dividendsDistribution={rolodexItem.dividendsDistribution} corporationCategory={rolodexItem.incorporationCategory} />
+                </>}/>
+        </>
+        :null}
     </div>
     </>
     )

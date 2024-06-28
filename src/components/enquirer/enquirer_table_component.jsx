@@ -3,9 +3,11 @@ import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import '../planner/planner_styles.css'
 import EnquirerViewer from './enquirer_viewer';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { deleteQueryModel } from '../../forge/enquirer';
 import ConfirmModal from '../artificer/confirm_modal_component';
+import RecordsModal from '../artificer/records_modal_component';
+import EnquirerEditForm from './enquirer_edit_component';
 
 
 
@@ -14,8 +16,12 @@ const EnquirerTable = ({enquirerList}) => {
     const [enquirerModal, setEnquirerModal] = useState(false);
     const [enquirerItem, setEnquirerItem] = useState(null);
     const [confirmModal, setConfirmModal] = useState(false);
+    const [editModal, setEditModal] = useState(false);
+    const [editLinked, setEditLinked] = useState(false);
+    const toggleEditOpen = () => setEditModal(!editModal);
     const toggleOpen = () => setEnquirerModal(!enquirerModal); 
     const enquirerDeleteDispatch = useDispatch();
+    const planner = useSelector((state)=> state.planner.list);
     const renderEnquirerViewer = (enquirerItemObject) => { 
         setEnquirerItem(enquirerItemObject); 
         setEnquirerModal(!enquirerModal); 
@@ -24,8 +30,25 @@ const EnquirerTable = ({enquirerList}) => {
     const deleteEnquirerRecord = (enquirerRecord) => {
         setEnquirerItem(enquirerRecord);
         setConfirmModal(!confirmModal)
-        console.log(`Deleting Record ${enquirerRecord.modelName}`);
+        console.log(`Deleting Enquirer Record ${enquirerRecord.modelName}`);
 
+    }
+    const editEnquirerRecord = (enquirerRecord) => {
+        if(isLinkedEnquiry){setEditLinked(true);}
+        if(!isLinkedEnquiry){setEditLinked(false);}
+        setEnquirerItem(enquirerRecord);
+        setEditModal(!editModal);
+        console.log(`Editing Enquirer Record ${enquirerRecord.modelName}`);
+
+    }
+    const isLinkedEnquiry = (enquirerRecord) => {
+        let isLinkedEnquiry = false;
+        for(const plan of planner){
+            if(enquirerRecord.id == plan.enquiryID){
+                isLinked = true;
+            }
+        }
+        return isLinkedEnquiry;
     }
    
 
@@ -84,7 +107,7 @@ const EnquirerTable = ({enquirerList}) => {
                                     <td>
                                         <MDBBtn onClick={() => renderEnquirerViewer(enquirerItem)} className="enquirer-form-button" rounded size='sm'>
                                         <i className="fa-regular fa-eye"></i> View</MDBBtn>&nbsp;
-                                        <MDBBtn className="enquirer-form-button" rounded size='sm'>
+                                        <MDBBtn onClick={() => editEnquirerRecord(enquirerItem)} className="enquirer-form-button" rounded size='sm'>
                                         <i className="fa-regular fa-pen-to-square"></i> Edit</MDBBtn>&nbsp;
                                         <MDBBtn onClick={() => deleteEnquirerRecord(enquirerItem)} className="enquirer-form-button" rounded size='sm'>
                                         <i className="fa-solid fa-trash"></i> Delete</MDBBtn>
@@ -141,6 +164,15 @@ const EnquirerTable = ({enquirerList}) => {
                     onClickFunc={() => {enquirerDeleteDispatch(deleteQueryModel({...enquirerItem})); setConfirmModal(!confirmModal);}}/>         
         </>
          :null}
+        {enquirerItem ?
+        <>
+        <RecordsModal title={`Edit Query Model`} action="EDIT" size="fullscreen" onClickFunc={()=>{}}
+                toggleOpen={toggleEditOpen} staticModal={editModal} setStaticModal={setEditModal} formComponent={<>
+                <EnquirerEditForm isLinked={editLinked} modelName={enquirerItem.modelName} modelProduct={enquirerItem.productName} modelPlan={enquirerItem.productPlanName} 
+                modelRegion={enquirerItem.regionName} modelMarket={enquirerItem.exchangeMarket} modelPlatform={enquirerItem.platformName} modelJSON={enquirerItem.jsonQueryDefinition}/>
+                </>}/>
+        </>
+        :null}
     </div>
     </>
     )

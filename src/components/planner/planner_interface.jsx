@@ -175,7 +175,7 @@ const PlannerInterface = () => {
     </MDBContainer>
     <RecordsModal title="New Plan Questionnaire" action="CREATE" size="xl" onClickFunc={submitPQModel}
                 toggleOpen={toggleOpen} staticModal={staticModal} setStaticModal={setStaticModal} formComponent={<PlannerInputForm/>}/>
-
+   
 <PromptModal title="Extant Product Plan" action="CREATE" size="lg" staticModal={staticModal} setStaticModal={setStaticModal}
                     togglePromptModal={togglePromptModal} setTogglePromptModal={setTogglePromptModal} scrollable={false} 
                     productPlan={portmanteauProduct} corpName={portmanteauCorp.companyName}

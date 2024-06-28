@@ -21,6 +21,7 @@ import UBSGroupLogo from '../planner/assets/UBSLogo.png';
 import { formClerk } from '../../utils/form_clerk';
 import { useDispatch } from 'react-redux'
 import { postPlanQuestionnaire } from '../../forge/planner';
+import { currentTime } from '../../utils/chronos';
 
 
 
@@ -208,8 +209,36 @@ const PlannerClientInterface = ({planRecord}) => {
 
     onSubmit={(values) => {
         console.log(`FormData: ${values}`)
-        let jsonModelEdit = formClerk(planRecord.jsonQueryDefinition, values)
-        console.log(`Edited Form Output: ${jsonModelEdit}`)
+        let jsonModelEdit = formClerk(planRecord.jsonQueryDefinition, values);
+        if(!onSubmit && planRecord.status <= 2){
+            // submit -> 2
+            planPostDispatch(postPlanQuestionnaire({...planRecord, 
+                correspondenceTime: currentTime(), 
+                lastSavedCorrespondenceTime: currentTime(),
+                status: 2,
+                buildRank: 0, 
+                jsonQueryDefinition: `${jsonModelEdit}`}))
+            console.log(`Edited Form Output: ${jsonModelEdit}`)
+
+        }
+        if(!onSubmit && planRecord.status > 2){
+            // submit -> 3
+            planPostDispatch(postPlanQuestionnaire({...planRecord, 
+                correspondenceTime: currentTime(), 
+                lastSavedCorrespondenceTime: currentTime(),
+                status: 3,
+                buildRank: 0, 
+                jsonQueryDefinition: `${jsonModelEdit}`}))
+        }
+        if(onSubmit && planRecord.status <= 3){
+            // submit -> 3
+            planPostDispatch(postPlanQuestionnaire({...planRecord, 
+                correspondenceTime: currentTime(), 
+                lastSavedCorrespondenceTime: planRecord.lastSavedCorrespondenceTime,
+                status: 3,
+                buildRank: 0, 
+                jsonQueryDefinition: `${jsonModelEdit}`}))
+        }
 
     }}
     >  
