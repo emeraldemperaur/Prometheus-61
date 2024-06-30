@@ -7,8 +7,11 @@ const RecordsModal = ({title, action, size, toggleOpen, staticModal, setStaticMo
     let icon = ''
     const [crudIcon, setCrudIcon] = useState(<></>);    
     if(action == 'CREATE'){icon = <MDBIcon fab icon='plus circle' />;}
-    if(action == 'EDIT'){icon = <MDBIcon far icon="edit" />;;}
+    if(action == 'EDIT' || action == 'UPDATE'){icon = <MDBIcon far icon="edit" />;;}
   
+     useEffect(() => {
+       
+      }, []);
 
 
     return(

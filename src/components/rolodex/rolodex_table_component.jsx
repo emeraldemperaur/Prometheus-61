@@ -1,20 +1,21 @@
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBadge, MDBBtn, MDBIcon, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import { MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBModalBody } from 'mdb-react-ui-kit';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import '../rolodex/rolodex_styles.css'
 import RolodexViewer from './rolodex_viewer';
 import LogoHolder from '../planner/assets/placeholder-circle.png';
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteCompanyProfile } from '../../forge/rolodex';
+import { deleteCompanyProfile, editCompanyProfile } from '../../forge/rolodex';
 import ConfirmModal from '../artificer/confirm_modal_component';
 import CascadeModal from '../artificer/cascade_modal_component';
 import RecordsModal from '../artificer/records_modal_component';
 import RolodexEditForm from './rolodex_edit_component';
+import { clearInputs, dividendsValid, duoListedValid, fetchRegion, inputMktValid, inputTextValid, toggleDuoInput, toggledInputValue } from '../../utils/input_inspector';
 
 
 
 const RolodexTable = ({rolodexList}) => {
-
     const [rolodexModal, setRolodexModal] = useState(false);
     const [rolodexItem, setRolodexItem] = useState(null);
     const [confirmModal, setConfirmModal] = useState(false);
@@ -23,8 +24,12 @@ const RolodexTable = ({rolodexList}) => {
     const toggleEditOpen = () => setEditModal(!editModal);
     const toggleOpen = () => setRolodexModal(!rolodexModal);
     const rolodexDeleteDispatch = useDispatch();
+    const rolodexEditDispatch = useDispatch();
     const planner = useSelector((state)=> state.planner.list);
 
+    useEffect(() => {
+       
+      }, [rolodexItem]);
 
     const renderRolodexViewer = (rolodexItemObject) => {
         setRolodexItem(rolodexItemObject)
@@ -47,6 +52,39 @@ const RolodexTable = ({rolodexList}) => {
         setRolodexItem(rolodexRecord);
         setEditModal(!editModal);
         console.log(`Editing Rolodex Record ${rolodexRecord.companyName}`);
+    }
+    const updateRolodexRecord = (rolodexRecord) => {
+        if(inputTextValid(document.getElementById("formCorpNameE"), document.getElementById("corpNameLabelE")) 
+        && inputTextValid(document.getElementById("formAuthNameE"), document.getElementById("authNameLabelE")) 
+        && inputTextValid(document.getElementById("formAuthEmailE"), document.getElementById("authEmailLabelE")) 
+        && inputTextValid(document.getElementById("formCorpCountryE"), document.getElementById("corpCountryLabelE")) 
+        && inputMktValid(document.getElementById("formCorpMarketExE"), document.getElementById("corpMarketExLabelE")) 
+        && inputTextValid(document.getElementById("formStockTickerE"), document.getElementById("corpMarketExLabelE")) 
+        && duoListedValid(document.getElementById("formCorpDualListedToggleE"),document.getElementById("formCorpDualMarketExE"), document.getElementById("corpDualMarketExLabelE"), document.getElementById("formDualStockTickerE"), document.getElementById("corpDualMarketExLabelE")) 
+        && dividendsValid(document.getElementById("formCorpDividendsToggleE"), document.getElementById("formCorpDividendsDistroMethodE"), document.getElementById("corpDividendsMethodLabelE")) 
+        && inputTextValid(document.getElementById("formCorpCategoryTypeE"), document.getElementById("formCorpCategoryTypeLabelE"))){
+            rolodexEditDispatch(editCompanyProfile({
+                id: rolodexRecord.id,
+                companyName: document.getElementById("formCorpNameE").value, 
+                primaryContactName: document.getElementById("formAuthNameE").value,
+                primaryContactEmail: document.getElementById("formAuthEmailE").value,
+                companyLogo: '',
+                incorporationCountry: document.getElementById("formCorpCountryE").value,
+                incorporationRegion: fetchRegion(document.getElementById("formCorpCountryE").value),
+                primeStockExchange: document.getElementById("formCorpMarketExE").value,
+                primeTickerSymbol: document.getElementById("formStockTickerE").value,
+                dualListed: document.getElementById("formCorpDualListedToggleE").checked,
+                dualStockExchange: toggleDuoInput(document.getElementById("formCorpDualListedToggleE"), document.getElementById("formCorpDualMarketExE")),
+                dualTickerSymbol: toggledInputValue(document.getElementById("formCorpDualListedToggleE"), document.getElementById("formDualStockTickerE")),
+                legendConditions: document.getElementById("formCorpLegendConditionsE").checked,
+                distributesDividends: document.getElementById("formCorpDividendsToggleE").checked,
+                dividendsDistribution: toggledInputValue(document.getElementById("formCorpDividendsToggleE"), document.getElementById("formCorpDividendsDistroMethodE")),
+                incorporationCategory: document.getElementById("formCorpCategoryTypeE").value
+            }))
+            setEditModal(!editModal);
+            toast.success(`${rolodexRecord.companyName} updated`,{ position: "top-right", autoClose: 1000, closeOnClick: true});
+            console.log(`Successfully Updated '${rolodexRecord.companyName}' Rolodex Record`)
+        }
 
     }
 
@@ -179,7 +217,7 @@ const RolodexTable = ({rolodexList}) => {
          :null}
          {rolodexItem ?
         <>
-        <RecordsModal title={`Edit Company Profile`} action="EDIT" size="xl" onClickFunc={()=>{}}
+        <RecordsModal title={`Edit Company Profile`} action="UPDATE" size="xl" onClickFunc={() => updateRolodexRecord(rolodexItem)}
                 toggleOpen={toggleEditOpen} staticModal={editModal} setStaticModal={setEditModal} formComponent={
                 <>
                 <RolodexEditForm companyName={rolodexItem.companyName} authorizedName={rolodexItem.primaryContactName}

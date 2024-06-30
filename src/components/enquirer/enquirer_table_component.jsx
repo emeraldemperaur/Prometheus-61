@@ -1,13 +1,16 @@
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody, MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBModalBody } from 'mdb-react-ui-kit';
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import Form from 'react-bootstrap/Form';
 import '../planner/planner_styles.css'
 import EnquirerViewer from './enquirer_viewer';
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteQueryModel } from '../../forge/enquirer';
+import { deleteQueryModel, editQueryModel } from '../../forge/enquirer';
 import ConfirmModal from '../artificer/confirm_modal_component';
 import RecordsModal from '../artificer/records_modal_component';
 import EnquirerEditForm from './enquirer_edit_component';
+import { currentTime } from '../../utils/chronos';
+import { clearInputs, inputMktValid, inputTextValid } from '../../utils/input_inspector';
 
 
 
@@ -21,6 +24,7 @@ const EnquirerTable = ({enquirerList}) => {
     const toggleEditOpen = () => setEditModal(!editModal);
     const toggleOpen = () => setEnquirerModal(!enquirerModal); 
     const enquirerDeleteDispatch = useDispatch();
+    const enquirerEditDispatch = useDispatch();
     const planner = useSelector((state)=> state.planner.list);
     const renderEnquirerViewer = (enquirerItemObject) => { 
         setEnquirerItem(enquirerItemObject); 
@@ -34,18 +38,50 @@ const EnquirerTable = ({enquirerList}) => {
 
     }
     const editEnquirerRecord = (enquirerRecord) => {
-        if(isLinkedEnquiry){setEditLinked(true);}
-        if(!isLinkedEnquiry){setEditLinked(false);}
         setEnquirerItem(enquirerRecord);
+        if(isLinkedEnquiry(enquirerRecord)){setEditLinked(true);}
+        if(!isLinkedEnquiry(enquirerRecord)){setEditLinked(false);}
         setEditModal(!editModal);
-        console.log(`Editing Enquirer Record ${enquirerRecord.modelName}`);
+        console.log(`Editing Enquirer Record ${enquirerRecord}`);
+    }
+    const updateEnquirerRecord = (enquirerRecord) => {
 
+        if(inputTextValid(document.getElementById("formQueryModelNameE"), document.getElementById("queryModelNameLabelE")) 
+        && inputTextValid(document.getElementById("formQueryModelProductE"), document.getElementById("queryModelProductLabelE")) 
+        && inputTextValid(document.getElementById("formQueryModelPlanE"), document.getElementById("queryModelPlanLabelE")) 
+        && inputTextValid(document.getElementById("formQueryModelRegionE"), document.getElementById("queryModelRegionLabelE")) 
+        && inputMktValid(document.getElementById("formQueryModelMarketExE"), document.getElementById("queryModelMarketExLabelE"))
+        && inputTextValid(document.getElementById("formQueryModelPlatformE"), document.getElementById("queryModelPlatformLabelE"))
+        && inputTextValid(document.getElementById("formQueryModelJSONE"), document.getElementById("queryModelJSONLabelE"))){
+            
+        enquirerEditDispatch(editQueryModel({
+                    id: enquirerRecord.id,
+                    modelName: document.getElementById("formQueryModelNameE").value, 
+                    productName: document.getElementById("formQueryModelProductE").value,
+                    productPlanName: document.getElementById("formQueryModelPlanE").value,
+                    regionName: document.getElementById("formQueryModelRegionE").value,
+                    exchangeMarket: document.getElementById("formQueryModelMarketExE").value,
+                    platformName: document.getElementById("formQueryModelPlatformE").value,
+                    enquiryAuthor: enquirerRecord.enquiryAuthor,
+                    enquiryDate: enquirerRecord.enquiryDate,
+                    enquiryModified: true,
+                    enquiryEditor: 'Prometheus Admin (Editor)',
+                    enquiryEditDate: currentTime(),
+                    jsonQueryDefinition: document.getElementById("formQueryModelJSONE").value
+                }))
+                clearInputs([document.getElementById("formQueryModelName"), document.getElementById("formQueryModelProduct"), 
+                document.getElementById("formQueryModelPlan"), document.getElementById("formQueryModelRegion"), document.getElementById("formQueryModelMarketEx"), 
+                document.getElementById("formQueryModelPlatform"), document.getElementById("formQueryModelJSON")])
+                setEditModal(!editModal);
+                toast.success(`${enquirerRecord.modelName} updated`,{ position: "top-right", autoClose: 1000, closeOnClick: true});
+                console.log(`Successfully Updated '${enquirerRecord.modelName}' Enquirer Record`);
+        }
     }
     const isLinkedEnquiry = (enquirerRecord) => {
         let isLinkedEnquiry = false;
         for(const plan of planner){
             if(enquirerRecord.id == plan.enquiryID){
-                isLinked = true;
+                isLinkedEnquiry = true;
             }
         }
         return isLinkedEnquiry;
@@ -166,11 +202,15 @@ const EnquirerTable = ({enquirerList}) => {
          :null}
         {enquirerItem ?
         <>
-        <RecordsModal title={`Edit Query Model`} action="EDIT" size="fullscreen" onClickFunc={()=>{}}
-                toggleOpen={toggleEditOpen} staticModal={editModal} setStaticModal={setEditModal} formComponent={<>
+        <RecordsModal title={`Edit Query Model`} action="UPDATE" size="fullscreen" onClickFunc={() => updateEnquirerRecord(enquirerItem)}
+                toggleOpen={toggleEditOpen} staticModal={editModal} setStaticModal={setEditModal} formComponent={
+                <>
+                 {enquirerItem ?
                 <EnquirerEditForm isLinked={editLinked} modelName={enquirerItem.modelName} modelProduct={enquirerItem.productName} modelPlan={enquirerItem.productPlanName} 
                 modelRegion={enquirerItem.regionName} modelMarket={enquirerItem.exchangeMarket} modelPlatform={enquirerItem.platformName} modelJSON={enquirerItem.jsonQueryDefinition}/>
-                </>}/>
+                :null}
+                </>
+            }/>
         </>
         :null}
     </div>

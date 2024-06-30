@@ -13,6 +13,7 @@ import PlannerTable from './planner_table_component';
 import { toast } from 'react-toastify';
 import { currentTime, fetchPIN } from '../../utils/chronos';
 import PromptModal from '../artificer/prompt_modal_component';
+import { v4 as uuidv4 } from 'uuid';
 
 
 const PlannerInterface = () => {
@@ -67,6 +68,8 @@ const PlannerInterface = () => {
                     companyDualTickerSymbol: selectedCorp.dualTickerSymbol,
                     productName: plannerProductNameInput.value,
                     productPlanName: plannerPlanNameInput.value,
+                    isPortmanteau: false,
+                    portmanteauLabel: ' ',
                     enquiryName: selectedQuery.modelName,
                     enquiryID: selectedQuery.id,
                     enquiryPlatformName: selectedQuery.platformName,
@@ -130,7 +133,7 @@ const PlannerInterface = () => {
         return extantProduct;
     }
 
-    const getNextId = (plannerStore) => { let plannerLength = plannerStore.length; return ++plannerLength}
+    const getNextId = (plannerStore) => { let plannerLength = plannerStore.length; if(plannerLength == 0){plannerLength = 1;}return uuidv4();}
     const clearInputs = (inputList) =>{for(const inputElement of inputList){inputElement.value = " ";}}
     const clearToggles = (toggleList) => { for(const toggle of toggleList){ toggle.checked = false;}}
 

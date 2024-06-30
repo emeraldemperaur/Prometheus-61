@@ -13,6 +13,7 @@ import EnquirerTable from './enquirer_table_component';
 import { toast } from 'react-toastify';
 import { currentTime } from '../../utils/chronos';
 import ExtantModal from '../artificer/extant_modal_component';
+import { v4 as uuidv4 } from 'uuid';
 
 
 const EnquirerInterface = () => {
@@ -106,7 +107,7 @@ const EnquirerInterface = () => {
         return extantQuery;
     }
 
-    const getNextId = (enquirerStore) => { let enquirerLength = enquirerStore.length; return ++enquirerLength}
+    const getNextId = (enquirerStore) => { let enquirerLength = enquirerStore.length; if(enquirerLength == 0){ enquirerLength = 1;} return uuidv4();}
     const clearInputs = (inputList) =>{for(const inputElement of inputList){inputElement.value = " ";}}
 
 

@@ -14,6 +14,8 @@ import RolodexTable from './rolodex_table_component';
 import { countriesItems } from '../../utils/country_data';
 import { toast } from 'react-toastify';
 import ExtantModal from '../artificer/extant_modal_component';
+import { v4 as uuidv4 } from 'uuid';
+
 
 const RolodexInterface = () => {
     document.body.style.backgroundColor = "#ffffff"
@@ -171,7 +173,9 @@ const RolodexInterface = () => {
         }
     }
 
-    const getNextId = (rolodexStore) => { let rolodexLength = rolodexStore.length; return ++rolodexLength}
+    const getNextId = (rolodexStore) => { 
+        let rolodexLength = rolodexStore.length;if(rolodexLength == 0){rolodexLength = 1;} return uuidv4();;
+    }
 
     return(
     <>

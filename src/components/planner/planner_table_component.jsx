@@ -1,14 +1,16 @@
 import { MDBBadge, MDBBtn, MDBRow, MDBTable, MDBTableHead, MDBTableBody, MDBCheckbox, MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBModalBody, MDBTooltip } from 'mdb-react-ui-kit';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { CSSTransition, TransitionGroup} from 'react-transition-group';
 import '../planner/planner_styles.css'
 import PlannerViewer from './planner_viewer';
 import LogoHolder from '../planner/assets/placeholder-circle.png';
-import { useDispatch } from 'react-redux'
-import { deletePlanQuestionnaire } from '../../forge/planner';
+import { useDispatch, useSelector } from 'react-redux'
+import { deletePlanQuestionnaire, editPlanQuestionnaire } from '../../forge/planner';
 import ConfirmModal from '../artificer/confirm_modal_component';
 import RecordsModal from '../artificer/records_modal_component';
 import PlannerEditForm from './planner_edit_component';
+import { clearInputs, fetchCompany, fetchQuery, inputTextValid } from '../../utils/input_inspector';
 
 
 
@@ -21,7 +23,9 @@ const PlannerTable = ({plannerList}) => {
     const toggleOpen = () => setPlannerModal(!plannerModal);
     const toggleEditOpen = () => setEditModal(!editModal);
     const planDeleteDispatch = useDispatch();
-
+    const planEditDispatch = useDispatch();
+    const enquirerList = useSelector((state)=> state.enquirer.list);
+    const rolodexList = useSelector((state)=> state.rolodex.list);
     
 
     const renderPlannerViewer = (plannerItemObject) => {
@@ -39,7 +43,49 @@ const PlannerTable = ({plannerList}) => {
         setPlannerItem(planRecord);
         setConfirmModal(!confirmModal);
         console.log(`Deleting Plan Record ${planRecord.companyName}: ${planRecord.productPlanName}`);
-
+    }
+    const updatePlanRecord = (planRecord) => {
+      
+        if(inputTextValid(document.getElementById("formPlannerCorpNameE"), document.getElementById("plannerCorpNameLabelE")) 
+        && inputTextValid(document.getElementById("formPlannerProductNameE"), document.getElementById("plannerProductNameLabelE")) 
+        && inputTextValid(document.getElementById("formPlannerPlanNameE"), document.getElementById("plannerPlanNameLabelE")) 
+        && inputTextValid(document.getElementById("formPlannerEnquiryNameE"), document.getElementById("plannerEnquiryNameLabelE"))){
+            let selectedQuery = fetchQuery(enquirerList, document.getElementById("formPlannerEnquiryNameE").value)
+            let selectedCorp = fetchCompany(rolodexList, document.getElementById("formPlannerCorpNameE").value)
+            console.log(`Selected Query >>>>> ${selectedQuery.modelName}`)
+            console.log(`Selected Corp >>>>> ${selectedCorp.companyName}`)
+            planEditDispatch(editPlanQuestionnaire({
+                id: planRecord.id,
+                companyName: planRecord.companyName,
+                companyID: planRecord.companyID, 
+                companyRegion: planRecord.companyRegion,
+                companyStockExchange: planRecord.companyStockExchange,
+                companyTickerSymbol: planRecord.companyTickerSymbol,
+                isCorpDualListed: planRecord.isCorpDualListed,
+                companyDualStockExchange: planRecord.companyDualStockExchange,
+                companyDualTickerSymbol: planRecord.companyDualTickerSymbol,
+                productName: document.getElementById("formPlannerProductNameE").value,
+                productPlanName: document.getElementById("formPlannerPlanNameE").value,
+                isPortmanteau: false,
+                portmanteauLabel: ' ',
+                enquiryName: selectedQuery.modelName,
+                enquiryID: selectedQuery.id,
+                enquiryPlatformName: selectedQuery.platformName,
+                autoShare: document.getElementById("formPlannerEnquiryShareE").checked,
+                accessPIN: planRecord.accessPIN,
+                status: planRecord.status,
+                buildRank: planRecord.buildRank,
+                correspondenceName: selectedCorp.primaryContactName,
+                correspondenceEmail:selectedCorp.correspondenceEmail,
+                correspondenceTime: planRecord.correspondenceTime,
+                lastSavedCorrespondenceTime: planRecord.lastSavedCorrespondenceTime,
+                isLocked: planRecord.isLocked,
+                jsonQueryDefinition: selectedQuery.jsonQueryDefinition
+            }))
+            setEditModal(!editModal);
+            toast.success(`${planRecord.companyName}: ${planRecord.productPlanName} updated`,{ position: "top-right", autoClose: 1000, closeOnClick: true});
+            console.log(`Successfully Updated '${planRecord.companyName}: ${planRecord.productPlanName}' Plan Record`);
+        }
     }
     const isInProgress = (planRecord) => {
         let inProgress = false;
@@ -117,9 +163,8 @@ const PlannerTable = ({plannerList}) => {
                                     </td>
                                     <td>
                                         <MDBBtn onClick={() => renderPlannerViewer(plannerItem)} className="planner-form-button" rounded size='sm'>
-                                        <i className="fa-regular fa-eye"></i> View</MDBBtn>&nbsp;
-                                        <MDBBtn onClick={() => editPlanRecord(plannerItem)} disabled={isInProgress(plannerItem)} className="planner-form-button" rounded size='sm'>
-                                        <i className="fa-regular fa-pen-to-square"></i> Edit</MDBBtn>&nbsp;
+                                        <i className="fa-regular fa-eye"></i> View</MDBBtn>&nbsp;&nbsp;
+                                        
                                         <MDBBtn onClick={() => deletePlanRecord(plannerItem)} className="planner-form-button" rounded size='sm'>
                                         <i className="fa-solid fa-trash"></i> Delete</MDBBtn>
                                     </td>
@@ -188,7 +233,7 @@ const PlannerTable = ({plannerList}) => {
          :null}
         {plannerItem ?
         <>
-        <RecordsModal title={`Edit Plan Questionnaire`} action="EDIT" size="xl" onClickFunc={()=>{}}
+        <RecordsModal title={`Edit Plan Questionnaire`} action="UPDATE" size="xl" onClickFunc={()=> updatePlanRecord(plannerItem)}
                 toggleOpen={toggleEditOpen} staticModal={editModal} setStaticModal={setEditModal} formComponent={
                 <>
                 <PlannerEditForm corpName={plannerItem.companyID} productName={plannerItem.productPlanName} autoShare={plannerItem.autoShare}
